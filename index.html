@@ -4,154 +4,679 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Babar Mobile Trader | Mobile Phones & Accessories</title>
+<title>BMT | Babar Mobile Trader</title>
+
+<meta name="description"
+content="Babar Mobile Trader — Mobile phones, chargers and mobile accessories trading. North Nazimabad, Karachi.">
 
 <style>
-* {
-    box-sizing: border-box;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f3f6fa;
-    color: #1f2937;
+html{
+    scroll-behavior:smooth;
 }
 
-header {
-    background: linear-gradient(135deg, #0f172a, #2563eb);
-    color: white;
-    padding: 55px 20px;
-    text-align: center;
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f7f9fc;
+    color:#111827;
+    line-height:1.6;
 }
 
-header h1 {
-    margin: 0;
-    font-size: 40px;
+/* ---------- HEADER ---------- */
+
+header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:1000;
+    background:rgba(255,255,255,.94);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid #e5e7eb;
 }
 
-header p {
-    font-size: 19px;
-    margin-top: 12px;
+.nav{
+    max-width:1200px;
+    margin:auto;
+    height:78px;
+    padding:0 25px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 }
 
-.container {
-    max-width: 1000px;
-    margin: 30px auto;
-    padding: 0 18px;
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    text-decoration:none;
+    color:#111827;
 }
 
-.card {
-    background: white;
-    margin-bottom: 25px;
-    padding: 30px 22px;
-    border-radius: 16px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-    text-align: center;
+.brand-mark{
+    width:48px;
+    height:48px;
+    border-radius:13px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#0b63f6;
+    color:white;
+    font-size:22px;
+    font-weight:900;
+    letter-spacing:-1px;
+    box-shadow:0 8px 25px rgba(11,99,246,.25);
 }
 
-.card h2 {
-    color: #1d4ed8;
-    font-size: 27px;
-    margin-top: 0;
+.brand-text strong{
+    display:block;
+    font-size:17px;
+    letter-spacing:.5px;
 }
 
-.card p {
-    font-size: 17px;
-    line-height: 1.7;
+.brand-text span{
+    display:block;
+    color:#64748b;
+    font-size:11px;
+    letter-spacing:2px;
+    text-transform:uppercase;
 }
 
-/* PRODUCT GRID */
-
-.products {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+nav a{
+    text-decoration:none;
+    color:#475569;
+    font-size:14px;
+    font-weight:600;
+    margin-left:28px;
+    transition:.25s;
 }
 
-.product {
-    border: 1px solid #e5e7eb;
-    border-radius: 14px;
-    padding: 20px;
-    background: #fff;
+nav a:hover{
+    color:#0b63f6;
 }
 
-.product-image {
-    height: 180px;
-    background: #eef2f7;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 65px;
-    margin-bottom: 15px;
+.nav-button{
+    padding:11px 18px;
+    background:#0b63f6;
+    color:white!important;
+    border-radius:9px;
 }
 
-.product h3 {
-    margin: 10px 0;
-    font-size: 21px;
+/* ---------- HERO ---------- */
+
+.hero{
+    min-height:100vh;
+    padding:150px 25px 90px;
+    background:
+        radial-gradient(circle at 85% 20%,rgba(11,99,246,.14),transparent 30%),
+        radial-gradient(circle at 15% 80%,rgba(14,165,233,.10),transparent 30%),
+        #f8fafc;
+    display:flex;
+    align-items:center;
 }
 
-.price {
-    font-size: 20px;
-    font-weight: bold;
-    margin: 12px 0;
+.hero-inner{
+    width:100%;
+    max-width:1200px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    gap:70px;
+    align-items:center;
 }
 
-.stock {
-    display: inline-block;
-    padding: 7px 12px;
-    border-radius: 20px;
-    background: #fee2e2;
-    color: #b91c1c;
-    font-weight: bold;
-    font-size: 14px;
+.badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:8px 13px;
+    border:1px solid #dbeafe;
+    background:#eff6ff;
+    color:#0b63f6;
+    border-radius:30px;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.5px;
+    margin-bottom:22px;
 }
 
-.available {
-    background: #dcfce7;
-    color: #15803d;
+.badge i{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#0b63f6;
 }
 
-.button {
-    display: block;
-    max-width: 330px;
-    margin: 14px auto;
-    padding: 15px 20px;
-    border-radius: 10px;
-    text-decoration: none;
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
+.hero h1{
+    font-size:clamp(48px,7vw,86px);
+    line-height:.95;
+    letter-spacing:-4px;
+    margin-bottom:24px;
 }
 
-.call {
-    background: #2563eb;
+.hero h1 .bmt{
+    color:#0b63f6;
 }
 
-.whatsapp {
-    background: #16a34a;
+.hero h1 small{
+    display:block;
+    font-size:clamp(21px,2.4vw,32px);
+    letter-spacing:-1px;
+    margin-top:15px;
+    color:#334155;
 }
 
-footer {
-    text-align: center;
-    padding: 30px 15px;
-    color: #6b7280;
-    font-size: 14px;
+.hero p{
+    max-width:580px;
+    color:#64748b;
+    font-size:17px;
+    margin-bottom:34px;
 }
 
-@media (max-width: 600px) {
+.buttons{
+    display:flex;
+    gap:13px;
+    flex-wrap:wrap;
+}
 
-    header h1 {
-        font-size: 32px;
+.btn{
+    display:inline-block;
+    text-decoration:none;
+    padding:14px 22px;
+    border-radius:10px;
+    font-size:14px;
+    font-weight:700;
+    transition:.25s;
+}
+
+.btn-primary{
+    background:#0b63f6;
+    color:white;
+    box-shadow:0 10px 30px rgba(11,99,246,.25);
+}
+
+.btn-primary:hover{
+    transform:translateY(-2px);
+}
+
+.btn-secondary{
+    background:white;
+    color:#0f172a;
+    border:1px solid #dbe1ea;
+}
+
+.btn-secondary:hover{
+    border-color:#0b63f6;
+}
+
+/* ---------- HERO VISUAL ---------- */
+
+.hero-visual{
+    min-height:500px;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.phone{
+    width:245px;
+    height:470px;
+    border-radius:39px;
+    background:linear-gradient(145deg,#111827,#020617);
+    padding:9px;
+    transform:rotate(7deg);
+    box-shadow:
+        25px 35px 70px rgba(15,23,42,.25),
+        inset 0 0 0 1px #475569;
+    position:relative;
+    z-index:3;
+}
+
+.phone-screen{
+    width:100%;
+    height:100%;
+    border-radius:32px;
+    background:
+        radial-gradient(circle at 35% 25%,#38bdf8,transparent 22%),
+        radial-gradient(circle at 70% 65%,#2563eb,transparent 32%),
+        linear-gradient(145deg,#020617,#172554);
+    overflow:hidden;
+    position:relative;
+}
+
+.phone-screen:after{
+    content:"BMT";
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    color:white;
+    font-size:55px;
+    font-weight:900;
+    letter-spacing:-4px;
+    opacity:.9;
+}
+
+.camera{
+    position:absolute;
+    top:18px;
+    left:50%;
+    transform:translateX(-50%);
+    width:75px;
+    height:22px;
+    background:#020617;
+    border-radius:20px;
+    z-index:5;
+}
+
+.floating-card{
+    position:absolute;
+    background:rgba(255,255,255,.94);
+    border:1px solid #e2e8f0;
+    border-radius:17px;
+    padding:17px 20px;
+    box-shadow:0 20px 50px rgba(15,23,42,.12);
+    z-index:5;
+}
+
+.card-one{
+    top:90px;
+    right:0;
+}
+
+.card-two{
+    bottom:70px;
+    left:0;
+}
+
+.floating-card strong{
+    display:block;
+    font-size:16px;
+}
+
+.floating-card span{
+    color:#64748b;
+    font-size:11px;
+}
+
+/* ---------- TRUST BAR ---------- */
+
+.trust{
+    background:#0f172a;
+    color:white;
+}
+
+.trust-inner{
+    max-width:1200px;
+    margin:auto;
+    padding:25px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    text-align:center;
+    gap:20px;
+}
+
+.trust strong{
+    display:block;
+    font-size:15px;
+}
+
+.trust span{
+    display:block;
+    color:#94a3b8;
+    font-size:12px;
+    margin-top:3px;
+}
+
+/* ---------- SECTIONS ---------- */
+
+section{
+    padding:100px 25px;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+}
+
+.section-label{
+    color:#0b63f6;
+    font-size:12px;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    margin-bottom:12px;
+}
+
+.section-title{
+    font-size:clamp(32px,5vw,52px);
+    line-height:1.05;
+    letter-spacing:-2px;
+    max-width:700px;
+    margin-bottom:18px;
+}
+
+.section-description{
+    color:#64748b;
+    max-width:650px;
+    margin-bottom:50px;
+}
+
+/* ---------- PRODUCTS ---------- */
+
+.products{
+    background:white;
+}
+
+.product-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.product{
+    min-height:260px;
+    border:1px solid #e5e7eb;
+    border-radius:20px;
+    padding:28px;
+    background:#fff;
+    transition:.3s;
+    position:relative;
+    overflow:hidden;
+}
+
+.product:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 45px rgba(15,23,42,.08);
+    border-color:#bfdbfe;
+}
+
+.product-icon{
+    width:60px;
+    height:60px;
+    border-radius:16px;
+    background:#eff6ff;
+    color:#0b63f6;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+    margin-bottom:28px;
+}
+
+.product h3{
+    font-size:20px;
+    margin-bottom:8px;
+}
+
+.product p{
+    color:#64748b;
+    font-size:13px;
+}
+
+/* ---------- ABOUT ---------- */
+
+.about{
+    background:#f8fafc;
+}
+
+.about-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:70px;
+    align-items:center;
+}
+
+.about-box{
+    background:#0f172a;
+    color:white;
+    border-radius:28px;
+    padding:50px;
+    min-height:370px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.about-box .big{
+    font-size:90px;
+    line-height:1;
+    font-weight:900;
+    color:#3b82f6;
+    letter-spacing:-8px;
+}
+
+.about-box h3{
+    font-size:26px;
+    margin-top:10px;
+}
+
+.about-box p{
+    color:#94a3b8;
+    margin-top:10px;
+}
+
+.about-text p{
+    color:#64748b;
+    margin-bottom:20px;
+}
+
+.check{
+    display:flex;
+    gap:12px;
+    margin:15px 0;
+    font-size:14px;
+    font-weight:600;
+}
+
+.check span{
+    color:#0b63f6;
+    font-weight:900;
+}
+
+/* ---------- CONTACT ---------- */
+
+.contact{
+    background:white;
+}
+
+.contact-card{
+    background:
+        radial-gradient(circle at 90% 10%,rgba(59,130,246,.22),transparent 35%),
+        #0f172a;
+    color:white;
+    border-radius:30px;
+    padding:60px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:50px;
+    align-items:center;
+}
+
+.contact-card h2{
+    font-size:clamp(34px,5vw,58px);
+    line-height:1;
+    letter-spacing:-2px;
+    margin-bottom:18px;
+}
+
+.contact-card p{
+    color:#94a3b8;
+}
+
+.contact-info{
+    display:grid;
+    gap:15px;
+}
+
+.info{
+    padding:19px;
+    border:1px solid #334155;
+    border-radius:13px;
+    background:rgba(255,255,255,.03);
+}
+
+.info small{
+    color:#64748b;
+    display:block;
+    margin-bottom:4px;
+}
+
+.info a,
+.info div{
+    color:white;
+    text-decoration:none;
+    font-weight:700;
+}
+
+/* ---------- FOOTER ---------- */
+
+footer{
+    background:#020617;
+    color:white;
+    padding:35px 25px;
+}
+
+.footer-inner{
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.footer-brand{
+    font-weight:900;
+    letter-spacing:1px;
+}
+
+.footer-brand span{
+    color:#3b82f6;
+}
+
+footer p{
+    color:#64748b;
+    font-size:12px;
+}
+
+/* ---------- MOBILE ---------- */
+
+@media(max-width:900px){
+
+    nav{
+        display:none;
     }
 
-    header p {
-        font-size: 17px;
+    .hero{
+        padding-top:125px;
     }
 
-    .card {
-        padding: 25px 18px;
+    .hero-inner,
+    .about-grid,
+    .contact-card{
+        grid-template-columns:1fr;
+    }
+
+    .hero{
+        text-align:center;
+    }
+
+    .hero p{
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+    .buttons{
+        justify-content:center;
+    }
+
+    .hero-visual{
+        min-height:450px;
+    }
+
+    .phone{
+        width:210px;
+        height:400px;
+    }
+
+    .card-one{
+        right:2%;
+    }
+
+    .card-two{
+        left:2%;
+    }
+
+    .product-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .trust-inner{
+        grid-template-columns:1fr;
+    }
+
+    .contact-card{
+        padding:35px 25px;
+    }
+}
+
+@media(max-width:550px){
+
+    .nav{
+        height:68px;
+    }
+
+    .brand-mark{
+        width:43px;
+        height:43px;
+    }
+
+    .hero h1{
+        font-size:56px;
+    }
+
+    .hero h1 small{
+        font-size:21px;
+    }
+
+    section{
+        padding:75px 20px;
+    }
+
+    .product-grid{
+        grid-template-columns:1fr;
+    }
+
+    .product{
+        min-height:auto;
+    }
+
+    .about-box{
+        padding:35px;
+    }
+
+    .about-box .big{
+        font-size:70px;
+    }
+
+    .hero-visual{
+        transform:scale(.9);
+    }
+
+    .floating-card{
+        padding:13px 15px;
+    }
+
+    .footer-inner{
+        flex-direction:column;
+        text-align:center;
     }
 }
 </style>
@@ -159,151 +684,381 @@ footer {
 
 <body>
 
+<!-- ================= HEADER ================= -->
+
 <header>
-    <h1>Babar Mobile Trader</h1>
-    <p>Mobile Phones • New & Used • PTA Approved</p>
+<div class="nav">
+
+    <a href="#" class="brand">
+
+        <!--
+        APNA ORIGINAL LOGO YAHAN LAGANA HAI.
+
+        Jab logo ki file upload karein to:
+        <div class="brand-mark">BMT</div>
+
+        ki jagah:
+        <img src="logo.png" class="brand-logo">
+
+        kar dein.
+        -->
+
+        <div class="brand-mark">BMT</div>
+
+        <div class="brand-text">
+            <strong>Babar Mobile Trader</strong>
+            <span>Mobile Trading & Accessories</span>
+        </div>
+
+    </a>
+
+    <nav>
+        <a href="#products">Products</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a href="tel:03122741845" class="nav-button">Call BMT</a>
+    </nav>
+
+</div>
 </header>
 
-<div class="container">
 
-<!-- ABOUT -->
+<!-- ================= HERO ================= -->
 
-<section class="card">
+<section class="hero">
 
-    <h2>All PTA Approved Mobile Phones</h2>
+<div class="hero-inner">
 
-    <p>
-        New & Used Mobile Phones — All Models Available
-    </p>
+    <div>
 
-    <p>
-        <strong>iPhone • Samsung • All Major Brands</strong>
-    </p>
+        <div class="badge">
+            <i></i>
+            PROFESSIONAL MOBILE TRADING
+        </div>
 
-    <p>
-        For latest price and availability, please contact us.
-    </p>
+        <h1>
+            <span class="bmt">BMT</span>
+            <small>Babar Mobile Trader</small>
+        </h1>
 
-</section>
+        <p>
+            A professional mobile trading and accessories business
+            serving customers with quality products and reliable service
+            from North Nazimabad, Karachi.
+        </p>
 
+        <div class="buttons">
 
-<!-- IPHONE -->
+            <a href="tel:03122741845" class="btn btn-primary">
+                Call Us
+            </a>
 
-<section class="card">
-
-    <h2>📱 Featured Mobile</h2>
-
-    <div class="products">
-
-        <div class="product">
-
-            <div class="product-image">
-                📱
-            </div>
-
-            <h3>iPhone 18 Pro Max</h3>
-
-            <p>
-                256GB • PTA Approved
-            </p>
-
-            <div class="price">
-                Rs. 605,000
-            </div>
-
-            <span class="stock">
-                OUT OF STOCK
-            </span>
+            <a href="https://wa.me/923122741845"
+               class="btn btn-secondary"
+               target="_blank">
+                WhatsApp
+            </a>
 
         </div>
 
     </div>
 
-</section>
 
+    <div class="hero-visual">
 
-<!-- ACCESSORIES -->
-
-<section class="card">
-
-    <h2>🔌 Mobile Accessories</h2>
-
-    <div class="products">
-
-        <div class="product">
-
-            <div class="product-image">
-                🍎
-            </div>
-
-            <h3>Apple 20W USB-C Charger</h3>
-
-            <div class="price">
-                Rs. 5,199
-            </div>
-
-            <span class="stock available">
-                AVAILABLE
-            </span>
-
+        <div class="floating-card card-one">
+            <strong>Mobile Trading</strong>
+            <span>Professional Service</span>
         </div>
 
+        <div class="floating-card card-two">
+            <strong>Accessories</strong>
+            <span>Chargers • Cables • More</span>
+        </div>
 
-        <div class="product">
-
-            <div class="product-image">
-                🔌
+        <div class="phone">
+            <div class="phone-screen">
+                <div class="camera"></div>
             </div>
-
-            <h3>Samsung 25W Charger + USB-C Cable</h3>
-
-            <div class="price">
-                Rs. 3,999
-            </div>
-
-            <span class="stock available">
-                AVAILABLE
-            </span>
-
         </div>
 
     </div>
 
-</section>
-
-
-<!-- CONTACT -->
-
-<section class="card">
-
-    <h2>Contact Us</h2>
-
-    <p>
-        <strong>Address:</strong><br>
-        Office D-10, Sareena Family Mobile Market,<br>
-        Sakhi Hasan, North Nazimabad
-    </p>
-
-    <p>
-        <strong>Phone:</strong><br>
-        0312-2741845
-    </p>
-
-    <a class="button call" href="tel:+923122741845">
-        📞 Call Now
-    </a>
-
-    <a class="button whatsapp" href="https://wa.me/923122741845">
-        💬 WhatsApp
-    </a>
+</div>
 
 </section>
+
+
+<!-- ================= TRUST ================= -->
+
+<div class="trust">
+
+<div class="trust-inner">
+
+    <div>
+        <strong>BMT</strong>
+        <span>Our Brand</span>
+    </div>
+
+    <div>
+        <strong>Mobile & Accessories</strong>
+        <span>Our Business</span>
+    </div>
+
+    <div>
+        <strong>Karachi</strong>
+        <span>Our Location</span>
+    </div>
+
+</div>
 
 </div>
 
 
+<!-- ================= PRODUCTS ================= -->
+
+<section class="products" id="products">
+
+<div class="container">
+
+    <div class="section-label">What We Offer</div>
+
+    <h2 class="section-title">
+        Mobile technology, handled professionally.
+    </h2>
+
+    <p class="section-description">
+        Explore our core product categories. Contact BMT directly
+        for current availability, pricing and business enquiries.
+    </p>
+
+
+    <div class="product-grid">
+
+        <div class="product">
+
+            <div class="product-icon">📱</div>
+
+            <h3>Mobile Phones</h3>
+
+            <p>
+                Mobile phones and trading services for today's
+                connected world.
+            </p>
+
+        </div>
+
+
+        <div class="product">
+
+            <div class="product-icon">⚡</div>
+
+            <h3>Chargers</h3>
+
+            <p>
+                Charging solutions and mobile power accessories.
+            </p>
+
+        </div>
+
+
+        <div class="product">
+
+            <div class="product-icon">🔌</div>
+
+            <h3>Cables</h3>
+
+            <p>
+                Essential cables and connectivity accessories
+                for mobile devices.
+            </p>
+
+        </div>
+
+
+        <div class="product">
+
+            <div class="product-icon">🎧</div>
+
+            <h3>Accessories</h3>
+
+            <p>
+                Mobile accessories and everyday technology
+                essentials.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- ================= ABOUT ================= -->
+
+<section class="about" id="about">
+
+<div class="container">
+
+<div class="about-grid">
+
+    <div class="about-box">
+
+        <div class="big">BMT</div>
+
+        <h3>Babar Mobile Trader</h3>
+
+        <p>
+            Mobile Trading & Accessories
+        </p>
+
+    </div>
+
+
+    <div class="about-text">
+
+        <div class="section-label">About BMT</div>
+
+        <h2 class="section-title">
+            Built around trust, service and mobile technology.
+        </h2>
+
+        <p>
+            Babar Mobile Trader is a professional mobile trading
+            business based in North Nazimabad, Karachi.
+        </p>
+
+        <p>
+            Our focus is simple: provide customers with a professional
+            experience and dependable mobile products and accessories.
+        </p>
+
+        <div class="check">
+            <span>✓</span>
+            Professional customer service
+        </div>
+
+        <div class="check">
+            <span>✓</span>
+            Mobile phones & accessories
+        </div>
+
+        <div class="check">
+            <span>✓</span>
+            Convenient WhatsApp & phone contact
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= CONTACT ================= -->
+
+<section class="contact" id="contact">
+
+<div class="container">
+
+<div class="contact-card">
+
+    <div>
+
+        <div class="section-label">Get In Touch</div>
+
+        <h2>
+            Let's talk<br>
+            mobile.
+        </h2>
+
+        <p>
+            For product enquiries, availability or business
+            information, contact BMT directly.
+        </p>
+
+    </div>
+
+
+    <div class="contact-info">
+
+        <div class="info">
+
+            <small>PHONE / WHATSAPP</small>
+
+            <a href="tel:03122741845">
+                0312 2741845
+            </a>
+
+        </div>
+
+
+        <div class="info">
+
+            <small>OFFICE</small>
+
+            <div>
+                D10, Sareena Family Mobile Market
+            </div>
+
+        </div>
+
+
+        <div class="info">
+
+            <small>LOCATION</small>
+
+            <div>
+                Sakhi Hasan, North Nazimabad, Karachi
+            </div>
+
+        </div>
+
+
+        <div class="buttons">
+
+            <a href="https://wa.me/923122741845"
+               class="btn btn-primary"
+               target="_blank">
+                Chat on WhatsApp
+            </a>
+
+            <a href="tel:03122741845"
+               class="btn btn-secondary">
+                Call Now
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
 <footer>
-    ©️ 2026 Babar Mobile Trader. All Rights Reserved.
+
+<div class="footer-inner">
+
+    <div class="footer-brand">
+        <span>BMT</span> — Babar Mobile Trader
+    </div>
+
+    <p>
+        ©️ 2026 Babar Mobile Trader. All rights reserved.
+    </p>
+
+</div>
+
 </footer>
 
 </body>
