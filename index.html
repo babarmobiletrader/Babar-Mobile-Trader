@@ -8,89 +8,73 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Babar Mobile Trader</title>
+<title>Babar Mobile Trader | Premium Smartphones</title>
+
+<meta name="description"
+
+content="Babar Mobile Trader — Premium smartphones, carefully selected used mobiles, box pack phones and accessories in Karachi.">
 
 <style>
 
 *{
 
-  margin:0;
+    margin:0;
 
-  padding:0;
+    padding:0;
 
-  box-sizing:border-box;
+    box-sizing:border-box;
 
 }
 
 :root{
 
-  --blue:#0879d1;
+    --blue:#1261a8;
 
-  --blue-dark:#075a9e;
+    --blue-dark:#0a3d70;
 
-  --wine:#641d2d;
+    --wine:#7b1735;
 
-  --wine-light:#8d3048;
+    --wine-dark:#4b0d20;
 
-  --cream:#f7f4ef;
+    --cream:#f8f5ef;
 
-  --dark:#111317;
+    --light:#f4f7fa;
 
-  --text:#181a1e;
+    --text:#17202a;
 
-  --muted:#747980;
+    --muted:#697586;
 
-  --white:#fff;
+    --white:#ffffff;
+
+    --border:#e5e9ef;
 
 }
 
 body{
 
-  font-family:Arial,Helvetica,sans-serif;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
 
-  color:var(--text);
+    background:#fff;
 
-  background:#fff;
+    color:var(--text);
+
+    line-height:1.5;
 
 }
 
 a{
 
-  text-decoration:none;
+    text-decoration:none;
 
-  color:inherit;
-
-}
-
-.container{
-
-  width:92%;
-
-  max-width:1180px;
-
-  margin:auto;
+    color:inherit;
 
 }
 
-/* TOP */
+img{
 
-.top{
+    max-width:100%;
 
-  background:#101216;
-
-  color:#fff;
-
-  padding:9px 0;
-
-  font-size:13px;
-
-}
-
-.top-inner{
-
-  display:flex;
-
-  justify-content:space-between;
+    display:block;
 
 }
 
@@ -98,153 +82,133 @@ a{
 
 header{
 
-  position:sticky;
+    position:sticky;
 
-  top:0;
+    top:0;
 
-  z-index:999;
+    z-index:1000;
 
-  background:rgba(255,255,255,.97);
+    background:rgba(255,255,255,.96);
 
-  border-bottom:1px solid #eee;
+    backdrop-filter:blur(12px);
+
+    border-bottom:1px solid var(--border);
 
 }
 
 .nav{
 
-  height:82px;
+    max-width:1200px;
 
-  display:flex;
+    margin:auto;
 
-  justify-content:space-between;
+    height:78px;
 
-  align-items:center;
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 22px;
 
 }
 
 .brand{
 
-  display:flex;
+    display:flex;
 
-  align-items:center;
+    align-items:center;
 
-  gap:12px;
+    gap:12px;
 
 }
 
 .logo{
 
-  width:44px;
+    width:44px;
 
-  height:64px;
+    height:58px;
 
-  border-radius:11px;
+    border-radius:11px;
 
-  background:linear-gradient(145deg,#0a8bea,#075da4);
+    border:3px solid var(--blue);
 
-  color:#fff;
+    position:relative;
 
-  display:flex;
+    display:flex;
 
-  align-items:center;
+    align-items:center;
 
-  justify-content:center;
+    justify-content:center;
 
-  font-weight:900;
+    color:var(--blue);
 
-  font-size:14px;
+    font-weight:900;
 
-  position:relative;
+    font-size:14px;
 
-  box-shadow:0 8px 20px rgba(8,121,209,.25);
+    background:white;
 
-}
-
-.logo:before{
-
-  content:"";
-
-  position:absolute;
-
-  top:5px;
-
-  width:14px;
-
-  height:3px;
-
-  border-radius:5px;
-
-  background:#fff;
+    box-shadow:0 5px 18px rgba(18,97,168,.15);
 
 }
 
 .logo:after{
 
-  content:"";
+    content:"";
 
-  position:absolute;
+    width:5px;
 
-  bottom:5px;
+    height:5px;
 
-  width:5px;
+    background:var(--blue);
 
-  height:5px;
+    border-radius:50%;
 
-  border:1px solid #fff;
+    position:absolute;
 
-  border-radius:50%;
+    bottom:5px;
 
 }
 
 .brand-name{
 
-  color:var(--blue);
+    color:var(--blue);
 
-  font-size:20px;
+    font-size:22px;
 
-  font-weight:900;
+    font-weight:800;
+
+    letter-spacing:-.5px;
 
 }
 
 .brand-tag{
 
-  color:#777;
+    font-size:11px;
 
-  font-size:10px;
+    color:#697586;
 
-  letter-spacing:1.2px;
-
-  margin-top:2px;
+    margin-top:1px;
 
 }
 
 .nav-links{
 
-  display:flex;
+    display:flex;
 
-  gap:28px;
+    gap:25px;
 
-  font-size:14px;
+    font-size:14px;
 
-  font-weight:bold;
+    font-weight:600;
 
 }
 
 .nav-links a:hover{
 
-  color:var(--blue);
-
-}
-
-.menu{
-
-  display:none;
-
-  background:none;
-
-  border:0;
-
-  font-size:27px;
+    color:var(--blue);
 
 }
 
@@ -252,397 +216,231 @@ header{
 
 .hero{
 
-  background:
+    min-height:610px;
 
-  radial-gradient(circle at 75% 50%,rgba(255,255,255,.13),transparent 27%),
+    background:
 
-  linear-gradient(120deg,#501522,#75263a,#46131f);
+        radial-gradient(circle at 80% 30%,rgba(255,255,255,.12),transparent 25%),
 
-  color:#fff;
+        linear-gradient(135deg,var(--wine-dark),var(--wine) 55%,#a9274e);
 
-  overflow:hidden;
+    color:white;
 
-}
-
-.hero-grid{
-
-  min-height:620px;
-
-  display:grid;
-
-  grid-template-columns:1fr 1fr;
-
-  align-items:center;
+    overflow:hidden;
 
 }
 
-.eyebrow{
+.hero-inner{
 
-  color:#9fd8ff;
+    max-width:1200px;
 
-  font-weight:800;
+    min-height:610px;
 
-  letter-spacing:2px;
+    margin:auto;
 
-  text-transform:uppercase;
+    padding:75px 22px;
 
-  font-size:13px;
+    display:grid;
 
-  margin-bottom:18px;
+    grid-template-columns:1.05fr .95fr;
 
-}
+    align-items:center;
 
-.hero h1{
-
-  font-size:clamp(42px,6vw,70px);
-
-  line-height:1;
-
-  letter-spacing:-3px;
-
-}
-
-.hero h1 span{
-
-  color:#9fd8ff;
-
-}
-
-.hero p{
-
-  margin:25px 0 30px;
-
-  max-width:550px;
-
-  color:#f3e9ec;
-
-  font-size:18px;
-
-}
-
-.buttons{
-
-  display:flex;
-
-  gap:12px;
-
-  flex-wrap:wrap;
-
-}
-
-.btn{
-
-  display:inline-flex;
-
-  padding:14px 22px;
-
-  border-radius:12px;
-
-  font-weight:800;
-
-}
-
-.btn-white{
-
-  background:#fff;
-
-  color:#541827;
-
-}
-
-.btn-blue{
-
-  background:var(--blue);
-
-  color:#fff;
-
-}
-
-.btn-green{
-
-  background:#18b957;
-
-  color:#fff;
-
-}
-
-/* HERO PHONE */
-
-.hero-phone-area{
-
-  height:560px;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-}
-
-.phone{
-
-  width:270px;
-
-  height:505px;
-
-  border-radius:43px;
-
-  background:#19191b;
-
-  padding:9px;
-
-  transform:rotate(4deg);
-
-  box-shadow:0 40px 70px rgba(0,0,0,.45);
-
-}
-
-.phone-back{
-
-  width:100%;
-
-  height:100%;
-
-  border-radius:36px;
-
-  position:relative;
-
-  overflow:hidden;
-
-  /* Burgundy iPhone-style rear */
-
-  background:
-
-    radial-gradient(circle at 30% 20%,rgba(255,255,255,.22),transparent 18%),
-
-    linear-gradient(145deg,#a33d57,#7b263c 45%,#541827);
-
-}
-
-/* Apple logo */
-
-.apple{
-
-  position:absolute;
-
-  top:51%;
-
-  left:50%;
-
-  transform:translate(-50%,-50%);
-
-  color:rgba(255,255,255,.92);
-
-  font-size:65px;
-
-  font-weight:bold;
-
-}
-
-/* CAMERA */
-
-.camera{
-
-  position:absolute;
-
-  top:24px;
-
-  left:23px;
-
-  width:115px;
-
-  height:115px;
-
-  border-radius:28px;
-
-  background:#752439;
-
-  box-shadow:inset 0 0 0 2px rgba(255,255,255,.08);
-
-}
-
-.lens{
-
-  position:absolute;
-
-  width:38px;
-
-  height:38px;
-
-  border-radius:50%;
-
-  background:
-
-    radial-gradient(circle at 35% 30%,#788b9b 0 8%,#17202a 9% 48%,#050608 50%);
-
-  border:3px solid #aeb0b5;
-
-}
-
-.lens.one{top:14px;left:14px}
-
-.lens.two{top:14px;right:14px}
-
-.lens.three{bottom:14px;left:14px}
-
-.flash{
-
-  position:absolute;
-
-  right:18px;
-
-  bottom:28px;
-
-  width:18px;
-
-  height:18px;
-
-  border-radius:50%;
-
-  background:#eee;
+    gap:40px;
 
 }
 
 .hero-label{
 
-  position:absolute;
+    display:inline-block;
 
-  bottom:70px;
+    padding:8px 14px;
 
-  right:8%;
+    border:1px solid rgba(255,255,255,.35);
 
-  background:#fff;
+    border-radius:30px;
 
-  color:#222;
+    background:rgba(255,255,255,.08);
 
-  padding:14px 18px;
+    font-size:13px;
 
-  border-radius:14px;
-
-  box-shadow:0 15px 40px rgba(0,0,0,.25);
+    margin-bottom:22px;
 
 }
 
-.hero-label strong{
+.hero h1{
 
-  display:block;
+    font-size:clamp(42px,6vw,72px);
 
-}
+    line-height:1.02;
 
-.hero-label small{
+    letter-spacing:-2px;
 
-  color:#777;
-
-}
-
-/* TRUST */
-
-.trust{
-
-  padding:25px 0;
-
-  border-bottom:1px solid #eee;
+    margin-bottom:22px;
 
 }
 
-.trust-grid{
+.hero h1 span{
 
-  display:grid;
-
-  grid-template-columns:repeat(4,1fr);
-
-  gap:20px;
+    color:#ffd7df;
 
 }
 
-.trust-item{
+.hero p{
 
-  display:flex;
+    font-size:18px;
 
-  gap:12px;
+    color:#f6e8eb;
 
-  align-items:center;
+    max-width:570px;
 
-}
-
-.trust-icon{
-
-  width:43px;
-
-  height:43px;
-
-  border-radius:12px;
-
-  background:#edf7ff;
-
-  color:var(--blue);
-
-  display:grid;
-
-  place-items:center;
-
-  font-weight:bold;
+    margin-bottom:28px;
 
 }
 
-.trust-item strong{
+.hero-buttons{
 
-  display:block;
+    display:flex;
 
-  font-size:14px;
+    gap:12px;
 
-}
-
-.trust-item small{
-
-  color:#777;
+    flex-wrap:wrap;
 
 }
 
-/* GENERAL */
+.btn{
 
-section{
+    display:inline-flex;
 
-  padding:80px 0;
+    align-items:center;
+
+    justify-content:center;
+
+    padding:13px 21px;
+
+    border-radius:10px;
+
+    font-weight:700;
+
+    border:1px solid transparent;
+
+    transition:.2s;
+
+}
+
+.btn-light{
+
+    background:white;
+
+    color:var(--wine-dark);
+
+}
+
+.btn-light:hover{
+
+    transform:translateY(-2px);
+
+}
+
+.btn-outline{
+
+    border-color:rgba(255,255,255,.45);
+
+    color:white;
+
+}
+
+.btn-outline:hover{
+
+    background:rgba(255,255,255,.1);
+
+}
+
+/* HERO PHONE */
+
+.hero-product{
+
+    background:rgba(255,255,255,.08);
+
+    border:1px solid rgba(255,255,255,.18);
+
+    border-radius:28px;
+
+    padding:24px;
+
+    text-align:center;
+
+    box-shadow:0 30px 70px rgba(0,0,0,.25);
+
+}
+
+.hero-product img{
+
+    width:100%;
+
+    max-width:390px;
+
+    height:390px;
+
+    object-fit:contain;
+
+    margin:auto;
+
+    filter:drop-shadow(0 25px 25px rgba(0,0,0,.35));
+
+}
+
+.hero-product h3{
+
+    font-size:23px;
+
+    margin-top:10px;
+
+}
+
+.hero-product small{
+
+    color:#f0dce2;
+
+}
+
+/* SECTION */
+
+.section{
+
+    max-width:1200px;
+
+    margin:auto;
+
+    padding:80px 22px;
 
 }
 
 .section-head{
 
-  margin-bottom:32px;
+    display:flex;
 
-}
+    align-items:end;
 
-.kicker{
+    justify-content:space-between;
 
-  color:var(--blue);
+    gap:20px;
 
-  font-weight:900;
-
-  font-size:12px;
-
-  text-transform:uppercase;
-
-  letter-spacing:2px;
-
-  margin-bottom:8px;
+    margin-bottom:30px;
 
 }
 
 .section-head h2{
 
-  font-size:45px;
+    font-size:36px;
 
-  letter-spacing:-2px;
+    letter-spacing:-1px;
 
 }
 
 .section-head p{
 
-  color:#777;
-
-  margin-top:10px;
+    color:var(--muted);
 
 }
 
@@ -650,485 +448,275 @@ section{
 
 .categories{
 
-  background:var(--cream);
+    display:grid;
 
-}
+    grid-template-columns:repeat(5,1fr);
 
-.category-grid{
-
-  display:grid;
-
-  grid-template-columns:repeat(4,1fr);
-
-  gap:18px;
+    gap:13px;
 
 }
 
 .category{
 
-  background:#fff;
+    border:1px solid var(--border);
 
-  padding:28px;
+    border-radius:14px;
 
-  min-height:170px;
+    padding:19px;
 
-  border-radius:22px;
+    background:white;
 
-  border:1px solid #e6e2dc;
+    text-align:center;
 
-  transition:.2s;
+    font-weight:700;
+
+    transition:.2s;
 
 }
 
 .category:hover{
 
-  transform:translateY(-5px);
+    border-color:#aac7e1;
 
-  box-shadow:0 18px 45px rgba(0,0,0,.1);
+    transform:translateY(-3px);
 
-}
-
-.category-icon{
-
-  font-size:32px;
-
-  margin-bottom:18px;
+    box-shadow:0 10px 25px rgba(20,40,70,.07);
 
 }
 
-.category h3{
-
-  margin-bottom:5px;
-
-}
-
-.category p{
-
-  color:#777;
-
-  font-size:13px;
-
-}
-
-/* USED */
-
-.used{
-
-  background:#111317;
-
-  color:#fff;
-
-}
-
-.used .section-head p{
-
-  color:#aaa;
-
-}
-
-.search{
-
-  width:100%;
-
-  padding:17px;
-
-  border-radius:13px;
-
-  border:1px solid #353941;
-
-  background:#1b1e24;
-
-  color:#fff;
-
-  margin-bottom:25px;
-
-  outline:none;
-
-}
+/* PRODUCTS */
 
 .product-list{
 
-  display:flex;
+    display:grid;
 
-  flex-direction:column;
-
-  gap:22px;
+    gap:24px;
 
 }
 
 .product{
 
-  display:grid;
+    display:grid;
 
-  grid-template-columns:280px 1fr;
+    grid-template-columns:340px 1fr;
 
-  gap:30px;
+    gap:34px;
 
-  padding:22px;
+    background:white;
 
-  background:#191c21;
+    border:1px solid var(--border);
 
-  border:1px solid #30343b;
+    border-radius:22px;
 
-  border-radius:24px;
+    padding:24px;
+
+    overflow:hidden;
+
+    box-shadow:0 10px 30px rgba(20,40,70,.05);
 
 }
 
 .product-image{
 
-  min-height:310px;
+    background:#f7f8fa;
 
-  border-radius:18px;
+    border-radius:17px;
 
-  background:#f2f4f6;
+    min-height:330px;
 
-  display:flex;
+    display:flex;
 
-  justify-content:center;
+    align-items:center;
 
-  align-items:center;
+    justify-content:center;
 
-  overflow:hidden;
+    padding:20px;
 
 }
 
 .product-image img{
 
-  width:100%;
+    width:100%;
 
-  height:100%;
+    height:290px;
 
-  object-fit:contain;
-
-  padding:18px;
-
-}
-
-.fake-back{
-
-  width:145px;
-
-  height:275px;
-
-  border-radius:25px;
-
-  position:relative;
-
-  box-shadow:0 20px 35px rgba(0,0,0,.25);
-
-}
-
-.blue-phone{
-
-  background:linear-gradient(145deg,#6e9fbd,#477c9c);
-
-}
-
-.purple-phone{
-
-  background:linear-gradient(145deg,#6d608e,#453a67);
-
-}
-
-.graphite-phone{
-
-  background:linear-gradient(145deg,#62666b,#282b30);
-
-}
-
-.camera-small{
-
-  position:absolute;
-
-  top:18px;
-
-  left:18px;
-
-  width:70px;
-
-  height:70px;
-
-  border-radius:20px;
-
-  background:rgba(0,0,0,.2);
-
-}
-
-.camera-small:before,
-
-.camera-small:after{
-
-  content:"";
-
-  position:absolute;
-
-  width:24px;
-
-  height:24px;
-
-  border-radius:50%;
-
-  background:#111;
-
-  border:3px solid #aaa;
-
-}
-
-.camera-small:before{
-
-  top:10px;
-
-  left:10px;
-
-}
-
-.camera-small:after{
-
-  top:35px;
-
-  left:35px;
+    object-fit:contain;
 
 }
 
 .product-info{
 
-  display:flex;
+    display:flex;
 
-  justify-content:center;
+    flex-direction:column;
 
-  flex-direction:column;
+    justify-content:center;
 
 }
 
 .badge{
 
-  width:max-content;
+    display:inline-block;
 
-  padding:6px 10px;
+    width:max-content;
 
-  background:#242930;
+    padding:6px 11px;
 
-  color:#91d2ff;
+    border-radius:20px;
 
-  border-radius:30px;
+    background:#eef6ff;
 
-  font-size:11px;
+    color:var(--blue);
 
-  font-weight:bold;
+    font-size:12px;
 
-  margin-bottom:12px;
+    font-weight:800;
+
+    margin-bottom:11px;
 
 }
 
 .product h3{
 
-  font-size:30px;
+    font-size:28px;
 
-  margin-bottom:5px;
+    margin-bottom:8px;
 
 }
 
-.meta{
+.product-sub{
 
-  color:#a9adb4;
+    color:var(--muted);
 
-  margin-bottom:18px;
+    margin-bottom:16px;
 
 }
 
 .specs{
 
-  display:grid;
+    display:flex;
 
-  grid-template-columns:repeat(3,1fr);
+    flex-wrap:wrap;
 
-  gap:10px;
+    gap:9px;
 
-  margin-bottom:18px;
+    margin-bottom:18px;
 
 }
 
 .spec{
 
-  border:1px solid #333840;
+    background:#f5f6f8;
 
-  border-radius:12px;
+    border-radius:8px;
 
-  padding:11px;
+    padding:7px 11px;
 
-}
-
-.spec small{
-
-  display:block;
-
-  color:#777;
-
-  font-size:10px;
-
-  text-transform:uppercase;
-
-}
-
-.colors{
-
-  display:flex;
-
-  gap:8px;
-
-  align-items:center;
-
-  margin-bottom:18px;
-
-}
-
-.dot{
-
-  width:22px;
-
-  height:22px;
-
-  border-radius:50%;
-
-  border:2px solid #777;
+    font-size:13px;
 
 }
 
 .price{
 
-  font-size:28px;
+    font-size:28px;
 
-  font-weight:900;
+    font-weight:850;
 
-  margin-bottom:18px;
+    color:var(--wine);
 
-}
-
-/* BOX PACK */
-
-.box-section{
-
-  background:#f7f7f5;
+    margin-bottom:17px;
 
 }
 
-.box-grid{
+.product-buttons{
 
-  display:grid;
+    display:flex;
 
-  grid-template-columns:repeat(3,1fr);
+    gap:10px;
 
-  gap:20px;
-
-}
-
-.box{
-
-  background:#fff;
-
-  border-radius:23px;
-
-  overflow:hidden;
-
-  border:1px solid #e3e3e3;
+    flex-wrap:wrap;
 
 }
 
-.box-image{
+.btn-blue{
 
-  height:320px;
+    background:var(--blue);
 
-  display:flex;
-
-  justify-content:center;
-
-  align-items:center;
-
-  background:#f0f2f4;
-
-  overflow:hidden;
+    color:white;
 
 }
 
-.box-image img{
+.btn-wine{
 
-  width:100%;
+    background:var(--wine);
 
-  height:100%;
-
-  object-fit:contain;
-
-  padding:22px;
+    color:white;
 
 }
 
-.box-info{
+/* ABOUT */
 
-  padding:22px;
+.about{
 
-}
-
-.box-info h3{
-
-  font-size:21px;
-
-  margin:8px 0;
+    background:var(--cream);
 
 }
 
-.box-info p{
+.about-inner{
 
-  color:#777;
+    max-width:1200px;
 
-  margin-bottom:15px;
+    margin:auto;
 
-}
+    padding:75px 22px;
 
-/* ACCESSORIES */
+    display:grid;
 
-.accessories-grid{
+    grid-template-columns:1fr 1fr;
 
-  display:grid;
+    gap:50px;
 
-  grid-template-columns:repeat(4,1fr);
-
-  gap:18px;
+    align-items:center;
 
 }
 
-.accessory{
+.about h2{
 
-  padding:23px;
+    font-size:40px;
 
-  border:1px solid #e4e4e4;
-
-  border-radius:20px;
+    margin-bottom:18px;
 
 }
 
-.accessory-image{
+.about p{
 
-  height:160px;
+    color:#5d6570;
 
-  background:#f3f4f5;
+    font-size:16px;
 
-  border-radius:15px;
-
-  display:grid;
-
-  place-items:center;
-
-  font-size:55px;
-
-  margin-bottom:18px;
+    margin-bottom:15px;
 
 }
 
-.accessory p{
+.points{
 
-  color:#777;
+    display:grid;
 
-  font-size:13px;
+    gap:12px;
+
+}
+
+.point{
+
+    background:white;
+
+    padding:15px;
+
+    border-radius:12px;
+
+    border:1px solid #e7dfd2;
+
+    font-weight:700;
 
 }
 
@@ -1136,269 +724,253 @@ section{
 
 .contact{
 
-  background:#101216;
+    background:var(--blue-dark);
 
-  color:#fff;
+    color:white;
 
 }
 
-.contact-grid{
+.contact-inner{
 
-  display:grid;
+    max-width:1200px;
 
-  grid-template-columns:1fr 1fr;
+    margin:auto;
 
-  gap:50px;
+    padding:70px 22px;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:40px;
 
 }
 
 .contact h2{
 
-  font-size:48px;
+    font-size:38px;
 
-  letter-spacing:-2px;
+    margin-bottom:15px;
 
 }
 
 .contact p{
 
-  color:#aaa;
-
-  margin-top:12px;
+    color:#dce8f4;
 
 }
 
-.contact-box{
+.contact-card{
 
-  background:#191c21;
+    background:rgba(255,255,255,.08);
 
-  border:1px solid #30343b;
+    border:1px solid rgba(255,255,255,.15);
 
-  border-radius:23px;
+    border-radius:18px;
 
-  padding:30px;
-
-}
-
-.contact-line{
-
-  padding:15px 0;
-
-  border-bottom:1px solid #30343b;
+    padding:25px;
 
 }
 
-.contact-line:last-child{
+.contact-row{
 
-  border:0;
+    padding:13px 0;
+
+    border-bottom:1px solid rgba(255,255,255,.12);
+
+}
+
+.contact-row:last-child{
+
+    border-bottom:0;
 
 }
 
-.contact-line small{
-
-  display:block;
-
-  color:#777;
-
-  font-size:10px;
-
-  text-transform:uppercase;
-
-}
+/* FOOTER */
 
 footer{
 
-  background:#08090b;
+    background:#071c31;
 
-  color:#777;
+    color:#b8c6d4;
 
-  padding:25px 0;
-
-  font-size:12px;
+    padding:28px 22px;
 
 }
 
 .footer-inner{
 
-  display:flex;
+    max-width:1200px;
 
-  justify-content:space-between;
+    margin:auto;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+}
+
+.footer-brand{
+
+    color:white;
+
+    font-weight:800;
 
 }
 
 /* MOBILE */
 
-@media(max-width:950px){
+@media(max-width:850px){
 
-  .nav-links{
+    .nav{
 
-    display:none;
+        height:70px;
 
-    position:absolute;
+    }
 
-    top:82px;
+    .nav-links{
 
-    left:0;
+        display:none;
 
-    right:0;
+    }
 
-    background:#fff;
+    .brand-name{
 
-    padding:25px 5%;
+        font-size:18px;
 
-    flex-direction:column;
+    }
 
-  }
+    .hero-inner{
 
-  .nav-links.active{
+        grid-template-columns:1fr;
 
-    display:flex;
+        padding-top:55px;
 
-  }
+        padding-bottom:55px;
 
-  .menu{
+    }
 
-    display:block;
+    .hero{
 
-  }
+        min-height:auto;
 
-  .hero-grid{
+    }
 
-    grid-template-columns:1fr;
+    .hero-inner{
 
-    padding:60px 0 30px;
+        min-height:auto;
 
-  }
+    }
 
-  .hero-phone-area{
+    .hero-product img{
 
-    height:500px;
+        height:310px;
 
-  }
+    }
 
-  .trust-grid{
+    .categories{
 
-    grid-template-columns:repeat(2,1fr);
+        grid-template-columns:repeat(2,1fr);
 
-  }
+    }
 
-  .category-grid{
+    .product{
 
-    grid-template-columns:repeat(2,1fr);
+        grid-template-columns:1fr;
 
-  }
+        gap:20px;
 
-  .box-grid{
+    }
 
-    grid-template-columns:repeat(2,1fr);
+    .product-image{
 
-  }
+        min-height:280px;
 
-  .accessories-grid{
+    }
 
-    grid-template-columns:repeat(2,1fr);
+    .product-image img{
 
-  }
+        height:260px;
+
+    }
+
+    .about-inner,
+
+    .contact-inner{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .section-head{
+
+        display:block;
+
+    }
+
+    .section-head p{
+
+        margin-top:7px;
+
+    }
 
 }
 
-@media(max-width:650px){
+@media(max-width:500px){
 
-  .top-inner{
+    .brand-tag{
 
-    justify-content:center;
+        display:none;
 
-  }
+    }
 
-  .top-inner span:last-child{
+    .hero h1{
 
-    display:none;
+        font-size:43px;
 
-  }
+    }
 
-  .brand-name{
+    .hero p{
 
-    font-size:17px;
+        font-size:16px;
 
-  }
+    }
 
-  section{
+    .section{
 
-    padding:60px 0;
+        padding:55px 17px;
 
-  }
+    }
 
-  .hero h1{
+    .categories{
 
-    font-size:44px;
+        grid-template-columns:1fr 1fr;
 
-  }
+    }
 
-  .hero-phone-area{
+    .product{
 
-    height:440px;
+        padding:15px;
 
-  }
+        border-radius:17px;
 
-  .phone{
+    }
 
-    width:215px;
+    .product h3{
 
-    height:400px;
+        font-size:24px;
 
-  }
+    }
 
-  .hero-label{
+    .price{
 
-    right:2%;
+        font-size:24px;
 
-    bottom:30px;
-
-  }
-
-  .trust-grid,
-
-  .category-grid,
-
-  .box-grid,
-
-  .accessories-grid{
-
-    grid-template-columns:1fr;
-
-  }
-
-  .product{
-
-    grid-template-columns:1fr;
-
-  }
-
-  .specs{
-
-    grid-template-columns:1fr 1fr;
-
-  }
-
-  .contact-grid{
-
-    grid-template-columns:1fr;
-
-  }
-
-  .footer-inner{
-
-    flex-direction:column;
-
-    gap:10px;
-
-  }
-
-  .section-head h2{
-
-    font-size:34px;
-
-  }
+    }
 
 }
 
@@ -1408,455 +980,1113 @@ footer{
 
 <body>
 
-<!-- TOP -->
-
-<div class="top">
-
-  <div class="container top-inner">
-
-    <span>Trust Quality and Connectivity</span>
-
-    <span>info@babarmobiletrader.com</span>
-
-  </div>
-
-</div>
-
-<!-- HEADER -->
-
 <header>
 
-  <div class="container nav">
+<div class="nav">
 
-    <a href="#home" class="brand">
+    <a class="brand" href="#">
 
-      <div class="logo">BMT</div>
+        <div class="logo">BMT</div>
 
-      <div>
+        <div>
 
-        <div class="brand-name">
+            <div class="brand-name">Babar Mobile Trader</div>
 
-          Babar Mobile Trader
-
-        </div>
-
-        <div class="brand-tag">
-
-          Trust Quality and Connectivity
+            <div class="brand-tag">Trust Quality and Connectivity</div>
 
         </div>
-
-      </div>
 
     </a>
 
-    <nav class="nav-links" id="nav">
+    <nav class="nav-links">
 
-      <a href="#home">Home</a>
+        <a href="#products">Mobiles</a>
 
-      <a href="#used">Used Mobiles</a>
+        <a href="#boxpack">Box Pack</a>
 
-      <a href="#boxpack">Box Pack</a>
+        <a href="#about">About</a>
 
-      <a href="#accessories">Accessories</a>
-
-      <a href="#contact">Contact</a>
+        <a href="#contact">Contact</a>
 
     </nav>
 
-    <button class="menu" onclick="toggleMenu()">☰</button>
-
-  </div>
+</div>
 
 </header>
 
 <!-- HERO -->
 
-<section class="hero" id="home">
+<section class="hero">
 
-  <div class="container hero-grid">
+<div class="hero-inner">
 
     <div>
 
-      <div class="eyebrow">
+        <div class="hero-label">
 
-        Babar Mobile Trader
-
-      </div>
-
-      <h1>
-
-        Premium Smartphones.
-
-        <span>Trusted Quality.</span>
-
-      </h1>
-
-      <p>
-
-        Box Pack & Carefully Selected Used Mobiles.
-
-        Special Deals for Shopkeepers & Wholesale Buyers.
-
-      </p>
-
-      <div class="buttons">
-
-        <a href="#used" class="btn btn-white">
-
-          Explore Used Mobiles
-
-        </a>
-
-        <a href="#boxpack" class="btn btn-blue">
-
-          View Box Pack
-
-        </a>
-
-      </div>
-
-    </div>
-
-    <div class="hero-phone-area">
-
-      <div class="phone">
-
-        <div class="phone-back">
-
-          <div class="camera">
-
-            <div class="lens one"></div>
-
-            <div class="lens two"></div>
-
-            <div class="lens three"></div>
-
-            <div class="flash"></div>
-
-          </div>
-
-          <div class="apple"></div>
+            Premium Smartphones • Karachi
 
         </div>
 
-      </div>
+        <h1>
 
-      <div class="hero-label">
+            Premium<br>
 
-        <strong>iPhone 18 Pro Max</strong>
+            <span>Smartphones.</span><br>
 
-        <small>Burgundy • Box Pack</small>
+            Trusted Quality.
 
-      </div>
+        </h1>
 
-    </div>
+        <p>
 
-  </div>
+            Box Pack & Carefully Selected Used Mobiles
 
-</section>
+            from Babar Mobile Trader.
 
-<!-- TRUST -->
+        </p>
 
-<div class="trust">
+        <div class="hero-buttons">
 
-  <div class="container trust-grid">
+            <a class="btn btn-light" href="#products">
 
-    <div class="trust-item">
+                View Mobiles
 
-      <div class="trust-icon">✓</div>
+            </a>
 
-      <div>
+            <a class="btn btn-outline"
 
-        <strong>Quality Checked</strong>
+               href="mailto:info@babarmobiletrader.com">
 
-        <small>Carefully selected devices</small>
+                Contact Us
 
-      </div>
+            </a>
 
-    </div>
-
-    <div class="trust-item">
-
-      <div class="trust-icon">▣</div>
-
-      <div>
-
-        <strong>Box Pack</strong>
-
-        <small>Latest premium models</small>
-
-      </div>
+        </div>
 
     </div>
 
-    <div class="trust-item">
+    <div class="hero-product">
 
-      <div class="trust-icon">◆</div>
+        <img
 
-      <div>
+        src="https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-18-pro-max.jpg"
 
-        <strong>Wholesale Deals</strong>
+        alt="iPhone 18 Pro Max Burgundy">
 
-        <small>Shopkeeper pricing</small>
+        <h3>iPhone 18 Pro Max</h3>
 
-      </div>
+        <small>
 
-    </div>
+            Burgundy • Box Pack
 
-    <div class="trust-item">
-
-      <div class="trust-icon">↗</div>
-
-      <div>
-
-        <strong>Easy Enquiry</strong>
-
-        <small>Quick WhatsApp response</small>
-
-      </div>
+        </small>
 
     </div>
-
-  </div>
 
 </div>
 
+</section>
+
 <!-- CATEGORIES -->
 
-<section class="categories">
+<section class="section">
 
-  <div class="container">
+<div class="section-head">
 
-    <div class="section-head">
+    <div>
 
-      <div class="kicker">
+        <h2>Shop by Category</h2>
 
-        Shop by category
-
-      </div>
-
-      <h2>
-
-        Find Your Next Phone
-
-      </h2>
-
-      <p>
-
-        Premium smartphones for retail customers,
-
-        shopkeepers and wholesale buyers.
-
-      </p>
+        <p>Carefully selected smartphones for retail and wholesale buyers.</p>
 
     </div>
 
-    <div class="category-grid">
+</div>
 
-      <a class="category" href="#used">
+<div class="categories">
 
-        <div class="category-icon"></div>
+    <a class="category" href="#products">Apple iPhone</a>
 
-        <h3>Apple iPhone</h3>
+    <a class="category" href="#pixel">Google Pixel</a>
 
-        <p>Used & Box Pack iPhones</p>
+    <a class="category" href="#boxpack">Samsung</a>
 
-      </a>
+    <a class="category" href="#products">Used Mobiles</a>
 
-      <a class="category" href="#used">
+    <a class="category" href="#accessories">Accessories</a>
 
-        <div class="category-icon">G</div>
-
-        <h3>Google Pixel</h3>
-
-        <p>Selected Pixel devices</p>
-
-      </a>
-
-      <a class="category" href="#boxpack">
-
-        <div class="category-icon">S</div>
-
-        <h3>Samsung</h3>
-
-        <p>Latest Box Pack models</p>
-
-      </a>
-
-      <a class="category" href="#accessories">
-
-        <div class="category-icon">＋</div>
-
-        <h3>Accessories</h3>
-
-        <p>Chargers, cables & earbuds</p>
-
-      </a>
-
-    </div>
-
-  </div>
+</div>
 
 </section>
 
-<!-- USED -->
+<!-- USED PHONES -->
 
-<section class="used" id="used">
+<section class="section" id="products">
 
-  <div class="container">
+<div class="section-head">
 
-    <div class="section-head">
+    <div>
 
-      <div class="kicker">
+        <h2>Used iPhones</h2>
 
-        Used Collection
-
-      </div>
-
-      <h2>
-
-        Carefully Selected Used Mobiles
-
-      </h2>
-
-      <p>
-
-        Individual product presentation with storage,
-
-        condition, colours and enquiry options.
-
-      </p>
+        <p>128GB • Carefully selected used devices</p>
 
     </div>
 
-    <input
+</div>
 
-      class="search"
+<div class="product-list">
 
-      id="search"
+<!-- iPhone 12 Pro Max -->
 
-      type="search"
+<div class="product">
 
-      placeholder="Search iPhone, Pixel or model..."
+    <div class="product-image">
 
-      oninput="searchProducts()"
+        <img
 
-    >
+        src="https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-12-pro-max.jpg"
 
-    <div class="product-list" id="products"></div>
+        alt="iPhone 12 Pro Max">
 
-  </div>
+    </div>
+
+    <div class="product-info">
+
+        <span class="badge">USED • 128GB</span>
+
+        <h3>iPhone 12 Pro Max</h3>
+
+        <div class="product-sub">
+
+            Premium selected used condition
+
+        </div>
+
+        <div class="specs">
+
+            <span class="spec">128GB</span>
+
+            <span class="spec">Pro Camera</span>
+
+            <span class="spec">Face ID</span>
+
+        </div>
+
+        <div class="price">Rs. 110,000</div>
+
+        <div class="product-buttons">
+
+            <a class="btn btn-wine"
+
+               href="PASTE_FIRST_NUMBER_HERE">
+
+                WhatsApp
+
+            </a>
+
+            <a class="btn btn-blue"
+
+               href="mailto:info@babarmobiletrader.com">
+
+                Enquire Now
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- iPhone 13 -->
+
+<div class="product">
+
+    <div class="product-image">
+
+        <img
+
+        src="https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-13.jpg"
+
+        alt="iPhone 13">
+
+    </div>
+
+    <div class="product-info">
+
+        <span class="badge">USED • 128GB</span>
+
+        <h3>iPhone 13</h3>
+
+        <div class="product-sub">
+
+            Clean selected used condition
+
+        </div>
+
+        <div class="specs">
+
+            <span class="spec">128GB</span>
+
+            <span class="spec">A15 Bionic</span>
+
+            <span class="spec">Face ID</span>
+
+        </div>
+
+        <div class="price">Rs. 102,000</div>
+
+        <div class="product-buttons">
+
+            <a class="btn btn-wine" href="PASTE_FIRST_NUMBER_HERE">WhatsApp</a>
+
+            <a class="btn btn-blue" href="mailto:info@babarmobiletrader.com">Enquire Now</a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- iPhone 13 Pro -->
+
+<div class="product">
+
+    <div class="product-image">
+
+        <img
+
+        src="https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-13-pro.jpg"
+
+        alt="iPhone 13 Pro">
+
+    </div>
+
+    <div class="product-info">
+
+        <span class="badge">USED • 128GB</span>
+
+        <h3>iPhone 13 Pro</h3>
+
+        <div class="product-sub">
+
+            ProMotion • Triple Camera
+
+        </div>
+
+        <div class="specs">
+
+            <span class="spec">128GB</span>
+
+            <span class="spec">120Hz ProMotion</span>
+
+            <span class="spec">A15 Bionic</span>
+
+        </div>
+
+        <div class="price">Rs. 135,000</div>
+
+        <div class="product-buttons">
+
+            <a class="btn btn-wine" href="PASTE_FIRST_NUMBER_HERE">WhatsApp</a>
+
+            <a class="btn btn-blue" href="mailto:info@babarmobiletrader.com">Enquire Now</a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- iPhone 13 Pro Max -->
+
+<div class="product">
+
+    <div class="product-image">
+
+        <img
+
+        src="https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-13-pro-max.jpg"
+
+        alt="iPhone 13 Pro Max">
+
+    </div>
+
+    <div class="product-info">
+
+        <span class="badge">USED • 128GB</span>
+
+        <h3>iPhone 13 Pro Max</h3>
+
+        <div class="product-sub">
+
+            Large Pro display • Premium used device
+
+        </div>
+
+        <div class="specs">
+
+            <span class="spec">128GB</span>
+
+            <span class="spec">6.7-inch</span>
+
+            <span class="spec">120Hz</span>
+
+        </div>
+
+        <div class="price">Rs. 170,000</div>
+
+        <div class="product-buttons">
+
+            <a class="btn btn-wine" href="PASTE_FIRST_NUMBER_HERE">WhatsApp</a>
+
+            <a class="btn btn-blue" href="mailto:info@babarmobiletrader.com">Enquire Now</a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- iPhone 14 Pro -->
+
+<div class="product">
+
+    <div class="product-image">
+
+        <img
+
+        src="https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-14-pro.jpg"
+
+        alt="iPhone 14 Pro Deep Purple">
+
+    </div>
+
+    <div class="product-info">
+
+        <span class="badge">USED • 128GB</span>
+
+        <h3>iPhone 14 Pro</h3>
+
+        <div class="product-sub">
+
+            Deep Purple • Selected used condition
+
+        </div>
+
+        <div class="specs">
+
+            <span class="spec">128GB</span>
+
+            <span class="spec">Dynamic Island</span>
+
+            <span class="spec">48MP Camera</span>
+
+        </div>
+
+        <div class="price">Rs. 170,000</div>
+
+        <div class="product-buttons">
+
+            <a class="btn btn-wine" href="PASTE_FIRST_NUMBER_HERE">WhatsApp</a>
+
+            <a class="btn btn-blue" href="mailto:info@babarmobiletrader.com">Enquire Now</a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- iPhone 14 Pro Max -->
+
+<div class="product">
+
+    <div class="product-image">
+
+        <img
+
+        src="https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-14-pro-max.jpg"
+
+        alt="iPhone 14 Pro Max Deep Purple">
+
+    </div>
+
+    <div class="product-info">
+
+        <span class="badge">USED • 128GB</span>
+
+        <h3>iPhone 14 Pro Max</h3>
+
+        <div class="product-sub">
+
+            Deep Purple • Premium Pro Max
+
+        </div>
+
+        <div class="specs">
+
+            <span class="spec">128GB</span>
+
+            <span class="spec">6.7-inch</span>
+
+            <span class="spec">Dynamic Island</span>
+
+        </div>
+
+        <div class="price">Rs. 205,000</div>
+
+        <div class="product-buttons">
+
+            <a class="btn btn-wine" href="PASTE_FIRST_NUMBER_HERE">WhatsApp</a>
+
+            <a class="btn btn-blue" href="mailto:info@babarmobiletrader.com">Enquire Now</a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- PIXEL -->
+
+<section class="section" id="pixel">
+
+<div class="section-head">
+
+    <div>
+
+        <h2>Google Pixel</h2>
+
+        <p>Selected 128GB Pixel devices</p>
+
+    </div>
+
+</div>
+
+<div class="product-list">
+
+<div class="product">
+
+    <div class="product-image">
+
+        <img
+
+        src="https://fdn2.gsmarena.com/vv/bigpic/google-pixel-8-pro.jpg"
+
+        alt="Google Pixel 8 Pro">
+
+    </div>
+
+    <div class="product-info">
+
+        <span class="badge">USED • 128GB</span>
+
+        <h3>Google Pixel 8 Pro</h3>
+
+        <div class="product-sub">Premium Pixel flagship</div>
+
+        <div class="specs">
+
+            <span class="spec">128GB</span>
+
+            <span class="spec">Tensor G3</span>
+
+            <span class="spec">Pro Camera</span>
+
+        </div>
+
+        <div class="price">Rs. 100,000</div>
+
+        <div class="product-buttons">
+
+            <a class="btn btn-wine" href="PASTE_FIRST_NUMBER_HERE">WhatsApp</a>
+
+            <a class="btn btn-blue" href="mailto:info@babarmobiletrader.com">Enquire Now</a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="product">
+
+    <div class="product-image">
+
+        <img
+
+        src="https://fdn2.gsmarena.com/vv/bigpic/google-pixel-7-pro.jpg"
+
+        alt="Google Pixel 7 Pro">
+
+    </div>
+
+    <div class="product-info">
+
+        <span class="badge">USED • 128GB</span>
+
+        <h3>Google Pixel 7 Pro</h3>
+
+        <div class="product-sub">Premium Hazel / selected condition</div>
+
+        <div class="specs">
+
+            <span class="spec">128GB</span>
+
+            <span class="spec">Tensor G2</span>
+
+            <span class="spec">120Hz</span>
+
+        </div>
+
+        <div class="price">Rs. 80,000</div>
+
+        <div class="product-buttons">
+
+            <a class="btn btn-wine" href="PASTE_FIRST_NUMBER_HERE">WhatsApp</a>
+
+            <a class="btn btn-blue" href="mailto:info@babarmobiletrader.com">Enquire Now</a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="product">
+
+    <div class="product-image">
+
+        <img
+
+        src="https://fdn2.gsmarena.com/vv/bigpic/google-pixel-6a.jpg"
+
+        alt="Google Pixel 6a">
+
+    </div>
+
+    <div class="product-info">
+
+        <span class="badge">USED • 128GB</span>
+
+        <h3>Google Pixel 6A</h3>
+
+        <div class="product-sub">Compact Pixel smartphone</div>
+
+        <div class="specs">
+
+            <span class="spec">128GB</span>
+
+            <span class="spec">Google Tensor</span>
+
+            <span class="spec">OLED</span>
+
+        </div>
+
+        <div class="price">Rs. 42,000</div>
+
+        <div class="product-buttons">
+
+            <a class="btn btn-wine" href="PASTE_FIRST_NUMBER_HERE">WhatsApp</a>
+
+            <a class="btn btn-blue" href="mailto:info@babarmobiletrader.com">Enquire Now</a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="product">
+
+    <div class="product-image">
+
+        <img
+
+        src="https://fdn2.gsmarena.com/vv/bigpic/google-pixel-6.jpg"
+
+        alt="Google Pixel 6">
+
+    </div>
+
+    <div class="product-info">
+
+        <span class="badge">USED • 128GB</span>
+
+        <h3>Google Pixel 6</h3>
+
+        <div class="product-sub">Selected used condition</div>
+
+        <div class="specs">
+
+            <span class="spec">128GB</span>
+
+            <span class="spec">Tensor</span>
+
+            <span class="spec">50MP Camera</span>
+
+        </div>
+
+        <div class="price">Rs. 52,000</div>
+
+        <div class="product-buttons">
+
+            <a class="btn btn-wine" href="PASTE_FIRST_NUMBER_HERE">WhatsApp</a>
+
+            <a class="btn btn-blue" href="mailto:info@babarmobiletrader.com">Enquire Now</a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="product">
+
+    <div class="product-image">
+
+        <img
+
+        src="https://fdn2.gsmarena.com/vv/bigpic/google-pixel-7a.jpg"
+
+        alt="Google Pixel 7a">
+
+    </div>
+
+    <div class="product-info">
+
+        <span class="badge">USED • 128GB</span>
+
+        <h3>Google Pixel 7A</h3>
+
+        <div class="product-sub">Compact Pixel device</div>
+
+        <div class="specs">
+
+            <span class="spec">128GB</span>
+
+            <span class="spec">Tensor G2</span>
+
+            <span class="spec">OLED</span>
+
+        </div>
+
+        <div class="price">Rs. 55,000</div>
+
+        <div class="product-buttons">
+
+            <a class="btn btn-wine" href="PASTE_FIRST_NUMBER_HERE">WhatsApp</a>
+
+            <a class="btn btn-blue" href="mailto:info@babarmobiletrader.com">Enquire Now</a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
 
 </section>
 
 <!-- BOX PACK -->
 
-<section class="box-section" id="boxpack">
+<section class="section" id="boxpack">
 
-  <div class="container">
+<div class="section-head">
 
-    <div class="section-head">
+    <div>
 
-      <div class="kicker">
+        <h2>Box Pack Collection</h2>
 
-        Box Pack
-
-      </div>
-
-      <h2>
-
-        Latest Premium Models
-
-      </h2>
-
-      <p>
-
-        Contact us for current price and availability.
-
-      </p>
+        <p>Latest Apple smartphones for customers and shopkeepers.</p>
 
     </div>
 
-    <div class="box-grid" id="boxProducts"></div>
+</div>
 
-  </div>
+<div class="product-list">
+
+<!-- 18 PRO MAX -->
+
+<div class="product">
+
+    <div class="product-image">
+
+        <img
+
+        src="https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-18-pro-max.jpg"
+
+        alt="iPhone 18 Pro Max Burgundy">
+
+    </div>
+
+    <div class="product-info">
+
+        <span class="badge">BOX PACK • 2026</span>
+
+        <h3>iPhone 18 Pro Max</h3>
+
+        <div class="product-sub">
+
+            Burgundy • Latest Pro Max
+
+        </div>
+
+        <div class="specs">
+
+            <span class="spec">256GB+</span>
+
+            <span class="spec">A20 Pro</span>
+
+            <span class="spec">Pro Camera</span>
+
+        </div>
+
+        <div class="price">Contact for Price</div>
+
+        <div class="product-buttons">
+
+            <a class="btn btn-wine" href="PASTE_FIRST_NUMBER_HERE">WhatsApp</a>
+
+            <a class="btn btn-blue" href="mailto:info@babarmobiletrader.com">Enquire Now</a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- 18 PRO -->
+
+<div class="product">
+
+    <div class="product-image">
+
+        <img
+
+        src="https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-18-pro.jpg"
+
+        alt="iPhone 18 Pro Burgundy">
+
+    </div>
+
+    <div class="product-info">
+
+        <span class="badge">BOX PACK • 2026</span>
+
+        <h3>iPhone 18 Pro</h3>
+
+        <div class="product-sub">Burgundy • Latest Pro</div>
+
+        <div class="specs">
+
+            <span class="spec">256GB+</span>
+
+            <span class="spec">A20 Pro</span>
+
+            <span class="spec">Pro Camera</span>
+
+        </div>
+
+        <div class="price">Contact for Price</div>
+
+        <div class="product-buttons">
+
+            <a class="btn btn-wine" href="PASTE_FIRST_NUMBER_HERE">WhatsApp</a>
+
+            <a class="btn btn-blue" href="mailto:info@babarmobiletrader.com">Enquire Now</a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- 18 -->
+
+<div class="product">
+
+    <div class="product-image">
+
+        <img
+
+        src="https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-18.jpg"
+
+        alt="iPhone 18">
+
+    </div>
+
+    <div class="product-info">
+
+        <span class="badge">BOX PACK • 2026</span>
+
+        <h3>iPhone 18</h3>
+
+        <div class="product-sub">Latest standard iPhone</div>
+
+        <div class="specs">
+
+            <span class="spec">256GB+</span>
+
+            <span class="spec">A20</span>
+
+            <span class="spec">5G</span>
+
+        </div>
+
+        <div class="price">Contact for Price</div>
+
+        <div class="product-buttons">
+
+            <a class="btn btn-wine" href="PASTE_FIRST_NUMBER_HERE">WhatsApp</a>
+
+            <a class="btn btn-blue" href="mailto:info@babarmobiletrader.com">Enquire Now</a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- 17 PRO MAX -->
+
+<div class="product">
+
+    <div class="product-image">
+
+        <img
+
+        src="https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-17-pro-max.jpg"
+
+        alt="iPhone 17 Pro Max">
+
+    </div>
+
+    <div class="product-info">
+
+        <span class="badge">BOX PACK • 2025</span>
+
+        <h3>iPhone 17 Pro Max</h3>
+
+        <div class="product-sub">Deep Blue / Cosmic Orange / Silver</div>
+
+        <div class="specs">
+
+            <span class="spec">256GB+</span>
+
+            <span class="spec">A19 Pro</span>
+
+            <span class="spec">6.9-inch</span>
+
+        </div>
+
+        <div class="price">Contact for Price</div>
+
+        <div class="product-buttons">
+
+            <a class="btn btn-wine" href="PASTE_FIRST_NUMBER_HERE">WhatsApp</a>
+
+            <a class="btn btn-blue" href="mailto:info@babarmobiletrader.com">Enquire Now</a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- 17 PRO -->
+
+<div class="product">
+
+    <div class="product-image">
+
+        <img
+
+        src="https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-17-pro.jpg"
+
+        alt="iPhone 17 Pro">
+
+    </div>
+
+    <div class="product-info">
+
+        <span class="badge">BOX PACK • 2025</span>
+
+        <h3>iPhone 17 Pro</h3>
+
+        <div class="product-sub">Deep Blue / Cosmic Orange / Silver</div>
+
+        <div class="specs">
+
+            <span class="spec">256GB+</span>
+
+            <span class="spec">A19 Pro</span>
+
+            <span class="spec">6.3-inch</span>
+
+        </div>
+
+        <div class="price">Contact for Price</div>
+
+        <div class="product-buttons">
+
+            <a class="btn btn-wine" href="PASTE_FIRST_NUMBER_HERE">WhatsApp</a>
+
+            <a class="btn btn-blue" href="mailto:info@babarmobiletrader.com">Enquire Now</a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- 17 -->
+
+<div class="product">
+
+    <div class="product-image">
+
+        <img
+
+        src="https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-17.jpg"
+
+        alt="iPhone 17">
+
+    </div>
+
+    <div class="product-info">
+
+        <span class="badge">BOX PACK • 2025</span>
+
+        <h3>iPhone 17</h3>
+
+        <div class="product-sub">Latest standard iPhone</div>
+
+        <div class="specs">
+
+            <span class="spec">256GB</span>
+
+            <span class="spec">A19</span>
+
+            <span class="spec">5G</span>
+
+        </div>
+
+        <div class="price">Contact for Price</div>
+
+        <div class="product-buttons">
+
+            <a class="btn btn-wine" href="PASTE_FIRST_NUMBER_HERE">WhatsApp</a>
+
+            <a class="btn btn-blue" href="mailto:info@babarmobiletrader.com">Enquire Now</a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- WHOLESALE -->
+
+<section class="about">
+
+<div class="about-inner">
+
+    <div>
+
+        <h2>Special Deals for Shopkeepers & Wholesale Buyers</h2>
+
+        <p>
+
+            Babar Mobile Trader provides carefully selected smartphones
+
+            for retailers, resellers and wholesale buyers.
+
+        </p>
+
+        <p>
+
+            For current stock, colours and wholesale rates,
+
+            contact our team directly.
+
+        </p>
+
+    </div>
+
+    <div class="points">
+
+        <div class="point">
+
+            ✓ Carefully Selected Devices
+
+        </div>
+
+        <div class="point">
+
+            ✓ Box Pack & Used Stock
+
+        </div>
+
+        <div class="point">
+
+            ✓ Wholesale Enquiries Welcome
+
+        </div>
+
+        <div class="point">
+
+            ✓ Karachi Based Mobile Trader
+
+        </div>
+
+    </div>
+
+</div>
 
 </section>
 
 <!-- ACCESSORIES -->
 
-<section id="accessories">
+<section class="section" id="accessories">
 
-  <div class="container">
+<div class="section-head">
 
-    <div class="section-head">
+    <div>
 
-      <div class="kicker">
+        <h2>Accessories</h2>
 
-        Accessories
-
-      </div>
-
-      <h2>
-
-        Essential Accessories
-
-      </h2>
-
-      <p>
-
-        Chargers, cables and wireless accessories.
-
-      </p>
+        <p>Chargers, cables, earbuds and mobile accessories.</p>
 
     </div>
 
-    <div class="accessories-grid">
+</div>
 
-      <div class="accessory">
+<div class="categories">
 
-        <div class="accessory-image">⚡</div>
+    <div class="category">Fast Chargers</div>
 
-        <h3>20W USB-C Power Adapter</h3>
+    <div class="category">USB-C Cables</div>
 
-        <p>Fast charging adapter</p>
+    <div class="category">Lightning Cables</div>
 
-      </div>
+    <div class="category">Wireless Earbuds</div>
 
-      <div class="accessory">
+    <div class="category">Phone Accessories</div>
 
-        <div class="accessory-image">🔌</div>
-
-        <h3>USB-C Fast Charging Cable</h3>
-
-        <p>1 metre charging cable</p>
-
-      </div>
-
-      <div class="accessory">
-
-        <div class="accessory-image">🎧</div>
-
-        <h3>Wireless Earbuds</h3>
-
-        <p>Wireless audio accessory</p>
-
-      </div>
-
-      <div class="accessory">
-
-        <div class="accessory-image">➰</div>
-
-        <h3>Premium Charging Cable</h3>
-
-        <p>Durable everyday cable</p>
-
-      </div>
-
-    </div>
-
-  </div>
+</div>
 
 </section>
 
@@ -1864,901 +2094,93 @@ footer{
 
 <section class="contact" id="contact">
 
-  <div class="container contact-grid">
+<div class="contact-inner">
 
     <div>
 
-      <div class="kicker">
+        <h2>Let's Talk</h2>
 
-        Contact Babar Mobile Trader
+        <p>
 
-      </div>
+            Looking for a particular iPhone, Google Pixel,
 
-      <h2>
+            Samsung or wholesale stock?
 
-        Let's Talk About Your Next Deal.
-
-      </h2>
-
-      <p>
-
-        For retail purchases, shopkeeper deals
-
-        and wholesale enquiries, contact us directly.
-
-      </p>
+        </p>
 
     </div>
 
-    <div class="contact-box">
+    <div class="contact-card">
 
-      <div class="contact-line">
+        <div class="contact-row">
 
-        <small>Business</small>
+            <strong>Business</strong><br>
 
-        Babar Mobile Trader
+            Babar Mobile Trader
 
-      </div>
+        </div>
 
-      <div class="contact-line">
+        <div class="contact-row">
 
-        <small>Email</small>
+            <strong>Email</strong><br>
 
-        <a href="mailto:info@babarmobiletrader.com">
+            info@babarmobiletrader.com
 
-          info@babarmobiletrader.com
+        </div>
 
-        </a>
+        <div class="contact-row">
 
-      </div>
+            <strong>Address</strong><br>
 
-      <div class="contact-line">
+            Sareena Family Mall, Sakhi Hasan,
 
-        <small>Address</small>
+            Office D-10, North Nazimabad, Karachi
 
-        Sareena Family Mall, Sakhi Hasan,
+        </div>
 
-        Office D-10, North Nazimabad, Karachi
+        <div class="contact-row">
 
-      </div>
+            <strong>Tagline</strong><br>
 
-      <!-- اپنا اصل پہلا WhatsApp نمبر یہاں ڈالیں -->
+            Trust Quality and Connectivity
 
-      <a
-
-        href="https://wa.me/PASTE_FIRST_NUMBER_HERE"
-
-        class="btn btn-green"
-
-        target="_blank"
-
-        style="margin-top:20px"
-
-      >
-
-        WhatsApp Enquiry
-
-      </a>
+        </div>
 
     </div>
 
-  </div>
+</div>
 
 </section>
 
-<!-- FOOTER -->
-
 <footer>
 
-  <div class="container footer-inner">
+<div class="footer-inner">
 
-    <span>
+    <div>
 
-      © 2026 Babar Mobile Trader
+        <div class="footer-brand">
 
-    </span>
+            Babar Mobile Trader
 
-    <span>
+        </div>
 
-      Trust Quality and Connectivity
+        <small>
 
-    </span>
+            Trust Quality and Connectivity
 
-  </div>
-
-</footer>
-
-<script>
-
-/* ---------------------------------------
-
-   WhatsApp Number
-
----------------------------------------- */
-
-const WHATSAPP = "PASTE_FIRST_NUMBER_HERE";
-
-/* ---------------------------------------
-
-   USED PRODUCTS
-
----------------------------------------- */
-
-const used = [
-
-  {
-
-    name:"iPhone 12 Pro Max",
-
-    brand:"Apple",
-
-    storage:"128GB",
-
-    price:"110,000",
-
-    colour:"Pacific Blue",
-
-    colourCode:"#527d9c",
-
-    phoneClass:"blue-phone"
-
-  },
-
-  {
-
-    name:"iPhone 13",
-
-    brand:"Apple",
-
-    storage:"128GB",
-
-    price:"102,000",
-
-    colour:"Blue",
-
-    colourCode:"#416e9c",
-
-    phoneClass:"blue-phone"
-
-  },
-
-  {
-
-    name:"iPhone 13 Pro",
-
-    brand:"Apple",
-
-    storage:"128GB",
-
-    price:"135,000",
-
-    colour:"Sierra Blue",
-
-    colourCode:"#7b9fb9",
-
-    phoneClass:"blue-phone"
-
-  },
-
-  {
-
-    name:"iPhone 13 Pro Max",
-
-    brand:"Apple",
-
-    storage:"128GB",
-
-    price:"170,000",
-
-    colour:"Sierra Blue",
-
-    colourCode:"#7b9fb9",
-
-    phoneClass:"blue-phone"
-
-  },
-
-  {
-
-    name:"iPhone 14 Pro",
-
-    brand:"Apple",
-
-    storage:"128GB",
-
-    price:"170,000",
-
-    colour:"Deep Purple",
-
-    colourCode:"#55466f",
-
-    phoneClass:"purple-phone"
-
-  },
-
-  {
-
-    name:"iPhone 14 Pro Max",
-
-    brand:"Apple",
-
-    storage:"128GB",
-
-    price:"205,000",
-
-    colour:"Deep Purple",
-
-    colourCode:"#55466f",
-
-    phoneClass:"purple-phone"
-
-  },
-
-  {
-
-    name:"Pixel 8 Pro",
-
-    brand:"Google",
-
-    storage:"128GB",
-
-    price:"100,000",
-
-    colour:"Bay Blue",
-
-    colourCode:"#7191a8",
-
-    phoneClass:"blue-phone"
-
-  },
-
-  {
-
-    name:"Pixel 7 Pro",
-
-    brand:"Google",
-
-    storage:"128GB",
-
-    price:"80,000",
-
-    colour:"Hazel",
-
-    colourCode:"#8e806c",
-
-    phoneClass:"graphite-phone"
-
-  },
-
-  {
-
-    name:"Pixel 6A",
-
-    brand:"Google",
-
-    storage:"128GB",
-
-    price:"42,000",
-
-    colour:"Sage",
-
-    colourCode:"#8d9e8c",
-
-    phoneClass:"blue-phone"
-
-  },
-
-  {
-
-    name:"Pixel 6",
-
-    brand:"Google",
-
-    storage:"128GB",
-
-    price:"52,000",
-
-    colour:"Stormy Black",
-
-    colourCode:"#55585b",
-
-    phoneClass:"graphite-phone"
-
-  },
-
-  {
-
-    name:"Pixel 7A",
-
-    brand:"Google",
-
-    storage:"128GB",
-
-    price:"55,000",
-
-    colour:"Sea Blue",
-
-    colourCode:"#6e91a3",
-
-    phoneClass:"blue-phone"
-
-  }
-
-];
-
-/* ---------------------------------------
-
-   BOX PACK
-
----------------------------------------- */
-
-const boxPack = [
-
-  {
-
-    name:"iPhone 18 Pro Max",
-
-    storage:"256GB",
-
-    colour:"Burgundy"
-
-  },
-
-  {
-
-    name:"iPhone 18 Pro",
-
-    storage:"256GB",
-
-    colour:"Burgundy"
-
-  },
-
-  {
-
-    name:"iPhone 18",
-
-    storage:"256GB",
-
-    colour:"Blue"
-
-  },
-
-  {
-
-    name:"iPhone 17 Pro Max",
-
-    storage:"256GB",
-
-    colour:"Deep Blue"
-
-  },
-
-  {
-
-    name:"iPhone 17 Pro",
-
-    storage:"256GB",
-
-    colour:"Deep Blue"
-
-  },
-
-  {
-
-    name:"iPhone 17",
-
-    storage:"256GB",
-
-    colour:"Blue"
-
-  },
-
-  {
-
-    name:"Galaxy S26 Ultra",
-
-    storage:"256GB",
-
-    colour:"Titanium Silver"
-
-  },
-
-  {
-
-    name:"Galaxy S26+",
-
-    storage:"256GB",
-
-    colour:"Silver"
-
-  }
-
-];
-
-/* ---------------------------------------
-
-   PHONE VISUAL
-
----------------------------------------- */
-
-function phoneVisual(product){
-
-  return `
-
-    <div class="fake-back ${product.phoneClass}">
-
-      <div class="camera-small"></div>
+        </small>
 
     </div>
 
-  `;
+    <div>
 
-}
+        © 2026 Babar Mobile Trader. All rights reserved.
 
-/* ---------------------------------------
+    </div>
 
-   WHATSAPP
+</div>
 
----------------------------------------- */
-
-function whatsapp(product){
-
-  const text =
-
-    "Assalam o Alaikum, I am interested in " +
-
-    product +
-
-    " from Babar Mobile Trader.";
-
-  return "https://wa.me/" +
-
-    WHATSAPP.replace(/\D/g,"") +
-
-    "?text=" +
-
-    encodeURIComponent(text);
-
-}
-
-/* ---------------------------------------
-
-   USED RENDER
-
----------------------------------------- */
-
-function renderUsed(list){
-
-  const area =
-
-    document.getElementById("products");
-
-  area.innerHTML =
-
-    list.map(p => `
-
-      <article class="product">
-
-        <div class="product-image">
-
-          ${phoneVisual(p)}
-
-        </div>
-
-        <div class="product-info">
-
-          <span class="badge">
-
-            USED
-
-          </span>
-
-          <h3>
-
-            ${p.name}
-
-          </h3>
-
-          <div class="meta">
-
-            ${p.brand} • ${p.storage}
-
-          </div>
-
-          <div class="specs">
-
-            <div class="spec">
-
-              <small>Storage</small>
-
-              <strong>${p.storage}</strong>
-
-            </div>
-
-            <div class="spec">
-
-              <small>Condition</small>
-
-              <strong>Used</strong>
-
-            </div>
-
-            <div class="spec">
-
-              <small>Colour</small>
-
-              <strong>${p.colour}</strong>
-
-            </div>
-
-          </div>
-
-          <div class="colors">
-
-            <span>Colour</span>
-
-            <span
-
-              class="dot"
-
-              style="background:${p.colourCode}"
-
-            ></span>
-
-          </div>
-
-          <div class="price">
-
-            Rs. ${p.price}
-
-          </div>
-
-          <div class="buttons">
-
-            <a
-
-              class="btn btn-green"
-
-              href="${whatsapp(p.name)}"
-
-              target="_blank"
-
-            >
-
-              WhatsApp Enquiry
-
-            </a>
-
-            <a
-
-              class="btn btn-blue"
-
-              href="mailto:info@babarmobiletrader.com"
-
-            >
-
-              Email
-
-            </a>
-
-          </div>
-
-        </div>
-
-      </article>
-
-    `).join("");
-
-}
-
-/* ---------------------------------------
-
-   BOX PACK RENDER
-
----------------------------------------- */
-
-function renderBox(){
-
-  const area =
-
-    document.getElementById("boxProducts");
-
-  area.innerHTML =
-
-    boxPack.map((p,index) => `
-
-      <article class="box">
-
-        <div class="box-image">
-
-          ${
-
-            index === 0
-
-            ?
-
-            `
-
-            <div
-
-              style="
-
-              width:145px;
-
-              height:275px;
-
-              border-radius:25px;
-
-              background:
-
-              linear-gradient(145deg,#a33d57,#641d2d);
-
-              position:relative;
-
-              box-shadow:0 20px 40px rgba(0,0,0,.22);
-
-              "
-
-            >
-
-              <div
-
-                style="
-
-                position:absolute;
-
-                top:18px;
-
-                left:18px;
-
-                width:68px;
-
-                height:68px;
-
-                border-radius:18px;
-
-                background:#752439;
-
-                "
-
-              >
-
-                <div
-
-                  style="
-
-                  width:22px;
-
-                  height:22px;
-
-                  background:#111;
-
-                  border-radius:50%;
-
-                  position:absolute;
-
-                  top:10px;
-
-                  left:10px;
-
-                  border:3px solid #aaa;
-
-                  "
-
-                ></div>
-
-                <div
-
-                  style="
-
-                  width:22px;
-
-                  height:22px;
-
-                  background:#111;
-
-                  border-radius:50%;
-
-                  position:absolute;
-
-                  bottom:10px;
-
-                  right:10px;
-
-                  border:3px solid #aaa;
-
-                  "
-
-                ></div>
-
-              </div>
-
-              <div
-
-                style="
-
-                position:absolute;
-
-                top:48%;
-
-                left:50%;
-
-                transform:translate(-50%,-50%);
-
-                color:#fff;
-
-                font-size:45px;
-
-                "
-
-              ></div>
-
-            </div>
-
-            `
-
-            :
-
-            `
-
-            <div
-
-              style="
-
-              width:135px;
-
-              height:260px;
-
-              border-radius:24px;
-
-              background:linear-gradient(145deg,#6e9fbd,#3e6782);
-
-              box-shadow:0 20px 35px rgba(0,0,0,.18);
-
-              position:relative;
-
-              "
-
-            >
-
-              <div
-
-                style="
-
-                position:absolute;
-
-                top:17px;
-
-                left:17px;
-
-                width:65px;
-
-                height:65px;
-
-                border-radius:18px;
-
-                background:rgba(0,0,0,.18);
-
-                "
-
-              ></div>
-
-            </div>
-
-            `
-
-          }
-
-        </div>
-
-        <div class="box-info">
-
-          <span class="badge">
-
-            BOX PACK
-
-          </span>
-
-          <h3>
-
-            ${p.name}
-
-          </h3>
-
-          <p>
-
-            ${p.storage} • ${p.colour}
-
-          </p>
-
-          <a
-
-            href="${whatsapp(p.name)}"
-
-            target="_blank"
-
-            class="btn btn-green"
-
-          >
-
-            Enquire Now
-
-          </a>
-
-        </div>
-
-      </article>
-
-    `).join("");
-
-}
-
-/* ---------------------------------------
-
-   SEARCH
-
----------------------------------------- */
-
-function searchProducts(){
-
-  const value =
-
-    document.getElementById("search")
-
-    .value
-
-    .toLowerCase();
-
-  const result =
-
-    used.filter(p =>
-
-      (
-
-        p.name +
-
-        p.brand +
-
-        p.storage +
-
-        p.colour
-
-      )
-
-      .toLowerCase()
-
-      .includes(value)
-
-    );
-
-  renderUsed(result);
-
-}
-
-/* ---------------------------------------
-
-   MENU
-
----------------------------------------- */
-
-function toggleMenu(){
-
-  document
-
-    .getElementById("nav")
-
-    .classList.toggle("active");
-
-}
-
-/* START */
-
-renderUsed(used);
-
-renderBox();
-
-</script>
+</footer>
 
 </body>
 
