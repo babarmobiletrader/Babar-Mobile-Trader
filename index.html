@@ -1,615 +1,113 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ur">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BMT | Official Website</title>
-<meta name="description" content="BMT — Premium Mobile Phones, Wholesale and Retail in Pakistan.">
-
+<title>ٹونی اسٹارک ٹیمپلیٹ</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{--navy:#071a33;--blue:#123d70;--light:#f2f6fc;--gold:#d8b56d;--white:#fff}
-body{font-family:Arial,Helvetica,sans-serif;background:var(--light);color:#17243a;line-height:1.6}
-a{text-decoration:none;color:inherit}
-.container{width:92%;max-width:1200px;margin:auto}
-header{background:var(--navy);color:white;position:sticky;top:0;z-index:100;box-shadow:0 3px 15px #0002}
-.nav{display:flex;align-items:center;justify-content:space-between;padding:15px 0;gap:20px}
-.brand{font-size:31px;font-weight:900;letter-spacing:3px;color:white}
-.brand span{color:var(--gold)}
-nav{display:flex;gap:23px;align-items:center;font-size:14px}
-nav a:hover{color:var(--gold)}
-.btn{display:inline-block;padding:12px 19px;border-radius:7px;background:var(--gold);color:#101d31;font-weight:bold;border:0;cursor:pointer}
-.hero{background:linear-gradient(120deg,#071a33,#174a7b);color:white;padding:75px 0}
-.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:35px}
-.eyebrow{color:var(--gold);font-weight:bold;letter-spacing:3px;font-size:12px}
-h1{font-size:clamp(42px,6vw,70px);line-height:1.08;margin:17px 0}
-.hero p{color:#d6e2f1;max-width:580px;margin-bottom:25px}
-.hero-art{min-height:320px;display:grid;place-items:center;background:radial-gradient(circle,#2c6091,#0b2340);border:1px solid #52749a;border-radius:24px;position:relative}
-.phone{width:145px;height:260px;border:7px solid #101722;border-radius:27px;background:linear-gradient(140deg,#dbe4ed,#8497ac);box-shadow:0 20px 45px #0007;position:relative}
-.phone:before{content:"";position:absolute;top:6px;left:50%;transform:translateX(-50%);width:54px;height:14px;background:#101722;border-radius:10px}
-.lens{position:absolute;top:15px;left:12px;width:44px;height:58px;background:#263345;border-radius:13px}
-.lens:before,.lens:after{content:"";display:block;width:13px;height:13px;border-radius:50%;background:#080e17;margin:7px}
-.hero-label{position:absolute;bottom:20px;right:20px;background:white;color:var(--navy);padding:10px 14px;border-radius:8px;font-weight:bold}
-.trust{background:white;padding:20px 0;display:grid;grid-template-columns:repeat(4,1fr);text-align:center;gap:12px;border-bottom:1px solid #e2e8f0}
-.trust strong{display:block;color:var(--navy)}
-.trust small{color:#728096}
-section{padding:65px 0}
-.section-title{text-align:center;margin-bottom:30px}
-.section-title h2{font-size:34px;color:var(--navy)}
-.section-title p{color:#748095;margin-top:7px}
-.deals{background:var(--navy);color:white}
-.deal-box{border:1px solid #526982;border-radius:18px;padding:30px;display:flex;justify-content:space-between;align-items:center;gap:20px;background:linear-gradient(110deg,#102d50,#0a1d36)}
-.deal-box h2{font-size:30px;margin:7px 0}
-.deal-box p{color:#d4dfeb}
-.searchbar{display:flex;gap:10px;margin-bottom:25px;flex-wrap:wrap}
-.searchbar input,.searchbar select{padding:13px;border:1px solid #d7dfeb;border-radius:8px;background:white;font-size:15px}
-.searchbar input{flex:1;min-width:200px}
-.products{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.card{background:white;border:1px solid #e1e7ef;border-radius:15px;overflow:hidden;box-shadow:0 8px 24px #12294b0b}
-.product-image{height:230px;background:linear-gradient(145deg,#edf2f8,#d5e0ee);display:grid;place-items:center;position:relative}
-.product-image .phone{width:100px;height:170px;border-width:5px;border-radius:20px}
-.badge{position:absolute;top:12px;left:12px;background:#d8f8e5;color:#17643b;padding:6px 9px;font-size:11px;font-weight:bold;border-radius:5px}
-.badge.ask{background:#fff0d5;color:#84550a}
-.card-body{padding:19px}
-.card h3{font-size:18px;color:var(--navy);margin-bottom:4px}
-.spec{font-size:13px;color:#78869a}
-.price{font-size:22px;font-weight:bold;color:var(--blue);margin:13px 0}
-.card-actions{display:flex;gap:8px}
-.card-actions a,.card-actions button{flex:1;text-align:center;padding:10px 5px;border:0;border-radius:6px;font-size:12px;font-weight:bold;cursor:pointer}
-.order-btn{background:var(--navy);color:white}
-.wa-btn{background:#d9f8e7;color:#17643b}
-.features{background:#eaf0f8}
-.feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
-.feature{padding:23px;background:white;border-radius:12px;border:1px solid #e0e6ef}
-.feature h3{font-size:16px;color:var(--navy);margin-bottom:8px}
-.feature p{font-size:13px;color:#718096}
-.wholesale{background:var(--navy);color:white}
-.wholesale-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.wholesale-box{padding:30px;border:1px solid #3c5875;border-radius:15px;background:#0c2542}
-.wholesale-box h2{font-size:28px;margin:10px 0}
-.wholesale-box p{color:#d0dce9;margin-bottom:18px}
-.wholesale-box ul{padding-left:20px;margin-bottom:22px;color:#d0dce9}
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.contact-box{background:white;padding:28px;border:1px solid #e0e6ef;border-radius:14px}
-.contact-box h2{color:var(--navy);margin-bottom:15px}
-.contact-row{padding:12px 0;border-bottom:1px solid #edf0f5}
-.contact-row strong{display:block;font-size:12px;color:#7c899b}
-footer{background:#040e1c;color:#cbd5e1;padding:35px 0}
-.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
-.footer-brand{font-size:26px;font-weight:900;letter-spacing:3px;color:white}
-.footer-brand span{color:var(--gold)}
-.email{margin-top:15px;font-size:14px}
-.email input{padding:10px;border-radius:5px;border:1px solid #526176;margin:5px 0;background:#0b1a2c;color:white}
-.modal{display:none;position:fixed;inset:0;background:#0009;z-index:200;overflow:auto;padding:20px}
-.modal-content{background:white;max-width:600px;margin:30px auto;padding:25px;border-radius:15px}
-.modal-header{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:15px}
-.close{border:0;background:#e9eef5;border-radius:6px;padding:8px 12px;cursor:pointer}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.field{margin-bottom:12px}
-.field label{display:block;font-size:13px;font-weight:bold;margin-bottom:5px}
-.field input,.field textarea,.field select{width:100%;padding:12px;border:1px solid #d7dfeb;border-radius:7px;font:inherit}
-.full{grid-column:1/-1}
-.submit{width:100%;padding:14px;border:0;background:var(--navy);color:white;font-weight:bold;border-radius:7px;cursor:pointer}
-@media(max-width:850px){
- nav{gap:10px;font-size:12px}.hero-grid{grid-template-columns:1fr}.hero-art{min-height:280px}
- .products{grid-template-columns:repeat(2,1fr)}.feature-grid{grid-template-columns:repeat(2,1fr)}
-}
-@media(max-width:580px){
- .nav{flex-wrap:wrap}.brand{font-size:27px}nav{width:100%;overflow:auto;padding-bottom:5px}
- nav a{white-space:nowrap}.trust{grid-template-columns:1fr 1fr}
- .products,.feature-grid,.wholesale-grid,.contact-grid{grid-template-columns:1fr}
- .deal-box{display:block}.deal-box .btn{margin-top:15px}
- .form-grid{grid-template-columns:1fr}.full{grid-column:auto}
- section{padding:45px 0}.hero{padding:50px 0}
-}
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #111;
+    color: #eee;
+    direction: rtl;
+  }
+
+  nav {
+    background: #000;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  nav a {
+    color: #ffd700;
+    text-decoration: none;
+    margin-left: 15px;
+  }
+
+  .hero {
+    text-align: center;
+    padding: 80px 20px;
+    background: radial-gradient(circle, #3a0000, #000);
+  }
+
+  h1 {
+    color: #ffd700;
+    font-size: 48px;
+    margin: 10px 0;
+  }
+
+  .arc {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #fff, #00e5ff, #0077ff);
+    box-shadow: 0 0 40px #00e5ff, 0 0 80px #0077ff;
+    margin: 20px auto;
+    animation: pulse 1.5s infinite alternate;
+  }
+
+  @keyframes pulse {
+    from { transform: scale(1); }
+    to { transform: scale(1.1); }
+  }
+
+  .section {
+    padding: 40px 20px;
+    max-width: 800px;
+    margin: auto;
+  }
+
+  .btn {
+    display: inline-block;
+    background: #b11313;
+    color: #fff;
+    padding: 12px 24px;
+    text-decoration: none;
+    border-radius: 30px;
+    margin-top: 20px;
+  }
+
+  footer {
+    text-align: center;
+    padding: 20px;
+    background: #000;
+    color: #888;
+  }
 </style>
 </head>
-
 <body>
-<header>
-<div class="container nav">
-<a class="brand" href="#home"><span>B</span>MT</a>
+
 <nav>
-<a href="#mobiles">Mobiles</a>
-<a href="#deals">PTA Deals</a>
-<a href="#wholesale">Wholesale</a>
-<a href="#about">About</a>
-<a href="#contact">Contact</a>
+  <strong>اسٹارک انڈسٹریز</strong>
+  <div>
+    <a href="#">ہوم</a>
+    <a href="#tech">ٹیکنالوجی</a>
+    <a href="#contact">رابطہ</a>
+  </div>
 </nav>
-</div>
-</header>
 
-<section class="hero" id="home">
-<div class="container hero-grid">
-<div>
-<div class="eyebrow">TRUST • QUALITY • CONNECTIVITY</div>
-<h1>Premium Mobiles.<br><span style="color:var(--gold)">Better Deals.</span></h1>
-<p>BMT brings mobile phones, wholesale opportunities and retail deals together in one professional place. Contact us for current stock, pricing and dealer offers.</p>
-<a class="btn" href="#mobiles">Explore Mobiles</a>
-<a class="btn" style="background:transparent;color:white;border:1px solid #7187a0;margin-left:8px" href="https://wa.me/923122741845">WhatsApp BMT</a>
-</div>
-<div class="hero-art"><div class="phone"><div class="lens"></div></div><div class="hero-label">BMT • Mobile Trade</div></div>
-</div>
-</section>
-
-<div class="container trust">
-<div><strong>Clear Pricing</strong><small>Confirm before ordering</small></div>
-<div><strong>Retail & Wholesale</strong><small>For buyers and dealers</small></div>
-<div><strong>Product Support</strong><small>Ask BMT on WhatsApp</small></div>
-<div><strong>Pakistan Supply</strong><small>Delivery details confirmed</small></div>
+<div class="hero">
+  <div class="arc"></div>
+  <h1>ٹونی اسٹارک</h1>
+  <p>جینیس۔ ارب پتی۔ پلے بوائے۔ انسان دوست۔</p>
+  <a href="#tech" class="btn">لیب میں داخل ہوں</a>
 </div>
 
-<section class="deals" id="deals">
-<div class="container">
-<div class="deal-box">
-<div><div class="eyebrow">SPECIAL DEALS</div><h2>PTA Approved iPhones</h2><p>Ask BMT to confirm PTA status, stock, condition and final price for your chosen model.</p></div>
-<a class="btn" href="https://wa.me/923122741845?text=Assalam-o-Alaikum%20BMT%2C%20please%20share%20PTA%20approved%20iPhone%20deals.">View Deals</a>
+<div class="section" id="tech">
+  <h2>آرک ری ایکٹر</h2>
+  <p>صاف توانائی۔ اسٹارک ٹیکنالوجی سے چلنے والی۔</p>
 </div>
-</div>
-</section>
 
-<section id="mobiles">
-<div class="container">
-<div class="section-title"><h2>Featured Mobiles</h2><p>Browse models and send your inquiry directly to BMT.</p></div>
-<div class="searchbar">
-<input id="search" placeholder="Search model or brand..." oninput="renderProducts()">
-<select id="brandFilter" onchange="renderProducts()">
-<option value="All">All Brands</option><option>Apple</option><option>Google</option><option>Samsung</option><option>OPPO</option>
-</select>
+<div class="section" id="contact">
+  <h2>رابطہ</h2>
+  <p>ای میل: tony@stark.com</p>
 </div>
-<div class="products" id="products"></div>
-</div>
-</section>
-
-<section class="features" id="about">
-<div class="container">
-<div class="section-title"><h2>Why Choose BMT?</h2><p>A professional approach to mobile trading.</p></div>
-<div class="feature-grid">
-<div class="feature"><h3>Product Information</h3><p>Ask about model, storage, colour, condition and PTA status before buying.</p></div>
-<div class="feature"><h3>Clear Communication</h3><p>Confirm pricing and availability directly with BMT.</p></div>
-<div class="feature"><h3>Wholesale Deals</h3><p>Dealer and bulk inquiries are welcome.</p></div>
-<div class="feature"><h3>WhatsApp Support</h3><p>Contact BMT for product information and order inquiries.</p></div>
-</div>
-</div>
-</section>
-
-<section class="wholesale" id="wholesale">
-<div class="container wholesale-grid">
-<div class="wholesale-box">
-<div class="eyebrow">FOR DEALERS & SHOPKEEPERS</div>
-<h2>Wholesale & Importer Deals</h2>
-<p>Looking for mobile phones for your shop or business? Contact BMT for bulk inquiries and dealer offers.</p>
-<ul><li>Wholesale and bulk inquiries</li><li>Retail and dealer support</li><li>Supply inquiries from across Pakistan</li><li>Model-wise stock confirmation</li></ul>
-<a class="btn" href="https://wa.me/923122741845?text=Assalam-o-Alaikum%20BMT%2C%20I%20want%20wholesale%20and%20dealer%20prices.">Become a BMT Dealer</a>
-</div>
-<div class="wholesale-box">
-<div class="eyebrow">NEW ARRIVALS</div>
-<h2>Latest Mobile Models</h2>
-<p>New models and special offers can be listed here as BMT stock changes. Contact us for current availability and updated prices.</p>
-<a class="btn" href="https://wa.me/923122741845">Ask About New Arrivals</a>
-</div>
-</div>
-</section>
-
-<section id="contact">
-<div class="container">
-<div class="section-title"><h2>Contact BMT</h2><p>We welcome retail customers, dealers and wholesale inquiries.</p></div>
-<div class="contact-grid">
-<div class="contact-box">
-<h2>Business Details</h2>
-<div class="contact-row"><strong>ADDRESS</strong>Office D10, Sareena Family Mobile Market, Sakhi Hasan, North Nazimabad, Karachi</div>
-<div class="contact-row"><strong>PHONE / WHATSAPP</strong><a href="tel:+923122741845">03122741845</a></div>
-<div class="contact-row"><strong>ALTERNATE NUMBER</strong><a href="tel:+923442318337">03442318337</a></div>
-<p style="margin-top:18px"><a class="btn" href="https://wa.me/923122741845">Chat on WhatsApp</a></p>
-</div>
-<div class="contact-box">
-<h2>Place an Order Inquiry</h2>
-<p style="color:#728096;margin-bottom:18px">Choose a product and enter your delivery details. Your inquiry will be sent to BMT through WhatsApp.</p>
-<button class="btn" onclick="openOrder('General BMT Inquiry')">Start Order</button>
-</div>
-</div>
-</div>
-</section>
 
 <footer>
-<div class="container footer-inner">
-<div><div class="footer-brand"><span>B</span>MT</div><p>TRUST • QUALITY • CONNECTIVITY</p><p>Importer • Wholesale • Retail</p></div>
-<div>
-<strong>Contact Email</strong><br>
-<div class="email">Add your business email here after confirming your final email address.</div>
-<p style="margin-top:15px">©️ 2026 BMT. All rights reserved.</p>
-</div>
-</div>
+  <p>© 2026 اسٹارک انڈسٹریز</p>
 </footer>
 
-<div class="modal" id="orderModal">
-<div class="modal-content">
-<div class="modal-header"><h2 id="orderTitle">BMT Order Inquiry</h2><button class="close" onclick="closeOrder()">✕</button></div>
-<form id="orderForm">
-<div class="form-grid">
-<div class="field"><label>Customer Name *</label><input id="customerName" required></div>
-<div class="field"><label>Phone / WhatsApp *</label><input id="customerPhone" required></div>
-<div class="field full"><label>Delivery Address *</label><textarea id="deliveryAddress" rows="3" required></textarea></div>
-<div class="field"><label>City *</label><input id="customerCity" required></div>
-<div class="field"><label>Preferred Colour</label><input id="customerColour"></div>
-<div class="field"><label>Quantity</label><input id="customerQty" type="number" min="1" value="1"></div>
-<div class="field"><label>Payment / Note</label><input id="customerNote"></div>
-</div>
-<button class="submit" type="submit">Send Order on WhatsApp</button>
-</form>
-</div>
-</div>
-
-<script>
-const products=[
-{brand:"Apple",name:"iPhone 12 Pro Max",storage:"256GB",price:120000,available:true},
-{brand:"Apple",name:"iPhone 12 Pro Max",storage:"128GB",price:110000,available:true},
-{brand:"Apple",name:"iPhone 13",storage:"128GB",price:103000,available:true},
-{brand:"Apple",name:"iPhone 13 Pro",storage:"128GB",price:135000,available:true},
-{brand:"Apple",name:"iPhone 13 Pro Max",storage:"128GB",price:175000,available:true},
-{brand:"Apple",name:"iPhone 14 Pro",storage:"128GB",price:170000,available:true},
-{brand:"Apple",name:"iPhone 14 Pro Max",storage:"128GB",price:205000,available:true},
-{brand:"Google",name:"Google Pixel 8 Pro",storage:"128GB",price:100000,available:true},
-{brand:"Google",name:"Google Pixel 7 Pro",storage:"128GB",price:80000,available:true},
-{brand:"Google",name:"Google Pixel 7a",storage:"128GB",price:55000,available:true},
-{brand:"Google",name:"Google Pixel 6",storage:"128GB",price:52000,available:true},
-{brand:"Google",name:"Google Pixel 6a",storage:"128GB",price:42000,available:true},
-{brand:"Samsung",name:"Samsung Galaxy S26 Ultra",storage:"Ask BMT",price:0,available:false},
-{brand:"Samsung",name:"Samsung Galaxy S26+",storage:"Ask BMT",price:0,available:false},
-{brand:"Samsung",name:"Samsung Galaxy S26",storage:"Ask BMT",price:0,available:false},
-{brand:"OPPO",name:"OPPO Reno Series",storage:"Ask BMT",price:0,available:false}
-];
-
-let selectedProduct="General BMT Inquiry";
-function renderProducts(){
- const q=document.getElementById("search").value.toLowerCase();
- const brand=document.getElementById("brandFilter").value;
- const filtered=products.filter(p=>(brand==="All"||p.brand===brand)&&(p.name+" "+p.brand+" "+p.storage).toLowerCase().includes(q));
- document.getElementById("products").innerHTML=filtered.map(p=>`
- <article class="card">
- <div class="product-image">
- <span class="badge ${p.available?'':'ask'}">${p.available?'Listed — Confirm Stock':'Ask for Availability'}</span>
- <div class="phone"><div class="lens"></div></div>
- </div>
- <div class="card-body">
- <h3>${p.name}</h3><div class="spec">${p.brand} • ${p.storage}</div>
- <div class="price">${p.price?'Rs. '+p.price.toLocaleString('en-PK'):'Ask BMT'}</div>
- <div class="card-actions">
- <button class="order-btn" onclick="openOrder('${p.name} ${p.storage}')">Order / Inquiry</button>
- <a class="wa-btn" target="_blank" href="https://wa.me/923122741845?text=${encodeURIComponent('Assalam-o-Alaikum BMT, please confirm stock and final price for '+p.name+' '+p.storage+'.')}">WhatsApp</a>
- </div>
- </div>
- </article>`).join("")||"<p>No products found.</p>";
-}
-function openOrder(product){
- selectedProduct=product;
- document.getElementById("orderTitle").textContent=product;
- document.getElementById("orderModal").style.display="block";
-}
-function closeOrder(){document.getElementById("orderModal").style.display="none"}
-document.getElementById("orderForm").addEventListener("submit",function(e){
- e.preventDefault();
- const msg=`BMT ORDER INQUIRY
-Product: ${selectedProduct}
-Customer: ${document.getElementById("customerName").value}
-Phone: ${document.getElementById("customerPhone").value}
-Delivery Address: ${document.getElementById("deliveryAddress").value}
-City: ${document.getElementById("customerCity").value}
-Colour: ${document.getElementById("customerColour").value||"Any"}
-Quantity: ${document.getElementById("customerQty").value||1}
-Note: ${document.getElementById("customerNote").value||"None"}
-
-Please confirm availability, PTA status if applicable, and final price.`;
- window.open("https://wa.me/923122741845?text="+encodeURIComponent(msg),"_blank");
-});
-renderProducts();
-</script>
-</<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BMT | Official Website</title>
-<meta name="description" content="BMT — Premium Mobile Phones, Wholesale and Retail in Pakistan.">
-
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{--navy:#071a33;--blue:#123d70;--light:#f2f6fc;--gold:#d8b56d;--white:#fff}
-body{font-family:Arial,Helvetica,sans-serif;background:var(--light);color:#17243a;line-height:1.6}
-a{text-decoration:none;color:inherit}
-.container{width:92%;max-width:1200px;margin:auto}
-header{background:var(--navy);color:white;position:sticky;top:0;z-index:100;box-shadow:0 3px 15px #0002}
-.nav{display:flex;align-items:center;justify-content:space-between;padding:15px 0;gap:20px}
-.brand{font-size:31px;font-weight:900;letter-spacing:3px;color:white}
-.brand span{color:var(--gold)}
-nav{display:flex;gap:23px;align-items:center;font-size:14px}
-nav a:hover{color:var(--gold)}
-.btn{display:inline-block;padding:12px 19px;border-radius:7px;background:var(--gold);color:#101d31;font-weight:bold;border:0;cursor:pointer}
-.hero{background:linear-gradient(120deg,#071a33,#174a7b);color:white;padding:75px 0}
-.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:35px}
-.eyebrow{color:var(--gold);font-weight:bold;letter-spacing:3px;font-size:12px}
-h1{font-size:clamp(42px,6vw,70px);line-height:1.08;margin:17px 0}
-.hero p{color:#d6e2f1;max-width:580px;margin-bottom:25px}
-.hero-art{min-height:320px;display:grid;place-items:center;background:radial-gradient(circle,#2c6091,#0b2340);border:1px solid #52749a;border-radius:24px;position:relative}
-.phone{width:145px;height:260px;border:7px solid #101722;border-radius:27px;background:linear-gradient(140deg,#dbe4ed,#8497ac);box-shadow:0 20px 45px #0007;position:relative}
-.phone:before{content:"";position:absolute;top:6px;left:50%;transform:translateX(-50%);width:54px;height:14px;background:#101722;border-radius:10px}
-.lens{position:absolute;top:15px;left:12px;width:44px;height:58px;background:#263345;border-radius:13px}
-.lens:before,.lens:after{content:"";display:block;width:13px;height:13px;border-radius:50%;background:#080e17;margin:7px}
-.hero-label{position:absolute;bottom:20px;right:20px;background:white;color:var(--navy);padding:10px 14px;border-radius:8px;font-weight:bold}
-.trust{background:white;padding:20px 0;display:grid;grid-template-columns:repeat(4,1fr);text-align:center;gap:12px;border-bottom:1px solid #e2e8f0}
-.trust strong{display:block;color:var(--navy)}
-.trust small{color:#728096}
-section{padding:65px 0}
-.section-title{text-align:center;margin-bottom:30px}
-.section-title h2{font-size:34px;color:var(--navy)}
-.section-title p{color:#748095;margin-top:7px}
-.deals{background:var(--navy);color:white}
-.deal-box{border:1px solid #526982;border-radius:18px;padding:30px;display:flex;justify-content:space-between;align-items:center;gap:20px;background:linear-gradient(110deg,#102d50,#0a1d36)}
-.deal-box h2{font-size:30px;margin:7px 0}
-.deal-box p{color:#d4dfeb}
-.searchbar{display:flex;gap:10px;margin-bottom:25px;flex-wrap:wrap}
-.searchbar input,.searchbar select{padding:13px;border:1px solid #d7dfeb;border-radius:8px;background:white;font-size:15px}
-.searchbar input{flex:1;min-width:200px}
-.products{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.card{background:white;border:1px solid #e1e7ef;border-radius:15px;overflow:hidden;box-shadow:0 8px 24px #12294b0b}
-.product-image{height:230px;background:linear-gradient(145deg,#edf2f8,#d5e0ee);display:grid;place-items:center;position:relative}
-.product-image .phone{width:100px;height:170px;border-width:5px;border-radius:20px}
-.badge{position:absolute;top:12px;left:12px;background:#d8f8e5;color:#17643b;padding:6px 9px;font-size:11px;font-weight:bold;border-radius:5px}
-.badge.ask{background:#fff0d5;color:#84550a}
-.card-body{padding:19px}
-.card h3{font-size:18px;color:var(--navy);margin-bottom:4px}
-.spec{font-size:13px;color:#78869a}
-.price{font-size:22px;font-weight:bold;color:var(--blue);margin:13px 0}
-.card-actions{display:flex;gap:8px}
-.card-actions a,.card-actions button{flex:1;text-align:center;padding:10px 5px;border:0;border-radius:6px;font-size:12px;font-weight:bold;cursor:pointer}
-.order-btn{background:var(--navy);color:white}
-.wa-btn{background:#d9f8e7;color:#17643b}
-.features{background:#eaf0f8}
-.feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
-.feature{padding:23px;background:white;border-radius:12px;border:1px solid #e0e6ef}
-.feature h3{font-size:16px;color:var(--navy);margin-bottom:8px}
-.feature p{font-size:13px;color:#718096}
-.wholesale{background:var(--navy);color:white}
-.wholesale-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.wholesale-box{padding:30px;border:1px solid #3c5875;border-radius:15px;background:#0c2542}
-.wholesale-box h2{font-size:28px;margin:10px 0}
-.wholesale-box p{color:#d0dce9;margin-bottom:18px}
-.wholesale-box ul{padding-left:20px;margin-bottom:22px;color:#d0dce9}
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.contact-box{background:white;padding:28px;border:1px solid #e0e6ef;border-radius:14px}
-.contact-box h2{color:var(--navy);margin-bottom:15px}
-.contact-row{padding:12px 0;border-bottom:1px solid #edf0f5}
-.contact-row strong{display:block;font-size:12px;color:#7c899b}
-footer{background:#040e1c;color:#cbd5e1;padding:35px 0}
-.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
-.footer-brand{font-size:26px;font-weight:900;letter-spacing:3px;color:white}
-.footer-brand span{color:var(--gold)}
-.email{margin-top:15px;font-size:14px}
-.email input{padding:10px;border-radius:5px;border:1px solid #526176;margin:5px 0;background:#0b1a2c;color:white}
-.modal{display:none;position:fixed;inset:0;background:#0009;z-index:200;overflow:auto;padding:20px}
-.modal-content{background:white;max-width:600px;margin:30px auto;padding:25px;border-radius:15px}
-.modal-header{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:15px}
-.close{border:0;background:#e9eef5;border-radius:6px;padding:8px 12px;cursor:pointer}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.field{margin-bottom:12px}
-.field label{display:block;font-size:13px;font-weight:bold;margin-bottom:5px}
-.field input,.field textarea,.field select{width:100%;padding:12px;border:1px solid #d7dfeb;border-radius:7px;font:inherit}
-.full{grid-column:1/-1}
-.submit{width:100%;padding:14px;border:0;background:var(--navy);color:white;font-weight:bold;border-radius:7px;cursor:pointer}
-@media(max-width:850px){
- nav{gap:10px;font-size:12px}.hero-grid{grid-template-columns:1fr}.hero-art{min-height:280px}
- .products{grid-template-columns:repeat(2,1fr)}.feature-grid{grid-template-columns:repeat(2,1fr)}
-}
-@media(max-width:580px){
- .nav{flex-wrap:wrap}.brand{font-size:27px}nav{width:100%;overflow:auto;padding-bottom:5px}
- nav a{white-space:nowrap}.trust{grid-template-columns:1fr 1fr}
- .products,.feature-grid,.wholesale-grid,.contact-grid{grid-template-columns:1fr}
- .deal-box{display:block}.deal-box .btn{margin-top:15px}
- .form-grid{grid-template-columns:1fr}.full{grid-column:auto}
- section{padding:45px 0}.hero{padding:50px 0}
-}
-</style>
-</head>
-
-<body>
-<header>
-<div class="container nav">
-<a class="brand" href="#home"><span>B</span>MT</a>
-<nav>
-<a href="#mobiles">Mobiles</a>
-<a href="#deals">PTA Deals</a>
-<a href="#wholesale">Wholesale</a>
-<a href="#about">About</a>
-<a href="#contact">Contact</a>
-</nav>
-</div>
-</header>
-
-<section class="hero" id="home">
-<div class="container hero-grid">
-<div>
-<div class="eyebrow">TRUST • QUALITY • CONNECTIVITY</div>
-<h1>Premium Mobiles.<br><span style="color:var(--gold)">Better Deals.</span></h1>
-<p>BMT brings mobile phones, wholesale opportunities and retail deals together in one professional place. Contact us for current stock, pricing and dealer offers.</p>
-<a class="btn" href="#mobiles">Explore Mobiles</a>
-<a class="btn" style="background:transparent;color:white;border:1px solid #7187a0;margin-left:8px" href="https://wa.me/923122741845">WhatsApp BMT</a>
-</div>
-<div class="hero-art"><div class="phone"><div class="lens"></div></div><div class="hero-label">BMT • Mobile Trade</div></div>
-</div>
-</section>
-
-<div class="container trust">
-<div><strong>Clear Pricing</strong><small>Confirm before ordering</small></div>
-<div><strong>Retail & Wholesale</strong><small>For buyers and dealers</small></div>
-<div><strong>Product Support</strong><small>Ask BMT on WhatsApp</small></div>
-<div><strong>Pakistan Supply</strong><small>Delivery details confirmed</small></div>
-</div>
-
-<section class="deals" id="deals">
-<div class="container">
-<div class="deal-box">
-<div><div class="eyebrow">SPECIAL DEALS</div><h2>PTA Approved iPhones</h2><p>Ask BMT to confirm PTA status, stock, condition and final price for your chosen model.</p></div>
-<a class="btn" href="https://wa.me/923122741845?text=Assalam-o-Alaikum%20BMT%2C%20please%20share%20PTA%20approved%20iPhone%20deals.">View Deals</a>
-</div>
-</div>
-</section>
-
-<section id="mobiles">
-<div class="container">
-<div class="section-title"><h2>Featured Mobiles</h2><p>Browse models and send your inquiry directly to BMT.</p></div>
-<div class="searchbar">
-<input id="search" placeholder="Search model or brand..." oninput="renderProducts()">
-<select id="brandFilter" onchange="renderProducts()">
-<option value="All">All Brands</option><option>Apple</option><option>Google</option><option>Samsung</option><option>OPPO</option>
-</select>
-</div>
-<div class="products" id="products"></div>
-</div>
-</section>
-
-<section class="features" id="about">
-<div class="container">
-<div class="section-title"><h2>Why Choose BMT?</h2><p>A professional approach to mobile trading.</p></div>
-<div class="feature-grid">
-<div class="feature"><h3>Product Information</h3><p>Ask about model, storage, colour, condition and PTA status before buying.</p></div>
-<div class="feature"><h3>Clear Communication</h3><p>Confirm pricing and availability directly with BMT.</p></div>
-<div class="feature"><h3>Wholesale Deals</h3><p>Dealer and bulk inquiries are welcome.</p></div>
-<div class="feature"><h3>WhatsApp Support</h3><p>Contact BMT for product information and order inquiries.</p></div>
-</div>
-</div>
-</section>
-
-<section class="wholesale" id="wholesale">
-<div class="container wholesale-grid">
-<div class="wholesale-box">
-<div class="eyebrow">FOR DEALERS & SHOPKEEPERS</div>
-<h2>Wholesale & Importer Deals</h2>
-<p>Looking for mobile phones for your shop or business? Contact BMT for bulk inquiries and dealer offers.</p>
-<ul><li>Wholesale and bulk inquiries</li><li>Retail and dealer support</li><li>Supply inquiries from across Pakistan</li><li>Model-wise stock confirmation</li></ul>
-<a class="btn" href="https://wa.me/923122741845?text=Assalam-o-Alaikum%20BMT%2C%20I%20want%20wholesale%20and%20dealer%20prices.">Become a BMT Dealer</a>
-</div>
-<div class="wholesale-box">
-<div class="eyebrow">NEW ARRIVALS</div>
-<h2>Latest Mobile Models</h2>
-<p>New models and special offers can be listed here as BMT stock changes. Contact us for current availability and updated prices.</p>
-<a class="btn" href="https://wa.me/923122741845">Ask About New Arrivals</a>
-</div>
-</div>
-</section>
-
-<section id="contact">
-<div class="container">
-<div class="section-title"><h2>Contact BMT</h2><p>We welcome retail customers, dealers and wholesale inquiries.</p></div>
-<div class="contact-grid">
-<div class="contact-box">
-<h2>Business Details</h2>
-<div class="contact-row"><strong>ADDRESS</strong>Office D10, Sareena Family Mobile Market, Sakhi Hasan, North Nazimabad, Karachi</div>
-<div class="contact-row"><strong>PHONE / WHATSAPP</strong><a href="tel:+923122741845">03122741845</a></div>
-<div class="contact-row"><strong>ALTERNATE NUMBER</strong><a href="tel:+923442318337">03442318337</a></div>
-<p style="margin-top:18px"><a class="btn" href="https://wa.me/923122741845">Chat on WhatsApp</a></p>
-</div>
-<div class="contact-box">
-<h2>Place an Order Inquiry</h2>
-<p style="color:#728096;margin-bottom:18px">Choose a product and enter your delivery details. Your inquiry will be sent to BMT through WhatsApp.</p>
-<button class="btn" onclick="openOrder('General BMT Inquiry')">Start Order</button>
-</div>
-</div>
-</div>
-</section>
-
-<footer>
-<div class="container footer-inner">
-<div><div class="footer-brand"><span>B</span>MT</div><p>TRUST • QUALITY • CONNECTIVITY</p><p>Importer • Wholesale • Retail</p></div>
-<div>
-<strong>Contact Email</strong><br>
-<div class="email">Add your business email here after confirming your final email address.</div>
-<p style="margin-top:15px">©️ 2026 BMT. All rights reserved.</p>
-</div>
-</div>
-</footer>
-
-<div class="modal" id="orderModal">
-<div class="modal-content">
-<div class="modal-header"><h2 id="orderTitle">BMT Order Inquiry</h2><button class="close" onclick="closeOrder()">✕</button></div>
-<form id="orderForm">
-<div class="form-grid">
-<div class="field"><label>Customer Name *</label><input id="customerName" required></div>
-<div class="field"><label>Phone / WhatsApp *</label><input id="customerPhone" required></div>
-<div class="field full"><label>Delivery Address *</label><textarea id="deliveryAddress" rows="3" required></textarea></div>
-<div class="field"><label>City *</label><input id="customerCity" required></div>
-<div class="field"><label>Preferred Colour</label><input id="customerColour"></div>
-<div class="field"><label>Quantity</label><input id="customerQty" type="number" min="1" value="1"></div>
-<div class="field"><label>Payment / Note</label><input id="customerNote"></div>
-</div>
-<button class="submit" type="submit">Send Order on WhatsApp</button>
-</form>
-</div>
-</div>
-
-<script>
-const products=[
-{brand:"Apple",name:"iPhone 12 Pro Max",storage:"256GB",price:120000,available:true},
-{brand:"Apple",name:"iPhone 12 Pro Max",storage:"128GB",price:110000,available:true},
-{brand:"Apple",name:"iPhone 13",storage:"128GB",price:103000,available:true},
-{brand:"Apple",name:"iPhone 13 Pro",storage:"128GB",price:135000,available:true},
-{brand:"Apple",name:"iPhone 13 Pro Max",storage:"128GB",price:175000,available:true},
-{brand:"Apple",name:"iPhone 14 Pro",storage:"128GB",price:170000,available:true},
-{brand:"Apple",name:"iPhone 14 Pro Max",storage:"128GB",price:205000,available:true},
-{brand:"Google",name:"Google Pixel 8 Pro",storage:"128GB",price:100000,available:true},
-{brand:"Google",name:"Google Pixel 7 Pro",storage:"128GB",price:80000,available:true},
-{brand:"Google",name:"Google Pixel 7a",storage:"128GB",price:55000,available:true},
-{brand:"Google",name:"Google Pixel 6",storage:"128GB",price:52000,available:true},
-{brand:"Google",name:"Google Pixel 6a",storage:"128GB",price:42000,available:true},
-{brand:"Samsung",name:"Samsung Galaxy S26 Ultra",storage:"Ask BMT",price:0,available:false},
-{brand:"Samsung",name:"Samsung Galaxy S26+",storage:"Ask BMT",price:0,available:false},
-{brand:"Samsung",name:"Samsung Galaxy S26",storage:"Ask BMT",price:0,available:false},
-{brand:"OPPO",name:"OPPO Reno Series",storage:"Ask BMT",price:0,available:false}
-];
-
-let selectedProduct="General BMT Inquiry";
-function renderProducts(){
- const q=document.getElementById("search").value.toLowerCase();
- const brand=document.getElementById("brandFilter").value;
- const filtered=products.filter(p=>(brand==="All"||p.brand===brand)&&(p.name+" "+p.brand+" "+p.storage).toLowerCase().includes(q));
- document.getElementById("products").innerHTML=filtered.map(p=>`
- <article class="card">
- <div class="product-image">
- <span class="badge ${p.available?'':'ask'}">${p.available?'Listed — Confirm Stock':'Ask for Availability'}</span>
- <div class="phone"><div class="lens"></div></div>
- </div>
- <div class="card-body">
- <h3>${p.name}</h3><div class="spec">${p.brand} • ${p.storage}</div>
- <div class="price">${p.price?'Rs. '+p.price.toLocaleString('en-PK'):'Ask BMT'}</div>
- <div class="card-actions">
- <button class="order-btn" onclick="openOrder('${p.name} ${p.storage}')">Order / Inquiry</button>
- <a class="wa-btn" target="_blank" href="https://wa.me/923122741845?text=${encodeURIComponent('Assalam-o-Alaikum BMT, please confirm stock and final price for '+p.name+' '+p.storage+'.')}">WhatsApp</a>
- </div>
- </div>
- </article>`).join("")||"<p>No products found.</p>";
-}
-function openOrder(product){
- selectedProduct=product;
- document.getElementById("orderTitle").textContent=product;
- document.getElementById("orderModal").style.display="block";
-}
-function closeOrder(){document.getElementById("orderModal").style.display="none"}
-document.getElementById("orderForm").addEventListener("submit",function(e){
- e.preventDefault();
- const msg=`BMT ORDER INQUIRY
-Product: ${selectedProduct}
-Customer: ${document.getElementById("customerName").value}
-Phone: ${document.getElementById("customerPhone").value}
-Delivery Address: ${document.getElementById("deliveryAddress").value}
-City: ${document.getElementById("customerCity").value}
-Colour: ${document.getElementById("customerColour").value||"Any"}
-Quantity: ${document.getElementById("customerQty").value||1}
-Note: ${document.getElementById("customerNote").value||"None"}
-
-Please confirm availability, PTA status if applicable, and final price.`;
- window.open("https://wa.me/923122741845?text="+encodeURIComponent(msg),"_blank");
-});
-renderProducts();
-</script>
 </body>
-</html>
 </html>
