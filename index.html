@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Babar Mobile Trader - Sareena Mobile Market</title>
+<title>Babar Mobile Trader</title>
 <style>
   * {
     box-sizing: border-box;
@@ -17,10 +17,10 @@
     color: #333;
   }
 
-  /* Top Header */
+  /* Top Header (Logo Section) */
   header {
     background: #ffffff;
-    padding: 10px 20px;
+    padding: 15px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -31,51 +31,36 @@
   .logo-section {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
   }
 
-  .logo-icon {
-    font-size: 28px;
-    font-weight: bold;
-    color: #0056b3;
-    border: 2px solid #0056b3;
-    padding: 2px 8px;
-    border-radius: 5px;
-    position: relative;
-  }
-
-  .logo-icon::before {
-    content: "📱";
-    position: absolute;
-    top: -10px;
-    left: -10px;
-    font-size: 14px;
+  /* YAHAN APNI LOGO IMAGE LAGAYEN */
+  .logo-img {
+    height: 50px;
+    width: auto;
   }
 
   .logo-text h1 {
-    font-size: 20px;
+    font-size: 22px;
     color: #0056b3;
     margin-bottom: 2px;
+    font-weight: bold;
   }
 
   .logo-text p {
-    font-size: 10px;
+    font-size: 11px;
     color: #666;
     letter-spacing: 1px;
   }
 
   .contact-section {
     display: flex;
-    gap: 12px;
-    font-size: 12px;
+    gap: 15px;
+    font-size: 13px;
     color: #0056b3;
     font-weight: bold;
     flex-wrap: wrap;
     align-items: center;
-  }
-
-  .contact-section span {
-    white-space: nowrap;
   }
 
   /* Navigation */
@@ -136,8 +121,6 @@
   .hero {
     background: linear-gradient(135deg, #003366, #0056b3);
     display: flex;
-    /* Ye line image ko left aur text ko right le aayegi */
-    flex-direction: row-reverse; 
     align-items: center;
     justify-content: space-between;
     padding: 40px 20px;
@@ -145,13 +128,30 @@
     position: relative;
     overflow: hidden;
     flex-wrap: wrap;
+    flex-direction: row; /* Image left, Text right */
+  }
+
+  /* YAHAN APNI MOBILE KI IMAGE LAGAYEN */
+  .hero-image {
+    flex: 1;
+    min-width: 300px;
+    text-align: left; /* Image left side */
+    z-index: 2;
+    padding: 10px;
+  }
+
+  .hero-image img {
+    max-width: 100%;
+    height: auto;
+    max-height: 350px;
+    object-fit: contain;
   }
 
   .hero-content {
     flex: 1;
     min-width: 300px;
     z-index: 2;
-    text-align: right; /* Text ko right align karne ke liye */
+    padding: 10px 20px;
   }
 
   .hero-content h2 {
@@ -193,7 +193,6 @@
   .socials {
     display: flex;
     gap: 10px;
-    justify-content: flex-end; /* Social icons ko right karne ke liye */
   }
 
   .socials span {
@@ -202,20 +201,6 @@
     border-radius: 50%;
     font-size: 14px;
     cursor: pointer;
-  }
-
-  .hero-image {
-    flex: 1;
-    min-width: 300px;
-    text-align: left; /* Image ko left align karne ke liye */
-    z-index: 2;
-  }
-
-  .hero-image img {
-    max-width: 100%;
-    height: auto;
-    max-height: 300px;
-    object-fit: contain;
   }
 
   /* Footer */
@@ -237,12 +222,15 @@
     font-weight: bold;
   }
 
-  /* Responsive (Mobile ke liye) */
+  /* Responsive (Mobile) */
   @media (max-width: 768px) {
     header {
       flex-direction: column;
       text-align: center;
       gap: 10px;
+    }
+    .logo-section {
+      flex-direction: column;
     }
     .contact-section {
       justify-content: center;
@@ -264,28 +252,28 @@
       width: 150px;
     }
     .hero {
-      flex-direction: column-reverse; /* Mobile par text upar aur image neeche */
+      flex-direction: column; /* Mobile par text upar aur image neeche */
       text-align: center;
-    }
-    .hero-content {
-      text-align: center; /* Mobile par text center ho jaye */
-    }
-    .socials {
-      justify-content: center;
     }
     .hero-image {
       text-align: center;
       margin-top: 20px;
+    }
+    .socials {
+      justify-content: center;
     }
   }
 </style>
 </head>
 <body>
 
-  <!-- Header -->
+  <!-- Header (Sab se Upar) -->
   <header>
     <div class="logo-section">
-      <div class="logo-icon">BMT</div>
+      <!-- YAHAN APNI "BMT" LOGO IMAGE KA NAAM LIKHEN -->
+      <!-- Misaal: <img src="bmt-logo.png" class="logo-img" alt="BMT Logo"> -->
+      <img src="bmt-logo.png" class="logo-img" alt="BMT Logo" style="border: 1px dashed #ccc; padding: 5px; background: #eee;">
+      
       <div class="logo-text">
         <h1>BABAR MOBILE TRADER</h1>
         <p>TRUST • QUALITY • CONNECTIVITY</p>
@@ -313,18 +301,21 @@
     </div>
   </nav>
 
-  <!-- Hero Section -->
+  <!-- Hero Section (Mobile ki Tasveer Baye, Text Daye) -->
   <section class="hero">
-    <!-- Pehle Image (Left side ke liye) -->
+    
+    <!-- Pehle Image (Left Side) -->
     <div class="hero-image">
-      <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&q=80" alt="Mobile Phones">
+      <!-- YAHAN APNI MOBILE WALI IMAGE KA NAAM LIKHEN -->
+      <!-- Misaal: <img src="mobile-image.jpg" alt="Mobile Phones"> -->
+      <img src="mobile-image.jpg" alt="Mobile Phones" style="border: 1px dashed #ccc; padding: 10px; background: rgba(255,255,255,0.1);">
     </div>
 
-    <!-- Phir Text (Right side ke liye) -->
+    <!-- Phir Text (Right Side) -->
     <div class="hero-content">
       <h2>Buy the Best Mobile Phones</h2>
       <p class="sub">At the Lowest Prices in Town</p>
-      <p class="desc">Visit our shop for the latest smartphones and accessories at Babar Mobile Trader.</p>
+      <p class="desc">Visit Babar Mobile Trader at Sareena Mobile Market for the latest smartphones and accessories.</p>
       <a href="#" class="btn">Explore Our Shop</a>
       <div class="socials">
         <span>f</span>
@@ -333,9 +324,10 @@
         <span>🎵</span>
       </div>
     </div>
+    
   </section>
 
-  <!-- Footer -->
+  <!-- Footer (Address Last Main) -->
   <footer>
     <p><strong>BABAR MOBILE TRADER</strong></p>
     <p>📍 Sareena Mobile Market, Sakhi Hassan, Karachi</p>
