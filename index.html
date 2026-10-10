@@ -3,224 +3,335 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Babar Mobile Trader</title>
+<title>Sareena Mobile Market - Sakhi Hassan, Karachi</title>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
     font-family: Arial, sans-serif;
-    background: #f4f4f4;
+  }
+
+  body {
+    background-color: #f4f4f4;
     color: #333;
   }
-  
-  /* Header */
+
+  /* Top Header */
   header {
-    background: #fff;
-    padding: 10px 15px;
+    background: #ffffff;
+    padding: 10px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 2px solid #0056b3;
     flex-wrap: wrap;
+    border-bottom: 2px solid #0056b3;
   }
-  .logo-area {
+
+  .logo-section {
     display: flex;
     align-items: center;
     gap: 10px;
   }
-  .logo-box {
-    background: #0056b3;
-    color: white;
+
+  .logo-icon {
+    font-size: 28px;
     font-weight: bold;
-    font-size: 24px;
-    padding: 5px 10px;
-    border-radius: 5px;
-  }
-  .logo-text h2 { color: #0056b3; font-size: 18px; margin: 0; }
-  .logo-text p { font-size: 10px; color: #666; margin: 0; }
-  .contact-info {
-    text-align: right;
-    font-size: 13px;
     color: #0056b3;
-    margin-top: 5px;
+    border: 2px solid #0056b3;
+    padding: 2px 8px;
+    border-radius: 5px;
+    position: relative;
   }
-  .contact-info div { margin-bottom: 3px; }
+
+  .logo-icon::before {
+    content: "📱";
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    font-size: 14px;
+  }
+
+  .logo-text h1 {
+    font-size: 20px;
+    color: #0056b3;
+    margin-bottom: 2px;
+  }
+
+  .logo-text p {
+    font-size: 10px;
+    color: #666;
+    letter-spacing: 1px;
+  }
+
+  .contact-section {
+    display: flex;
+    gap: 12px;
+    font-size: 12px;
+    color: #0056b3;
+    font-weight: bold;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .contact-section span {
+    white-space: nowrap;
+  }
 
   /* Navigation */
   nav {
     background: #0056b3;
     display: flex;
-    justify-content: space-around;
-    padding: 12px 5px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
     flex-wrap: wrap;
   }
-  nav a {
+
+  .nav-links {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .nav-links a {
     color: #fff;
     text-decoration: none;
+    padding: 15px 15px;
     font-size: 14px;
-    font-weight: bold;
+    display: block;
+    border-right: 1px solid #004494;
   }
-  nav a:hover { text-decoration: underline; }
+
+  .nav-links a:hover {
+    background: #004494;
+  }
+
+  .search-box {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    padding: 2px 10px;
+    margin: 10px 0;
+  }
+
+  .search-box input {
+    border: none;
+    outline: none;
+    padding: 8px;
+    font-size: 12px;
+    width: 200px;
+  }
+
+  .search-box button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #0056b3;
+  }
 
   /* Hero Section */
   .hero {
-    background: linear-gradient(rgba(0, 86, 179, 0.8), rgba(0, 86, 179, 0.8)), url('https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80') center/cover;
-    color: white;
-    text-align: center;
-    padding: 50px 20px;
+    background: linear-gradient(135deg, #003366, #0056b3);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px 20px;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+    flex-wrap: wrap;
   }
-  .hero h1 { font-size: 28px; margin-bottom: 10px; }
-  .hero p { font-size: 16px; margin-bottom: 20px; }
+
+  .hero-content {
+    flex: 1;
+    min-width: 300px;
+    z-index: 2;
+  }
+
+  .hero-content h2 {
+    font-size: 32px;
+    margin-bottom: 10px;
+    line-height: 1.2;
+  }
+
+  .hero-content .sub {
+    font-size: 20px;
+    color: #ffd700;
+    margin-bottom: 15px;
+    font-weight: bold;
+  }
+
+  .hero-content .desc {
+    font-size: 14px;
+    margin-bottom: 20px;
+    opacity: 0.9;
+  }
+
   .btn {
-    background: #ffd700;
+    background: #ffffff;
     color: #0056b3;
-    padding: 10px 25px;
+    padding: 12px 30px;
     text-decoration: none;
     border-radius: 25px;
     font-weight: bold;
     display: inline-block;
+    margin-bottom: 20px;
+    transition: 0.3s;
   }
 
-  /* Brands */
-  .section-title {
-    text-align: center;
-    color: #0056b3;
-    margin: 25px 0 15px;
-    font-size: 22px;
-  }
-  .brands-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    gap: 15px;
-    padding: 0 20px;
-    text-align: center;
-  }
-  .brand-card {
-    background: #fff;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    font-weight: bold;
-    color: #0056b3;
+  .btn:hover {
+    background: #ffd700;
+    color: #003366;
   }
 
-  /* Services */
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    padding: 0 20px;
-  }
-  .service-card {
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  .socials {
     display: flex;
-    align-items: center;
-    gap: 15px;
+    gap: 10px;
   }
-  .service-icon {
-    font-size: 30px;
-    background: #e6f0fa;
-    padding: 10px;
-    border-radius: 10px;
+
+  .socials span {
+    background: rgba(255,255,255,0.2);
+    padding: 8px 12px;
+    border-radius: 50%;
+    font-size: 14px;
+    cursor: pointer;
   }
-  .service-text h3 { color: #0056b3; font-size: 16px; margin-bottom: 5px; }
-  .service-text p { font-size: 13px; color: #555; }
+
+  .hero-image {
+    flex: 1;
+    min-width: 300px;
+    text-align: center;
+    z-index: 2;
+  }
+
+  .hero-image img {
+    max-width: 100%;
+    height: auto;
+    max-height: 300px;
+    object-fit: contain;
+  }
 
   /* Footer */
   footer {
     background: #002244;
-    color: white;
+    color: #fff;
     text-align: center;
-    padding: 20px;
-    margin-top: 30px;
-    font-size: 13px;
+    padding: 25px 20px;
+    margin-top: 20px;
+    font-size: 14px;
   }
-  footer p { margin: 5px 0; }
+  
+  footer p {
+    margin: 5px 0;
+  }
+
+  footer .footer-email {
+    color: #00e5ff;
+    font-weight: bold;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    header {
+      flex-direction: column;
+      text-align: center;
+      gap: 10px;
+    }
+    .contact-section {
+      justify-content: center;
+      flex-direction: column;
+      gap: 5px;
+    }
+    nav {
+      flex-direction: column;
+      padding: 10px;
+    }
+    .nav-links {
+      justify-content: center;
+    }
+    .nav-links a {
+      border-right: none;
+      padding: 10px;
+    }
+    .search-box input {
+      width: 150px;
+    }
+    .hero {
+      flex-direction: column;
+      text-align: center;
+    }
+    .hero-image {
+      margin-top: 20px;
+    }
+    .socials {
+      justify-content: center;
+    }
+  }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="logo-area">
-    <div class="logo-box">MBT</div>
-    <div class="logo-text">
-      <h2>BABAR MOBILE TRADER</h2>
-      <p>TRUST • QUALITY • CONNECTIVITY</p>
+  <!-- Header -->
+  <header>
+    <div class="logo-section">
+      <div class="logo-icon">SMM</div>
+      <div class="logo-text">
+        <h1>SAREENA MOBILE MARKET</h1>
+        <p>TRUST • QUALITY • CONNECTIVITY</p>
+      </div>
     </div>
-  </div>
-  <div class="contact-info">
-    <div>📞 0312-2741845</div>
-    <div>💬 0312-2741845</div>
-  </div>
-</header>
-
-<nav>
-  <a href="#">Home</a>
-  <a href="#">Mobile Phones</a>
-  <a href="#">New Phones</a>
-  <a href="#">Repair Phones</a>
-  <a href="#">Contact Us</a>
-</nav>
-
-<div class="hero">
-  <h1>Buy the Best Mobile Phones</h1>
-  <p>At the Lowest Prices in Town</p>
-  <p>Visit our shop for the latest smartphones and accessories.</p>
-  <a href="#" class="btn">Explore Our Shop</a>
-</div>
-
-<h2 class="section-title">Popular Brands</h2>
-<div class="brands-grid">
-  <div class="brand-card">Apple</div>
-  <div class="brand-card">Samsung</div>
-  <div class="brand-card">Infinix</div>
-  <div class="brand-card">Oppo</div>
-  <div class="brand-card">Vivo</div>
-  <div class="brand-card">Xiaomi</div>
-  <div class="brand-card">Realme</div>
-  <div class="brand-card">Tecno</div>
-</div>
-
-<h2 class="section-title">Our Services</h2>
-<div class="services-grid">
-  <div class="service-card">
-    <div class="service-icon">📱</div>
-    <div class="service-text">
-      <h3>New Mobiles</h3>
-      <p>Latest models with official warranty.</p>
+    <div class="contact-section">
+      <span>📞 0312 2741845 (WhatsApp & Inquiries)</span>
+      <span>📞 0344 2318337</span>
+      <span>✉️ info@BabarMobileTrader.com</span>
     </div>
-  </div>
-  <div class="service-card">
-    <div class="service-icon">🔄</div>
-    <div class="service-text">
-      <h3>Exchange Offer</h3>
-      <p>Bring your old phone and get a new one.</p>
-    </div>
-  </div>
-  <div class="service-card">
-    <div class="service-icon">🛠️</div>
-    <div class="service-text">
-      <h3>Mobile Repair</h3>
-      <p>Expert repair for all mobile brands.</p>
-    </div>
-  </div>
-  <div class="service-card">
-    <div class="service-icon">🎧</div>
-    <div class="service-text">
-      <h3>Accessories</h3>
-      <p>Headphones, chargers, and more.</p>
-    </div>
-  </div>
-</div>
+  </header>
 
-<footer>
-  <p><strong>BABAR MOBILE TRADER</strong></p>
-  <p>📍 Main Bazar, Your City</p>
-  <p>📞 0312-2741845 | ✉️ bmt@babarmobiletrader.com</p>
-  <p>© 2026 Babar Mobile Trader. All rights reserved.</p>
-</footer>
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">Mobile Phones</a>
+      <a href="#">New Phones</a>
+      <a href="#">Repair Phones</a>
+      <a href="#">Contact Us</a>
+    </div>
+    <div class="search-box">
+      <input type="text" placeholder="Search your favourite mobile...">
+      <button>🔍</button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Buy the Best Mobile Phones</h2>
+      <p class="sub">At the Lowest Prices in Town</p>
+      <p class="desc">Visit Sareena Mobile Market in Sakhi Hassan, Karachi for the latest smartphones and accessories.</p>
+      <a href="#" class="btn">Explore Our Shop</a>
+      <div class="socials">
+        <span>f</span>
+        <span>📷</span>
+        <span>▶</span>
+        <span>🎵</span>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&q=80" alt="Mobile Phones">
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p><strong>SAREENA MOBILE MARKET</strong></p>
+    <p>📍 Sakhi Hassan, Karachi</p>
+    <p>📞 0312 2741845 (WhatsApp & Inquiries) | 📞 0344 2318337</p>
+    <p>✉️ <span class="footer-email">info@BabarMobileTrader.com</span></p>
+    <p>© 2026 Sareena Mobile Market. All rights reserved.</p>
+  </footer>
 
 </body>
 </html>
