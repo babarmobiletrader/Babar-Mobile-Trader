@@ -17,53 +17,60 @@
     color: #333;
   }
 
-  /* Top Header (Logo Section) */
+  /* === SAB SE UPAR WALA HISA === */
+  /* Is main koi number ya email nahi hai */
   header {
     background: #ffffff;
     padding: 15px 20px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center; /* Center mein rakhne ke liye */
     align-items: center;
-    flex-wrap: wrap;
-    border-bottom: 2px solid #0056b3;
+    border-bottom: 1px solid #ccc;
   }
 
-  .logo-section {
+  .logo-wrapper {
     display: flex;
     align-items: center;
     gap: 15px;
   }
 
-  /* YAHAN APNI LOGO IMAGE LAGAYEN */
-  .logo-img {
-    height: 50px;
-    width: auto;
+  /* Ye BMT ka logo hai (Code se banaya hai) */
+  .bmt-logo-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    background: #0056b3;
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    border-radius: 8px;
+    position: relative;
   }
 
-  .logo-text h1 {
-    font-size: 22px;
+  .bmt-logo-box::after {
+    content: "📱";
+    position: absolute;
+    font-size: 14px;
+    top: -10px;
+    left: -10px;
+  }
+
+  .header-text h1 {
+    font-size: 24px;
     color: #0056b3;
     margin-bottom: 2px;
     font-weight: bold;
   }
 
-  .logo-text p {
+  .header-text p {
     font-size: 11px;
     color: #666;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
   }
 
-  .contact-section {
-    display: flex;
-    gap: 15px;
-    font-size: 13px;
-    color: #0056b3;
-    font-weight: bold;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-
-  /* Navigation */
+  /* === NAVIGATION BAR === */
   nav {
     background: #0056b3;
     display: flex;
@@ -117,7 +124,7 @@
     color: #0056b3;
   }
 
-  /* Hero Section */
+  /* === HERO SECTION (Mobile Baye, Text Daye) === */
   .hero {
     background: linear-gradient(135deg, #003366, #0056b3);
     display: flex;
@@ -125,17 +132,14 @@
     justify-content: space-between;
     padding: 40px 20px;
     color: #fff;
-    position: relative;
-    overflow: hidden;
     flex-wrap: wrap;
-    flex-direction: row; /* Image left, Text right */
+    flex-direction: row; /* Mobile left */
   }
 
-  /* YAHAN APNI MOBILE KI IMAGE LAGAYEN */
   .hero-image {
     flex: 1;
     min-width: 300px;
-    text-align: left; /* Image left side */
+    text-align: left; /* Mobile Left */
     z-index: 2;
     padding: 10px;
   }
@@ -203,7 +207,7 @@
     cursor: pointer;
   }
 
-  /* Footer */
+  /* === FOOTER (Yahan Number aur Email hain) === */
   footer {
     background: #002244;
     color: #fff;
@@ -222,20 +226,14 @@
     font-weight: bold;
   }
 
-  /* Responsive (Mobile) */
+  /* Mobile ke liye adjust */
   @media (max-width: 768px) {
     header {
       flex-direction: column;
       text-align: center;
-      gap: 10px;
     }
-    .logo-section {
+    .logo-wrapper {
       flex-direction: column;
-    }
-    .contact-section {
-      justify-content: center;
-      flex-direction: column;
-      gap: 5px;
     }
     nav {
       flex-direction: column;
@@ -252,7 +250,7 @@
       width: 150px;
     }
     .hero {
-      flex-direction: column; /* Mobile par text upar aur image neeche */
+      flex-direction: column; /* Text upar, Image neeche */
       text-align: center;
     }
     .hero-image {
@@ -267,22 +265,16 @@
 </head>
 <body>
 
-  <!-- Header (Sab se Upar) -->
+  <!-- Header (Sab se Upar - Bina Number/Email) -->
   <header>
-    <div class="logo-section">
-      <!-- YAHAN APNI "BMT" LOGO IMAGE KA NAAM LIKHEN -->
-      <!-- Misaal: <img src="bmt-logo.png" class="logo-img" alt="BMT Logo"> -->
-      <img src="bmt-logo.png" class="logo-img" alt="BMT Logo" style="border: 1px dashed #ccc; padding: 5px; background: #eee;">
-      
-      <div class="logo-text">
+    <div class="logo-wrapper">
+      <!-- BMT Logo -->
+      <div class="bmt-logo-box">BMT</div>
+      <!-- Naam aur Tagline -->
+      <div class="header-text">
         <h1>BABAR MOBILE TRADER</h1>
         <p>TRUST • QUALITY • CONNECTIVITY</p>
       </div>
-    </div>
-    <div class="contact-section">
-      <span>📞 0312 2741845 (WhatsApp)</span>
-      <span>📞 0344 2318337</span>
-      <span>✉️ info@BabarMobileTrader.com</span>
     </div>
   </header>
 
@@ -301,17 +293,15 @@
     </div>
   </nav>
 
-  <!-- Hero Section (Mobile ki Tasveer Baye, Text Daye) -->
+  <!-- Hero Section -->
   <section class="hero">
-    
-    <!-- Pehle Image (Left Side) -->
+    <!-- Mobile ki Tasveer (Left Side) -->
     <div class="hero-image">
-      <!-- YAHAN APNI MOBILE WALI IMAGE KA NAAM LIKHEN -->
-      <!-- Misaal: <img src="mobile-image.jpg" alt="Mobile Phones"> -->
-      <img src="mobile-image.jpg" alt="Mobile Phones" style="border: 1px dashed #ccc; padding: 10px; background: rgba(255,255,255,0.1);">
+      <!-- Yahan aap apni mobile ki tasveer ka link lagayen, ya ye internet wali chal jayegi -->
+      <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&q=80" alt="Mobile Phones">
     </div>
 
-    <!-- Phir Text (Right Side) -->
+    <!-- Likhayi (Right Side) -->
     <div class="hero-content">
       <h2>Buy the Best Mobile Phones</h2>
       <p class="sub">At the Lowest Prices in Town</p>
@@ -324,10 +314,9 @@
         <span>🎵</span>
       </div>
     </div>
-    
   </section>
 
-  <!-- Footer (Address Last Main) -->
+  <!-- Footer (Yahan Number aur Email hain) -->
   <footer>
     <p><strong>BABAR MOBILE TRADER</strong></p>
     <p>📍 Sareena Mobile Market, Sakhi Hassan, Karachi</p>
