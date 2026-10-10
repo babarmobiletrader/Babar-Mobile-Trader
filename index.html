@@ -2,46 +2,225 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>MBT Mobile Logo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Babar Mobile Trader</title>
 <style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: #f0f0f0;
-    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    color: #333;
   }
+  
+  /* Header */
+  header {
+    background: #fff;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #0056b3;
+    flex-wrap: wrap;
+  }
+  .logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo-box {
+    background: #0056b3;
+    color: white;
+    font-weight: bold;
+    font-size: 24px;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  .logo-text h2 { color: #0056b3; font-size: 18px; margin: 0; }
+  .logo-text p { font-size: 10px; color: #666; margin: 0; }
+  .contact-info {
+    text-align: right;
+    font-size: 13px;
+    color: #0056b3;
+    margin-top: 5px;
+  }
+  .contact-info div { margin-bottom: 3px; }
+
+  /* Navigation */
+  nav {
+    background: #0056b3;
+    display: flex;
+    justify-content: space-around;
+    padding: 12px 5px;
+    flex-wrap: wrap;
+  }
+  nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  nav a:hover { text-decoration: underline; }
+
+  /* Hero Section */
+  .hero {
+    background: linear-gradient(rgba(0, 86, 179, 0.8), rgba(0, 86, 179, 0.8)), url('https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=80') center/cover;
+    color: white;
+    text-align: center;
+    padding: 50px 20px;
+  }
+  .hero h1 { font-size: 28px; margin-bottom: 10px; }
+  .hero p { font-size: 16px; margin-bottom: 20px; }
+  .btn {
+    background: #ffd700;
+    color: #0056b3;
+    padding: 10px 25px;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+    display: inline-block;
+  }
+
+  /* Brands */
+  .section-title {
+    text-align: center;
+    color: #0056b3;
+    margin: 25px 0 15px;
+    font-size: 22px;
+  }
+  .brands-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 15px;
+    padding: 0 20px;
+    text-align: center;
+  }
+  .brand-card {
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    font-weight: bold;
+    color: #0056b3;
+  }
+
+  /* Services */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 0 20px;
+  }
+  .service-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  .service-icon {
+    font-size: 30px;
+    background: #e6f0fa;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  .service-text h3 { color: #0056b3; font-size: 16px; margin-bottom: 5px; }
+  .service-text p { font-size: 13px; color: #555; }
+
+  /* Footer */
+  footer {
+    background: #002244;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+    font-size: 13px;
+  }
+  footer p { margin: 5px 0; }
 </style>
 </head>
 <body>
 
-<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+<header>
+  <div class="logo-area">
+    <div class="logo-box">MBT</div>
+    <div class="logo-text">
+      <h2>BABAR MOBILE TRADER</h2>
+      <p>TRUST • QUALITY • CONNECTIVITY</p>
+    </div>
+  </div>
+  <div class="contact-info">
+    <div>📞 0312-2741845</div>
+    <div>💬 0312-2741845</div>
+  </div>
+</header>
 
-  <!-- Circle Background -->
-  <circle cx="200" cy="200" r="180" fill="#0d1b2a" stroke="#00e5ff" stroke-width="6"/>
+<nav>
+  <a href="#">Home</a>
+  <a href="#">Mobile Phones</a>
+  <a href="#">New Phones</a>
+  <a href="#">Repair Phones</a>
+  <a href="#">Contact Us</a>
+</nav>
 
-  <!-- Mobile Phone Body -->
-  <rect x="130" y="70" width="140" height="250" rx="20" fill="#111" stroke="#ffd700" stroke-width="4"/>
+<div class="hero">
+  <h1>Buy the Best Mobile Phones</h1>
+  <p>At the Lowest Prices in Town</p>
+  <p>Visit our shop for the latest smartphones and accessories.</p>
+  <a href="#" class="btn">Explore Our Shop</a>
+</div>
 
-  <!-- Screen -->
-  <rect x="145" y="90" width="110" height="200" rx="8" fill="#00e5ff" opacity="0.15"/>
+<h2 class="section-title">Popular Brands</h2>
+<div class="brands-grid">
+  <div class="brand-card">Apple</div>
+  <div class="brand-card">Samsung</div>
+  <div class="brand-card">Infinix</div>
+  <div class="brand-card">Oppo</div>
+  <div class="brand-card">Vivo</div>
+  <div class="brand-card">Xiaomi</div>
+  <div class="brand-card">Realme</div>
+  <div class="brand-card">Tecno</div>
+</div>
 
-  <!-- MBT on Screen -->
-  <text x="200" y="205" text-anchor="middle" font-size="60" font-weight="bold"
-        fill="#ffd700" font-family="Arial">MBT</text>
+<h2 class="section-title">Our Services</h2>
+<div class="services-grid">
+  <div class="service-card">
+    <div class="service-icon">📱</div>
+    <div class="service-text">
+      <h3>New Mobiles</h3>
+      <p>Latest models with official warranty.</p>
+    </div>
+  </div>
+  <div class="service-card">
+    <div class="service-icon">🔄</div>
+    <div class="service-text">
+      <h3>Exchange Offer</h3>
+      <p>Bring your old phone and get a new one.</p>
+    </div>
+  </div>
+  <div class="service-card">
+    <div class="service-icon">🛠️</div>
+    <div class="service-text">
+      <h3>Mobile Repair</h3>
+      <p>Expert repair for all mobile brands.</p>
+    </div>
+  </div>
+  <div class="service-card">
+    <div class="service-icon">🎧</div>
+    <div class="service-text">
+      <h3>Accessories</h3>
+      <p>Headphones, chargers, and more.</p>
+    </div>
+  </div>
+</div>
 
-  <!-- Speaker -->
-  <line x1="180" y1="80" x2="220" y2="80" stroke="#ffd700" stroke-width="3" stroke-linecap="round"/>
-
-  <!-- Home Button -->
-  <circle cx="200" cy="305" r="6" fill="#ffd700"/>
-
-  <!-- Full Name -->
-  <text x="200" y="360" text-anchor="middle" font-size="16" fill="#ffffff"
-        font-family="Arial" letter-spacing="2">BABAR MOBILE TRADER</text>
-
-</svg>
+<footer>
+  <p><strong>BABAR MOBILE TRADER</strong></p>
+  <p>📍 Main Bazar, Your City</p>
+  <p>📞 0312-2741845 | ✉️ bmt@babarmobiletrader.com</p>
+  <p>© 2026 Babar Mobile Trader. All rights reserved.</p>
+</footer>
 
 </body>
 </html>
