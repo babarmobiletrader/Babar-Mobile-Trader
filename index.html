@@ -3,110 +3,230 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BABAR MOBILE TRADER</title>
-
+<title>BMT | Babar Mobile Trader</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f4f7fc;color:#102b50}
-.page{max-width:1100px;margin:auto;background:#fff}
-header{display:flex;align-items:center;justify-content:center;gap:12px;padding:14px 8px}
-.logo{width:76px;height:58px;display:flex;align-items:center;justify-content:center;position:relative;color:#0875d1;font-size:29px;font-weight:900;letter-spacing:-3px}
-.logo:before{content:"";position:absolute;width:53px;height:45px;border:4px solid #0875d1;border-radius:10px;transform:skew(-8deg)}
-.logo span{position:relative}
-.brand{border-left:3px solid #0875d1;padding-left:12px}
-.brand h1{margin:0;color:#0758ae;font-size:clamp(16px,3.6vw,28px);font-weight:900}
-.brand p{margin:5px 0 0;color:#1286d5;font-size:clamp(8px,1.7vw,13px);font-weight:bold;letter-spacing:1.5px}
-nav{display:flex;justify-content:space-around;background:linear-gradient(90deg,#0878e8,#0349ac);overflow-x:auto}
-nav a{color:white;text-decoration:none;font-size:11px;font-weight:bold;padding:15px 10px;white-space:nowrap}
-nav a:first-child{background:#12a5ef}
-.search{background:#086bce;padding:8px 4%}
-.search input{width:100%;height:34px;border:0;border-radius:22px;padding:0 14px;font-size:13px}
-.hero{position:relative;overflow:hidden;min-height:275px;padding:27px 4%;color:#fff;background:radial-gradient(ellipse at 72% 70%,#168df0,#0750b6 43%,#04153f 84%)}
-.hero:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(155deg,transparent 0 32px,#5bd2ff13 33px 35px)}
-.copy{position:relative;z-index:2;width:55%}
-.bmt{font-size:clamp(32px,5vw,48px);font-weight:900;line-height:.9}
-h2{font-size:clamp(21px,4.2vw,37px);line-height:1;margin:10px 0 0;font-weight:900}
-h3{font-size:clamp(20px,4.2vw,36px);line-height:1;margin:0 0 10px;color:#23e3ef;font-weight:900}
-.copy p{font-size:12px;line-height:1.5;margin:0 0 12px}
-.cta{display:inline-block;background:white;color:#0757b1;padding:10px 16px;border-radius:24px;font-weight:bold;font-size:11px;text-decoration:none}
-.approved{position:absolute;right:5%;top:10%;z-index:2;color:#ffdf38;font-size:clamp(12px,2vw,19px);font-weight:900;font-style:italic;text-align:center;transform:rotate(-7deg);text-shadow:1px 2px #12274c}
-.approved small{display:block;color:white;font-size:10px}
-.phones{position:absolute;right:2%;bottom:30px;width:48%;height:160px;display:flex;align-items:flex-end;justify-content:center;gap:4px}
-.phone{position:relative;flex:0 1 48px;height:125px;min-width:20px;border:3px solid #d8e3ef;border-radius:8px;background:#101a31;box-shadow:0 5px 12px #0008;overflow:hidden}
-.phone:nth-child(2),.phone:nth-child(5){height:145px}
-.phone:nth-child(3),.phone:nth-child(4){height:132px}
-.phone:before{content:"";position:absolute;z-index:2;top:4px;left:30%;width:40%;height:5px;border-radius:5px;background:#080e1c}
-.phone:after{content:"";position:absolute;inset:12px 3px 4px;border-radius:4px;background:linear-gradient(145deg,#eaf3ff,#73a9ec 30%,#1d3976 62%,#101426)}
-.phone:nth-child(2):after{background:radial-gradient(circle at 70% 20%,#fff,#7098d2 15%,#173461 50%,#0c1022)}
-.phone:nth-child(3):after{background:linear-gradient(140deg,#e9efff,#36305e 40%,#090c1c 70%,#a28aff)}
-.phone:nth-child(4):after{background:linear-gradient(135deg,#fae6e6,#e83358 35%,#351034 65%,#090b1d)}
-.phone:nth-child(5):after{background:linear-gradient(140deg,#e3e7ef,#5d7b98 35%,#172538 70%,#d5f0ff)}
-.phone:nth-child(6):after{background:linear-gradient(135deg,#c7d4e3,#202d48 45%,#070b19 75%,#68bfff)}
-.dots{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:6px}
-.dots i{width:6px;height:6px;background:#ffffff70;border-radius:50%}
-.dots i:first-child{background:white}
-.social{position:absolute;right:12px;bottom:8px;color:white;font-size:10px;letter-spacing:4px}
-@media(max-width:370px){
-header{gap:7px}.logo{width:58px;font-size:25px}
-.brand{padding-left:8px}.brand p{letter-spacing:1px}
-.hero{min-height:255px}.copy{width:56%}
-.phones{width:47%;gap:2px}
-.phone{height:100px}
-.phone:nth-child(2),.phone:nth-child(5){height:118px}
-.phone:nth-child(3),.phone:nth-child(4){height:110px}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Arial,sans-serif;background:#f5f9ff;color:#102f60}
+a{text-decoration:none}
+.wrap{width:94%;max-width:1200px;margin:auto}
+header{background:white;padding:18px 0}
+.brand{display:flex;align-items:center;gap:15px}
+.logo{width:75px;height:75px;border:2px solid #075bc5;border-radius:14px;display:grid;place-items:center;color:#075bc5;font-size:26px;font-weight:900}
+.brand h2{margin:0;color:#083a7d;font-size:25px}
+.brand p{margin:6px 0 0;color:#0875c9;font-size:11px;letter-spacing:2px;font-weight:bold}
+nav{background:#075bc5;color:white}
+.navrow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 0;flex-wrap:wrap}
+nav a{color:white;font-weight:bold;font-size:14px;padding:8px}
+nav a:hover{background:#087ff4;border-radius:5px}
+#search{padding:11px 15px;border:0;border-radius:22px;max-width:230px;width:100%}
+.hero{background:linear-gradient(120deg,#031c4c,#075bc5,#1596f0);color:white;padding:45px 0}
+.heroGrid{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:20px}
+.hero h1{font-size:clamp(38px,6vw,65px);line-height:1;margin:0}
+.hero h1 span{display:block;color:#21d0ff}
+.hero p{line-height:1.7}
+.btn{display:inline-block;padding:12px 20px;background:#fff;color:#075bc5;border-radius:24px;font-weight:bold;margin:8px 6px 0 0}
+.heroPhones{display:flex;align-items:center;justify-content:center;gap:8px}
+.heroPhones img{width:30%;height:230px;object-fit:contain;filter:drop-shadow(0 8px 8px #00112c88)}
+section{padding:36px 0}
+h2.sectionTitle{text-align:center;margin:0 0 24px;color:#073577}
+.brands{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.brandBtn{border:1px solid #c9dcf5;background:white;color:#075bc5;padding:15px 5px;border-radius:9px;font-weight:bold;cursor:pointer}
+.brandBtn.active,.brandBtn:hover{background:#075bc5;color:white}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.product{background:white;border:1px solid #e0eafa;border-radius:12px;padding:14px;box-shadow:0 4px 15px #173f7210;display:flex;flex-direction:column}
+.product img{width:100%;height:190px;object-fit:contain}
+.stock{font-size:11px;color:#087d42;font-weight:bold}
+.product h3{font-size:16px;margin:12px 0 5px}
+.spec{font-size:13px;color:#64748b}
+.price{font-size:19px;font-weight:900;color:#075bc5;margin:12px 0}
+.available{font-size:12px;color:#65748a;margin-bottom:12px}
+.buttons{display:flex;gap:7px;margin-top:auto}
+.buttons a{font-size:12px;text-align:center;padding:10px 6px;border-radius:6px;background:#075bc5;color:white;flex:1;font-weight:bold}
+.buttons a:last-child{background:#0aab55}
+.features{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.feature{background:white;padding:22px 10px;text-align:center;border-radius:10px;font-weight:bold}
+.wholesale{background:#075bc5;color:white;text-align:center;padding:30px 15px;border-radius:12px}
+footer{background:#031b40;color:white;padding:30px 0}
+footer a{color:white}
+footer p{line-height:1.8}
+.small{font-size:12px;color:#c6d8f4}
+@media(max-width:800px){
+ .heroGrid{grid-template-columns:1fr}
+ .heroPhones img{height:175px}
+ .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .features{grid-template-columns:repeat(2,1fr)}
+ .brands{grid-template-columns:repeat(2,1fr)}
+ .brand h2{font-size:20px}
+ .navrow{justify-content:center}
+ #search{max-width:100%}
+}
+@media(max-width:400px){
+ .cards{gap:8px}
+ .product{padding:9px}
+ .product img{height:145px}
+ .buttons{flex-direction:column}
 }
 </style>
 </head>
-
 <body>
-<div class="page">
-
-<header>
-  <div class="logo"><span>BMT</span></div>
-  <div class="brand">
-    <h1>BABAR MOBILE TRADER</h1>
-    <p>TRUST • QUALITY • CONNECTIVITY</p>
+<header id="home">
+ <div class="wrap brand">
+  <div class="logo">BMT</div>
+  <div>
+   <h2>BABAR MOBILE TRADER</h2>
+   <p>TRUST • QUALITY • CONNECTIVITY</p>
   </div>
+ </div>
 </header>
 
 <nav>
-  <a href="#home">☰ HOME</a>
-  <a href="#home">MOBILE PHONES</a>
-  <a href="#home">ACCESSORIES</a>
-  <a href="#home">CONTACT US</a>
+ <div class="wrap navrow">
+  <div>
+   <a href="#home">Home</a>
+   <a href="#brands">Mobiles</a>
+   <a href="#deals">PTA Deals</a>
+   <a href="#wholesale">Wholesale</a>
+   <a href="#about">About Us</a>
+   <a href="#contact">Contact</a>
+  </div>
+  <input id="search" type="search" placeholder="Search mobile model...">
+ </div>
 </nav>
 
-<div class="search">
-  <input type="search" placeholder="Search mobiles, brands and accessories...">
-</div>
-
-<section class="hero" id="home">
-  <div class="copy">
-    <div class="bmt">BMT</div>
-    <h2>SMARTPHONES</h2>
-    <h3>BEST DEALS</h3>
-    <p>Premium mobiles. Trusted quality.</p>
-    <a class="cta" href="#home">EXPLORE NOW &nbsp; ➜</a>
+<section class="hero">
+ <div class="wrap heroGrid">
+  <div>
+   <h1>BMT<span>Premium Mobiles</span><span>Best Deals</span></h1>
+   <p>Your trusted partner for premium smartphones, PTA-approved iPhones and wholesale mobile deals across Pakistan.</p>
+   <a class="btn" href="#mobiles">Explore Now</a>
+   <a class="btn" style="background:#13b85d;color:white" href="https://wa.me/923122741845">Contact on WhatsApp</a>
   </div>
-
-  <div class="approved">
-    PTA APPROVED
-    <small>QUALITY YOU CAN TRUST</small>
+  <div class="heroPhones">
+   <img src="https://www.apple.com/v/iphone-16-pro/c/images/overview/welcome/hero_endframe__b3cjfkquc2s2_large.jpg" alt="Apple iPhone product image">
+   <img src="https://images.samsung.com/is/image/samsung/p6pim/pk/2401/gallery/pk-galaxy-s24-s928-sm-s928bztqpkd-thumb-539458306" alt="Samsung Galaxy product image">
   </div>
-
-  <div class="phones">
-    <div class="phone"></div>
-    <div class="phone"></div>
-    <div class="phone"></div>
-    <div class="phone"></div>
-    <div class="phone"></div>
-    <div class="phone"></div>
-  </div>
-
-  <div class="dots"><i></i><i></i><i></i><i></i></div>
-  <div class="social">f ◎ ▶️</div>
+ </div>
 </section>
 
-</div>
+<section id="brands">
+ <div class="wrap">
+  <h2 class="sectionTitle">Top Brands</h2>
+  <div class="brands" id="brandFilters">
+   <button class="brandBtn active" data-brand="All">All Mobiles</button>
+   <button class="brandBtn" data-brand="Apple">Apple</button>
+   <button class="brandBtn" data-brand="Samsung">Samsung</button>
+   <button class="brandBtn" data-brand="Google Pixel">Google Pixel</button>
+   <button class="brandBtn" data-brand="OPPO">OPPO</button>
+   <button class="brandBtn" data-brand="Xiaomi">Xiaomi</button>
+   <button class="brandBtn" data-brand="vivo">vivo</button>
+   <button class="brandBtn" data-brand="OnePlus">OnePlus</button>
+  </div>
+ </div>
+</section>
+
+<section id="mobiles">
+ <div class="wrap">
+  <h2 class="sectionTitle">Featured Mobiles</h2>
+  <div class="cards" id="productList"></div>
+ </div>
+</section>
+
+<section id="deals">
+ <div class="wrap">
+  <h2 class="sectionTitle">Why Choose BMT?</h2>
+  <div class="features">
+   <div class="feature">✓ Original Products</div>
+   <div class="feature">✓ Fast & Safe Delivery</div>
+   <div class="feature">✓ Reliable Support</div>
+   <div class="feature">✓ Competitive Deals</div>
+  </div>
+ </div>
+</section>
+
+<section id="wholesale">
+ <div class="wrap wholesale">
+  <h2>Wholesale & Importer Deals</h2>
+  <p>Special mobile deals for shopkeepers and dealers across Pakistan.</p>
+  <a class="btn" href="https://wa.me/923122741845?text=Assalam-o-Alaikum%20BMT%2C%20I%20want%20wholesale%20mobile%20deals.">Ask for Wholesale Rates</a>
+ </div>
+</section>
+
+<section id="about">
+ <div class="wrap">
+  <h2 class="sectionTitle">About Babar Mobile Trader</h2>
+  <p style="text-align:center;line-height:1.8">BMT offers mobile phone sales and purchase, PTA-approved iPhone deals and wholesale inquiries. Contact us to confirm stock, PTA status, colours and final prices before ordering.</p>
+ </div>
+</section>
+
+<footer id="contact">
+ <div class="wrap">
+  <h2>BABAR MOBILE TRADER (BMT)</h2>
+  <p>📍 Office D10, Sareena Family Mobile Market, Sakhi Hasan, North Nazimabad, Karachi</p>
+  <p>💬 WhatsApp: <a href="https://wa.me/923442318337">0344-2318337</a></p>
+  <p>📞 Product inquiries & orders: <a href="https://wa.me/923122741845">0312-2741845</a></p>
+  <p class="small">Email: info@babarmobiletrader.com — confirm this email is active before publishing.</p>
+  <p class="small">©️ 2026 BMT. All rights reserved.</p>
+ </div>
+</footer>
+
+<script>
+const inquiryNumber = "923122741845";
+
+const products = [
+ {name:"iPhone 12 Pro Max",spec:"256GB",price:120000,brand:"Apple",img:"https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP832/iphone12promax.png",stock:"Available"},
+ {name:"iPhone 12 Pro Max",spec:"128GB",price:110000,brand:"Apple",img:"https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP832/iphone12promax.png",stock:"Available"},
+ {name:"iPhone 13",spec:"128GB",price:103000,brand:"Apple",img:"https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP851/iphone13.png",stock:"Available"},
+ {name:"iPhone 13 Pro",spec:"128GB",price:135000,brand:"Apple",img:"https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP852/iphone13pro.png",stock:"Available"},
+ {name:"iPhone 13 Pro Max",spec:"128GB",price:175000,brand:"Apple",img:"https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP848/iphone13promax.png",stock:"Available"},
+ {name:"iPhone 14 Pro",spec:"128GB",price:170000,brand:"Apple",img:"https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP875/iphone14pro.png",stock:"Available"},
+ {name:"iPhone 14 Pro Max",spec:"128GB",price:205000,brand:"Apple",img:"https://support.apple.com/library/APPLE/APPLECARE_ALLGEOS/SP876/iphone14promax.png",stock:"Available"},
+ {name:"Google Pixel 8 Pro",spec:"128GB",price:100000,brand:"Google Pixel",img:"https://lh3.googleusercontent.com/GooglePixel8Pro",stock:"Confirm availability"},
+ {name:"Google Pixel 7 Pro",spec:"128GB",price:80000,brand:"Google Pixel",img:"https://lh3.googleusercontent.com/GooglePixel7Pro",stock:"Confirm availability"},
+ {name:"Google Pixel 6",spec:"128GB",price:52000,brand:"Google Pixel",img:"https://lh3.googleusercontent.com/GooglePixel6",stock:"Confirm availability"},
+ {name:"Google Pixel 6a",spec:"128GB",price:42000,brand:"Google Pixel",img:"https://lh3.googleusercontent.com/GooglePixel6a",stock:"Confirm availability"},
+ {name:"Samsung Galaxy S26 Ultra",spec:"Ask for storage",price:null,brand:"Samsung",img:"https://images.samsung.com/is/image/samsung/p6pim/pk/smartphones/galaxy-s26-ultra",stock:"Ask for price"},
+ {name:"OPPO Latest Models",spec:"Multiple variants",price:null,brand:"OPPO",img:"https://www.oppo.com/content/dam/oppo/common/mkt/v2-2/oppo-find-x8-series/listpage/listpage-find-x8-pro-black.png",stock:"Ask for price"},
+ {name:"Xiaomi Smartphones",spec:"Multiple variants",price:null,brand:"Xiaomi",img:"https://i01.appmifile.com/webfile/globalimg/products/pc/xiaomi-14/overview01.jpg",stock:"Ask for price"},
+ {name:"vivo Smartphones",spec:"Multiple variants",price:null,brand:"vivo",img:"https://www.vivo.com/content/dam/vivo/global/products/y/y100/images/section1/y100-blue.png",stock:"Ask for price"},
+ {name:"OnePlus Smartphones",spec:"Multiple variants",price:null,brand:"OnePlus",img:"https://www.oneplus.com/content/dam/oasis/page/2024/global/homepage/oneplus-13/green.png",stock:"Ask for price"}
+];
+
+let activeBrand = "All";
+
+function renderProducts(){
+ const q = document.getElementById("search").value.toLowerCase();
+ const shown = products.filter(p =>
+  (activeBrand === "All" || p.brand === activeBrand) &&
+  (p.name + " " + p.spec + " " + p.brand).toLowerCase().includes(q)
+ );
+ document.getElementById("productList").innerHTML = shown.map(p => {
+  const price = p.price ? "Rs. " + p.price.toLocaleString("en-PK") : "Contact for price";
+  const message = encodeURIComponent("Assalam-o-Alaikum BMT, I am interested in " + p.name + " " + p.spec + ". Please confirm actual photos, stock, PTA status and final price.");
+  return `<article class="product">
+   <span class="stock">${p.stock}</span>
+   <img loading="lazy" src="${p.img}" alt="${p.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+   <div style="display:none;background:#f1f6fd;padding:35px 5px;text-align:center;color:#60748e">Product image unavailable</div>
+   <h3>${p.name}</h3><div class="spec">${p.spec}</div>
+   <div class="price">${price}</div>
+   <div class="available">${p.stock}</div>
+   <div class="buttons">
+    <a target="_blank" rel="noopener" href="https://wa.me/${inquiryNumber}?text=${message}">Order / Inquiry</a>
+    <a target="_blank" rel="noopener" href="https://wa.me/${inquiryNumber}?text=${message}">WhatsApp</a>
+   </div>
+  </article>`;
+ }).join("") || "<p>No mobiles found. Try another search.</p>";
+}
+
+document.querySelectorAll(".brandBtn").forEach(button => {
+ button.addEventListener("click", () => {
+  activeBrand = button.dataset.brand;
+  document.querySelectorAll(".brandBtn").forEach(b => b.classList.toggle("active", b === button));
+  renderProducts();
+ });
+});
+document.getElementById("search").addEventListener("input", renderProducts);
+renderProducts();
+</script>
 </body>
 </html>
