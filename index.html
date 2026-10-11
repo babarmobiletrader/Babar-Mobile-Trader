@@ -1,329 +1,232 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Babar Mobile Trader</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BMT | Premium Mobiles — Best Deals</title>
 <style>
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-  }
-
-  body {
-    background-color: #f4f4f4;
-    color: #333;
-  }
-
-  /* === SAB SE UPAR WALA HISA === */
-  /* Is main koi number ya email nahi hai */
-  header {
-    background: #ffffff;
-    padding: 15px 20px;
-    display: flex;
-    justify-content: center; /* Center mein rakhne ke liye */
-    align-items: center;
-    border-bottom: 1px solid #ccc;
-  }
-
-  .logo-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-  }
-
-  /* Ye BMT ka logo hai (Code se banaya hai) */
-  .bmt-logo-box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 60px;
-    height: 60px;
-    background: #0056b3;
-    color: white;
-    font-size: 22px;
-    font-weight: bold;
-    border-radius: 8px;
-    position: relative;
-  }
-
-  .bmt-logo-box::after {
-    content: "📱";
-    position: absolute;
-    font-size: 14px;
-    top: -10px;
-    left: -10px;
-  }
-
-  .header-text h1 {
-    font-size: 24px;
-    color: #0056b3;
-    margin-bottom: 2px;
-    font-weight: bold;
-  }
-
-  .header-text p {
-    font-size: 11px;
-    color: #666;
-    letter-spacing: 2px;
-  }
-
-  /* === NAVIGATION BAR === */
-  nav {
-    background: #0056b3;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-    flex-wrap: wrap;
-  }
-
-  .nav-links {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-  .nav-links a {
-    color: #fff;
-    text-decoration: none;
-    padding: 15px 15px;
-    font-size: 14px;
-    display: block;
-    border-right: 1px solid #004494;
-  }
-
-  .nav-links a:hover {
-    background: #004494;
-  }
-
-  .search-box {
-    display: flex;
-    align-items: center;
-    background: #fff;
-    border-radius: 20px;
-    overflow: hidden;
-    padding: 2px 10px;
-    margin: 10px 0;
-  }
-
-  .search-box input {
-    border: none;
-    outline: none;
-    padding: 8px;
-    font-size: 12px;
-    width: 200px;
-  }
-
-  .search-box button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    color: #0056b3;
-  }
-
-  /* === HERO SECTION (Mobile Baye, Text Daye) === */
-  .hero {
-    background: linear-gradient(135deg, #003366, #0056b3);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 40px 20px;
-    color: #fff;
-    flex-wrap: wrap;
-    flex-direction: row; /* Mobile left */
-  }
-
-  .hero-image {
-    flex: 1;
-    min-width: 300px;
-    text-align: left; /* Mobile Left */
-    z-index: 2;
-    padding: 10px;
-  }
-
-  .hero-image img {
-    max-width: 100%;
-    height: auto;
-    max-height: 350px;
-    object-fit: contain;
-  }
-
-  .hero-content {
-    flex: 1;
-    min-width: 300px;
-    z-index: 2;
-    padding: 10px 20px;
-  }
-
-  .hero-content h2 {
-    font-size: 32px;
-    margin-bottom: 10px;
-    line-height: 1.2;
-  }
-
-  .hero-content .sub {
-    font-size: 20px;
-    color: #ffd700;
-    margin-bottom: 15px;
-    font-weight: bold;
-  }
-
-  .hero-content .desc {
-    font-size: 14px;
-    margin-bottom: 20px;
-    opacity: 0.9;
-  }
-
-  .btn {
-    background: #ffffff;
-    color: #0056b3;
-    padding: 12px 30px;
-    text-decoration: none;
-    border-radius: 25px;
-    font-weight: bold;
-    display: inline-block;
-    margin-bottom: 20px;
-    transition: 0.3s;
-  }
-
-  .btn:hover {
-    background: #ffd700;
-    color: #003366;
-  }
-
-  .socials {
-    display: flex;
-    gap: 10px;
-  }
-
-  .socials span {
-    background: rgba(255,255,255,0.2);
-    padding: 8px 12px;
-    border-radius: 50%;
-    font-size: 14px;
-    cursor: pointer;
-  }
-
-  /* === FOOTER (Yahan Number aur Email hain) === */
-  footer {
-    background: #002244;
-    color: #fff;
-    text-align: center;
-    padding: 25px 20px;
-    margin-top: 20px;
-    font-size: 14px;
-  }
-  
-  footer p {
-    margin: 5px 0;
-  }
-
-  footer .footer-email {
-    color: #00e5ff;
-    font-weight: bold;
-  }
-
-  /* Mobile ke liye adjust */
-  @media (max-width: 768px) {
-    header {
-      flex-direction: column;
-      text-align: center;
-    }
-    .logo-wrapper {
-      flex-direction: column;
-    }
-    nav {
-      flex-direction: column;
-      padding: 10px;
-    }
-    .nav-links {
-      justify-content: center;
-    }
-    .nav-links a {
-      border-right: none;
-      padding: 10px;
-    }
-    .search-box input {
-      width: 150px;
-    }
-    .hero {
-      flex-direction: column; /* Text upar, Image neeche */
-      text-align: center;
-    }
-    .hero-image {
-      text-align: center;
-      margin-top: 20px;
-    }
-    .socials {
-      justify-content: center;
-    }
-  }
+:root{--navy:#06285d;--blue:#075bc5;--bright:#087cf0;--cyan:#16c7f3;--ink:#073577;--line:#d7e6f8;--green:#12ae51}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font:15px Arial,Helvetica,sans-serif;color:var(--ink);background:#f7fbff}
+a{text-decoration:none;color:inherit}
+.wrap{width:min(1400px,96%);margin:auto}
+.topbrand{background:#fff;min-height:96px;display:flex;align-items:center}
+.brandrow{display:flex;align-items:center;gap:18px;padding:8px 0}
+.logo{width:min(590px,100%);height:auto;object-fit:contain}
+.nav{background:linear-gradient(90deg,#0644a9,#087cf0);color:#fff}
+.navin{display:flex;align-items:center;gap:0;min-height:50px}
+.nav a{padding:17px 22px;font-weight:bold;font-size:14px}
+.nav a:hover{background:#09a4ff}
+.search{margin-left:auto;display:flex;background:#fff;border-radius:28px;padding:8px 15px;width:min(410px,35%)}
+.search input{border:0;outline:0;width:100%;color:#174a91}
+.hero{background:linear-gradient(110deg,#031b4a,#075bc5 60%,#0a8bf0);color:#fff;overflow:hidden}
+.heroIn{min-height:270px;display:grid;grid-template-columns:42% 58%;align-items:center;position:relative}
+.hero h1{font-size:clamp(34px,4vw,58px);line-height:.98;margin:0 0 5px;font-weight:900}
+.hero h2{font-size:clamp(27px,3vw,44px);margin:0;line-height:1.08}
+.hero h2 span{color:#16c7f3}
+.hero p{margin:10px 0 14px;font-size:17px}
+.cta,.btn{display:inline-block;background:#fff;color:#0645a8;border-radius:28px;padding:12px 22px;font-weight:bold}
+.phones{width:100%;height:270px;object-fit:cover;object-position:center;border-radius:0 0 0 50px}
+.social{display:flex;gap:9px;margin-top:14px}
+.social span{background:#fff;color:#075bc5;border-radius:50%;width:31px;height:31px;display:grid;place-items:center;font-weight:bold}
+.content{display:grid;grid-template-columns:300px 1fr 300px;gap:14px;padding:18px 0}
+.panel{background:#fff;border:1px solid #e1ecf9;border-radius:12px;padding:14px;box-shadow:0 3px 15px #0b4b8a0c}
+.secttitle{font-size:21px;margin:0 0 12px;color:#063a82}
+.brands{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.brand{border:1px solid var(--line);border-radius:9px;padding:14px 6px;text-align:center;font-weight:bold;color:#0648a6;background:#fff}
+.brand:nth-child(3n){color:#078b42}
+.products{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.product{border:1px solid var(--line);border-radius:10px;background:#fff;padding:9px;min-width:0}
+.product img{width:100%;height:118px;object-fit:contain;border-radius:7px}
+.stock{float:right;background:#12ae51;color:#fff;border-radius:10px;padding:3px 6px;font-size:10px}
+.product h3{font-size:14px;margin:8px 0 3px}
+.small{font-size:12px;color:#38567e}
+.price{font-weight:bold;color:#0058c9;margin:6px 0}
+.actions{display:flex;gap:5px;margin-top:9px}
+.btn{background:#087cf0;color:#fff;border-radius:6px;padding:8px 9px;font-size:11px;text-align:center;flex:1}
+.btn.wa{background:#12ae51}
+.deal{background:linear-gradient(145deg,#06326d,#087cf0);color:#fff;border-radius:10px;padding:18px;min-height:100%;display:flex;flex-direction:column;justify-content:center}
+.deal .tag{color:#ffe04b;font-weight:bold}
+.deal h2{font-size:26px;margin:10px 0}
+.deal p{line-height:1.5}
+.benefits{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:8px 0 18px}
+.benefit{display:flex;align-items:center;gap:12px;padding:8px}
+.bubble{background:#0863c9;color:#fff;border-radius:50%;width:42px;height:42px;display:grid;place-items:center;font-size:19px;flex-shrink:0}
+.benefit strong{display:block;font-size:14px}
+.benefit small{font-size:11px}
+.wholesale{background:linear-gradient(90deg,#06316e,#075bc5);color:#fff;border-radius:8px;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:4px}
+.wholesale h2{margin:0 0 5px;font-size:21px}
+.footer{background:#031f4c;color:#fff;margin-top:0}
+.footrow{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:16px 0;flex-wrap:wrap}
+.footlogo{width:100px;filter:brightness(0) invert(1)}
+.footline{border-top:1px solid #2e5b8f;padding:12px 0;font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.mobilemenu{display:none}
+@media(max-width:900px){
+.content{grid-template-columns:1fr 2fr}
+.deal{grid-column:1/-1;min-height:180px}
+.products{grid-template-columns:repeat(2,minmax(0,1fr))}
+.heroIn{grid-template-columns:1fr 1fr}
+.heroIn>div:first-child{padding:18px 0}
+.phones{height:245px}
+.benefits{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px){
+.topbrand{min-height:76px}
+.brandrow{justify-content:center;padding:8px}
+.logo{width:min(100%,460px)}
+.navin{min-height:44px;flex-wrap:wrap}
+.mobilemenu{display:block;padding:12px 15px;font-size:20px}
+.nav a{padding:14px 8px;font-size:11px}
+.nav a:nth-of-type(4),.nav a:nth-of-type(5){display:none}
+.search{order:2;margin:0 8px 8px;width:calc(100% - 16px);flex:1}
+.heroIn{display:flex;flex-direction:column;align-items:stretch}
+.heroIn>div:first-child{padding:22px 15px 16px}
+.hero h1{font-size:40px}
+.hero h2{font-size:32px}
+.hero p{font-size:14px}
+.phones{height:190px;border-radius:0;object-position:center}
+.content{display:flex;flex-direction:column;padding:12px 0;gap:10px}
+.panel{padding:12px}
+.brands{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}
+.brand{font-size:11px;padding:10px 3px}
+.products{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.product{padding:7px}
+.product img{height:105px}
+.product h3{font-size:12px;line-height:1.25}
+.actions{flex-direction:column}
+.btn{font-size:11px;padding:9px}
+.deal{min-height:180px}
+.benefits{grid-template-columns:repeat(2,minmax(0,1fr));gap:2px}
+.benefit{padding:6px 2px;gap:7px}
+.bubble{width:32px;height:32px;font-size:14px}
+.benefit strong{font-size:11px}
+.benefit small{font-size:10px}
+.wholesale{align-items:flex-start;flex-direction:column;padding:16px}
+.wholesale h2{font-size:19px}
+.footrow{justify-content:center;text-align:center}
+.footline{justify-content:center;text-align:center}
+.footline span{width:100%}
+}
 </style>
 </head>
 <body>
-
-  <!-- Header (Sab se Upar - Bina Number/Email) -->
-  <header>
-    <div class="logo-wrapper">
-      <!-- BMT Logo -->
-      <div class="bmt-logo-box">BMT</div>
-      <!-- Naam aur Tagline -->
-      <div class="header-text">
-        <h1>BABAR MOBILE TRADER</h1>
-        <p>TRUST • QUALITY • CONNECTIVITY</p>
-      </div>
-    </div>
-  </header>
-
-  <!-- Navigation -->
-  <nav>
-    <div class="nav-links">
-      <a href="#">Home</a>
-      <a href="#">Mobile Phones</a>
-      <a href="#">New Phones</a>
-      <a href="#">Repair Phones</a>
-      <a href="#">Contact Us</a>
-    </div>
-    <div class="search-box">
-      <input type="text" placeholder="Search your favourite mobile...">
-      <button>🔍</button>
-    </div>
-  </nav>
-
-  <!-- Hero Section -->
-  <section class="hero">
-    <!-- Mobile ki Tasveer (Left Side) -->
-    <div class="hero-image">
-      <!-- Yahan aap apni mobile ki tasveer ka link lagayen, ya ye internet wali chal jayegi -->
-      <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&q=80" alt="Mobile Phones">
-    </div>
-
-    <!-- Likhayi (Right Side) -->
-    <div class="hero-content">
-      <h2>Buy the Best Mobile Phones</h2>
-      <p class="sub">At the Lowest Prices in Town</p>
-      <p class="desc">Visit Babar Mobile Trader at Sareena Mobile Market for the latest smartphones and accessories.</p>
-      <a href="#" class="btn">Explore Our Shop</a>
-      <div class="socials">
-        <span>f</span>
-        <span>📷</span>
-        <span>▶</span>
-        <span>🎵</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer (Yahan Number aur Email hain) -->
-  <footer>
-    <p><strong>BABAR MOBILE TRADER</strong></p>
-    <p>📍 Sareena Mobile Market, Sakhi Hassan, Karachi</p>
-    <p>📞 0312 2741845 (WhatsApp & Inquiries) | 📞 0344 2318337</p>
-    <p>✉️ <span class="footer-email">info@BabarMobileTrader.com</span></p>
-    <p>© 2026 Babar Mobile Trader. All rights reserved.</p>
-  </footer>
-
+<header class="topbrand">
+<div class="wrap brandrow">
+<img class="logo" alt="BMT — Babar Mobile Trader — Trust Quality Connectivity" src="data:image/webp;base64,UklGRlQNAABXRUJQVlA4WAoAAAAQAAAAPwAAAFsAAQUxQSDIAAAAEGZtYXBwAAAAAA==">
+</div>
+</header>
+<nav class="nav">
+<div class="wrap navin">
+<span class="mobilemenu">☰</span>
+<a href="#home">Home</a>
+<a href="#brands">Mobiles ▾</a>
+<a href="#deals">PTA Deals</a>
+<a href="#wholesale">Wholesale</a>
+<a href="#about">About Us</a>
+<a href="#contact">Contact</a>
+<label class="search"><input id="search" placeholder="Search your favorite mobile..." oninput="filterProducts()"><span>⌕</span></label>
+</div>
+</nav>
+<section class="hero" id="home">
+<div class="wrap heroIn">
+<div>
+<h1>BMT</h1>
+<h2>Premium Mobiles<br><span>Best Deals</span></h2>
+<p>Your Trusted Partner for Mobile Phones<br>Retail&nbsp; • &nbsp;Wholesale&nbsp; • &nbsp;Import</p>
+<a class="cta" href="#products">Explore Now →</a>
+<div class="social"><span>f</span><span>◎</span><span>▶️</span><span>♪</span><span>☎</span></div>
+</div>
+<img class="phones" alt="Premium smartphones" src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=1200&q=85">
+</div>
+</section>
+<main class="wrap">
+<section class="content">
+<div class="panel" id="brands">
+<h2 class="secttitle">Top Brands</h2>
+<div class="brands">
+<div class="brand"> iPhone</div><div class="brand">SAMSUNG</div>
+<div class="brand">Google Pixel</div><div class="brand">OPPO</div>
+<div class="brand">Xiaomi</div><div class="brand">vivo</div>
+<div class="brand">realme</div><div class="brand">ONEPLUS</div>
+</div>
+<p><a href="#products">More Brands　›</a></p>
+</div>
+<div class="panel" id="products">
+<h2 class="secttitle">Featured Mobiles</h2>
+<div class="products" id="productGrid">
+<article class="product" data-name="iphone 12 pro max 256gb">
+<span class="stock">In Stock</span>
+<img alt="iPhone 12 Pro Max" src="https://images.unsplash.com/photo-1592286927505-1def25115558?auto=format&fit=crop&w=500&q=80">
+<h3>iPhone 12 Pro Max</h3><div class="small">256GB</div><div class="price">Rs. 120,000</div><div class="small">In Stock</div>
+<div class="actions"><a class="btn" href="https://wa.me/923122741845?text=I%20am%20interested%20in%20iPhone%2012%20Pro%20Max%20256GB">Order Now</a><a class="btn wa" href="https://wa.me/923122741845">WhatsApp</a></div>
+</article>
+<article class="product" data-name="iphone 13 128gb">
+<span class="stock">In Stock</span>
+<img alt="iPhone 13" src="https://images.unsplash.com/photo-1605236453806-6ff36851218e?auto=format&fit=crop&w=500&q=80">
+<h3>iPhone 13</h3><div class="small">128GB</div><div class="price">Rs. 103,000</div><div class="small">In Stock</div>
+<div class="actions"><a class="btn" href="https://wa.me/923122741845?text=I%20am%20interested%20in%20iPhone%2013%20128GB">Order Now</a><a class="btn wa" href="https://wa.me/923122741845">WhatsApp</a></div>
+</article>
+<article class="product" data-name="iphone 14 pro max 128gb">
+<span class="stock">In Stock</span>
+<img alt="iPhone 14 Pro Max" src="https://images.unsplash.com/photo-1678685888221-cda773a3dcdb?auto=format&fit=crop&w=500&q=80">
+<h3>iPhone 14 Pro Max</h3><div class="small">128GB</div><div class="price">Rs. 205,000</div><div class="small">In Stock</div>
+<div class="actions"><a class="btn" href="https://wa.me/923122741845?text=I%20am%20interested%20in%20iPhone%2014%20Pro%20Max%20128GB">Order Now</a><a class="btn wa" href="https://wa.me/923122741845">WhatsApp</a></div>
+</article>
+<article class="product" data-name="samsung galaxy s24 ultra">
+<span class="stock">Ask availability</span>
+<img alt="Samsung Galaxy" src="https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=500&q=80">
+<h3>Samsung Galaxy S24 Ultra</h3><div class="small">Storage options</div><div class="price">Ask BMT</div><div class="small">Confirm availability</div>
+<div class="actions"><a class="btn" href="https://wa.me/923122741845?text=Please%20share%20Samsung%20availability%20and%20price">Ask Price</a><a class="btn wa" href="https://wa.me/923122741845">WhatsApp</a></div>
+</article>
+<article class="product" data-name="iphone 12 pro max 128gb">
+<img alt="iPhone 12 Pro Max" src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=500&q=80">
+<h3>iPhone 12 Pro Max</h3><div class="small">128GB</div><div class="price">Rs. 110,000</div><div class="small">In Stock</div>
+<div class="actions"><a class="btn" href="https://wa.me/923122741845?text=I%20am%20interested%20in%20iPhone%2012%20Pro%20Max%20128GB">Order Now</a><a class="btn wa" href="https://wa.me/923122741845">WhatsApp</a></div>
+</article>
+<article class="product" data-name="iphone 13 pro 128gb">
+<img alt="iPhone 13 Pro" src="https://images.unsplash.com/photo-1605236453806-6ff36851218e?auto=format&fit=crop&w=500&q=80">
+<h3>iPhone 13 Pro</h3><div class="small">128GB</div><div class="price">Rs. 135,000</div><div class="small">In Stock</div>
+<div class="actions"><a class="btn" href="https://wa.me/923122741845?text=I%20am%20interested%20in%20iPhone%2013%20Pro%20128GB">Order Now</a><a class="btn wa" href="https://wa.me/923122741845">WhatsApp</a></div>
+</article>
+</div>
+</div>
+<aside class="deal" id="deals">
+<span class="tag">SPECIAL DEALS</span>
+<h2>PTA Approved iPhones</h2>
+<p>Ask BMT to confirm PTA status, availability and latest price for your selected model.</p>
+<a class="cta" href="https://wa.me/923122741845?text=Please%20share%20PTA%20approved%20iPhone%20deals">View Deals →</a>
+</aside>
+</section>
+<section class="benefits" id="about">
+<div class="benefit"><span class="bubble">✓</span><div><strong>Genuine Products</strong><small>Quality mobile phones</small></div></div>
+<div class="benefit"><span class="bubble">➜</span><div><strong>Fast & Safe Delivery</strong><small>Across Pakistan</small></div></div>
+<div class="benefit"><span class="bubble">◉</span><div><strong>Reliable Support</strong><small>Before & after sale</small></div></div>
+<div class="benefit"><span class="bubble">◆</span><div><strong>Competitive Prices</strong><small>Best deals for everyone</small></div></div>
+</section>
+<section class="wholesale" id="wholesale">
+<div><h2>Wholesale & Importer Deals</h2><div>Bulk orders, dealer prices and shopkeeper support available.</div></div>
+<div>✓ Wholesale Rates　 ✓ Bulk Orders　 ✓ All Major Brands<br><small>Supply Across Pakistan</small></div>
+<a class="cta" href="https://wa.me/923122741845?text=I%20am%20interested%20in%20wholesale%20and%20dealer%20rates">Contact for Wholesale →</a>
+</section>
+</main>
+<footer class="footer" id="contact">
+<div class="wrap footrow">
+<img class="footlogo" alt="BMT" src="data:image/webp;base64,UklGRlQNAABXRUJQVlA4WAoAAAAQAAAAPwAAAFsAAQUxQSDIAAAAEGZtYXBwAAAAAA==">
+<div>Home　 |　 Mobiles　 |　 PTA Deals　 |　 Wholesale　 |　 About Us　 |　 Contact</div>
+<div>☎ 0312-2741845　　<a href="https://wa.me/923442318337">WhatsApp: 0344-2318337</a></div>
+</div>
+<div class="footline wrap">
+<span>⌖ Office D10, Sareena Family Mobile Market, Sakhi Hasan, North Nazimabad, Karachi</span>
+<span>✉ info@babarmobiletrader.com</span>
+<span>©️ 2026 BMT. All rights reserved.</span>
+</div>
+</footer>
+<script>
+function filterProducts(){
+const q=document.getElementById('search').value.toLowerCase();
+document.querySelectorAll('.product').forEach(p=>p.style.display=p.dataset.name.includes(q)?'':'none')
+}
+</script>
 </body>
 </html>
