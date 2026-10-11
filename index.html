@@ -2,36 +2,37 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Babar Mobile Trader | BMT</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BABAR MOBILE TRADER</title>
+
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#eef3fa;color:#12315b}
-.page{max-width:1100px;margin:auto;background:#fff;min-height:100vh}
-header{display:flex;align-items:center;justify-content:center;gap:12px;padding:13px 8px}
-.logo{width:76px;height:60px;display:grid;place-items:center;position:relative;font-size:29px;font-weight:900;letter-spacing:-3px;color:#0875d1}
-.logo:before{content:"";position:absolute;width:53px;height:46px;border:4px solid #0875d1;border-radius:10px;transform:skew(-8deg)}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f7fc;color:#102b50}
+.page{max-width:1100px;margin:auto;background:#fff}
+header{display:flex;align-items:center;justify-content:center;gap:12px;padding:14px 8px}
+.logo{width:76px;height:58px;display:flex;align-items:center;justify-content:center;position:relative;color:#0875d1;font-size:29px;font-weight:900;letter-spacing:-3px}
+.logo:before{content:"";position:absolute;width:53px;height:45px;border:4px solid #0875d1;border-radius:10px;transform:skew(-8deg)}
 .logo span{position:relative}
 .brand{border-left:3px solid #0875d1;padding-left:12px}
-.brand h1{margin:0;font-size:clamp(17px,3.7vw,29px);font-weight:900;color:#0758ae}
-.brand p{margin:5px 0 0;font-size:clamp(8px,1.8vw,13px);letter-spacing:1.7px;color:#1187d6;font-weight:bold}
-nav{display:flex;justify-content:space-around;align-items:center;background:linear-gradient(90deg,#0878e8,#0349ac);overflow-x:auto}
-nav a{color:#fff;text-decoration:none;font-size:11px;font-weight:bold;padding:15px 10px;white-space:nowrap}
+.brand h1{margin:0;color:#0758ae;font-size:clamp(16px,3.6vw,28px);font-weight:900}
+.brand p{margin:5px 0 0;color:#1286d5;font-size:clamp(8px,1.7vw,13px);font-weight:bold;letter-spacing:1.5px}
+nav{display:flex;justify-content:space-around;background:linear-gradient(90deg,#0878e8,#0349ac);overflow-x:auto}
+nav a{color:white;text-decoration:none;font-size:11px;font-weight:bold;padding:15px 10px;white-space:nowrap}
 nav a:first-child{background:#12a5ef}
-.searchbar{background:#086bce;padding:8px 4%}
-.searchbar input{width:100%;height:34px;border:0;border-radius:22px;padding:0 14px;font-size:13px;outline:none}
-.hero{position:relative;overflow:hidden;min-height:275px;padding:28px 4%;color:#fff;background:radial-gradient(ellipse at 72% 70%,#168df0 0%,#0750b6 42%,#04153f 83%)}
+.search{background:#086bce;padding:8px 4%}
+.search input{width:100%;height:34px;border:0;border-radius:22px;padding:0 14px;font-size:13px}
+.hero{position:relative;overflow:hidden;min-height:275px;padding:27px 4%;color:#fff;background:radial-gradient(ellipse at 72% 70%,#168df0,#0750b6 43%,#04153f 84%)}
 .hero:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(155deg,transparent 0 32px,#5bd2ff13 33px 35px)}
-.hero-copy{position:relative;z-index:2;width:53%}
+.copy{position:relative;z-index:2;width:55%}
 .bmt{font-size:clamp(32px,5vw,48px);font-weight:900;line-height:.9}
-.hero h2{font-size:clamp(21px,4.2vw,37px);line-height:1;margin:9px 0 0;font-weight:900}
-.hero h3{font-size:clamp(20px,4.2vw,36px);line-height:1;margin:0 0 10px;color:#23e3ef;font-weight:900}
-.hero-copy p{font-size:12px;line-height:1.5;margin:0 0 12px}
-.cta{display:inline-block;background:#fff;color:#0757b1;padding:10px 16px;border-radius:24px;font-weight:bold;font-size:11px;text-decoration:none}
+h2{font-size:clamp(21px,4.2vw,37px);line-height:1;margin:10px 0 0;font-weight:900}
+h3{font-size:clamp(20px,4.2vw,36px);line-height:1;margin:0 0 10px;color:#23e3ef;font-weight:900}
+.copy p{font-size:12px;line-height:1.5;margin:0 0 12px}
+.cta{display:inline-block;background:white;color:#0757b1;padding:10px 16px;border-radius:24px;font-weight:bold;font-size:11px;text-decoration:none}
 .approved{position:absolute;right:5%;top:10%;z-index:2;color:#ffdf38;font-size:clamp(12px,2vw,19px);font-weight:900;font-style:italic;text-align:center;transform:rotate(-7deg);text-shadow:1px 2px #12274c}
 .approved small{display:block;color:white;font-size:10px}
-.phones{position:absolute;right:2%;bottom:30px;width:49%;height:160px;display:flex;align-items:flex-end;justify-content:center;gap:4px;z-index:1}
-.phone{position:relative;flex:0 1 48px;width:48px;height:125px;min-width:20px;border:3px solid #d8e3ef;border-radius:8px;background:#101a31;box-shadow:0 5px 12px #0008;overflow:hidden}
+.phones{position:absolute;right:2%;bottom:30px;width:48%;height:160px;display:flex;align-items:flex-end;justify-content:center;gap:4px}
+.phone{position:relative;flex:0 1 48px;height:125px;min-width:20px;border:3px solid #d8e3ef;border-radius:8px;background:#101a31;box-shadow:0 5px 12px #0008;overflow:hidden}
 .phone:nth-child(2),.phone:nth-child(5){height:145px}
 .phone:nth-child(3),.phone:nth-child(4){height:132px}
 .phone:before{content:"";position:absolute;z-index:2;top:4px;left:30%;width:40%;height:5px;border-radius:5px;background:#080e1c}
@@ -41,34 +42,22 @@ nav a:first-child{background:#12a5ef}
 .phone:nth-child(4):after{background:linear-gradient(135deg,#fae6e6,#e83358 35%,#351034 65%,#090b1d)}
 .phone:nth-child(5):after{background:linear-gradient(140deg,#e3e7ef,#5d7b98 35%,#172538 70%,#d5f0ff)}
 .phone:nth-child(6):after{background:linear-gradient(135deg,#c7d4e3,#202d48 45%,#070b19 75%,#68bfff)}
-.dots{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:3}
+.dots{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:6px}
 .dots i{width:6px;height:6px;background:#ffffff70;border-radius:50%}
-.dots i:first-child{background:#fff}
-.social{position:absolute;right:12px;bottom:8px;z-index:3;font-size:10px;color:#fff;letter-spacing:4px}
-.section-head{display:flex;justify-content:space-between;align-items:center;padding:18px 4% 12px}
-.section-head h2{margin:0;color:#083d82;font-size:17px;font-weight:900}
-.section-head a{color:#0877d8;font-size:10px;text-decoration:none;font-weight:bold}
-.brands{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;padding:0 4% 20px}
-.brand-card{min-height:66px;border:1px solid #e0e8f2;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:#fff;box-shadow:0 2px 7px #17365b0a}
-.brand-card strong{font-size:clamp(12px,2vw,17px);color:#172c4a}
-.brand-card small{font-size:9px;color:#71839a}
-.apple{font-size:25px!important}
-.google{font-size:16px!important;letter-spacing:-1px}
-.mi{background:#ff6900;color:#fff!important;padding:4px 6px;border-radius:3px}
-.products{padding:0 4% 22px}
-.product-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.product{border:1px solid #e1e9f3;border-radius:8px;padding:12px;text-align:center}
-.product-art{height:85px;display:flex;justify-content:center;align-items:center;background:#f4f8fd;border-radius:6px;margin-bottom:8px}
-.mini-phone{height:69px;width:36px;border:3px solid #25344a;border-radius:7px;background:linear-gradient(145deg,#b1d4ff,#263e72,#090e1b);box-shadow:0 3px 6px #0002}
-.product h3{margin:6px 0;font-size:13px}
-.product p{font-size:11px;color:#65778c;margin:5px 0}
-.price{font-weight:bold;color:#0869c8}
-.stock{display:inline-block;background:#e2f8ec;color:#13834a;padding:4px 8px;border-radius:12px;font-size:10px}
-footer{padding:16px;text-align:center;background:#061b43;color:#dceaff;font-size:11px}
-@media(min-width:700px){.hero{min-height:350px;padding-top:45px}.phones{height:210px;bottom:35px}.phone{height:160px}.phone:nth-child(2),.phone:nth-child(5){height:190px}.phone:nth-child(3),.phone:nth-child(4){height:175px}.brands{grid-template-columns:repeat(4,1fr)}.product-grid{grid-template-columns:repeat(4,1fr)}}
-@media(max-width:370px){header{gap:7px}.logo{width:58px;font-size:25px}.brand{padding-left:8px}.brand p{letter-spacing:1px}.hero{min-height:255px}.hero-copy{width:56%}.phones{width:48%;gap:2px}.phone{height:100px}.phone:nth-child(2),.phone:nth-child(5){height:118px}.phone:nth-child(3),.phone:nth-child(4){height:110px}.approved{right:3%;top:7%}.brands{gap:6px}}
+.dots i:first-child{background:white}
+.social{position:absolute;right:12px;bottom:8px;color:white;font-size:10px;letter-spacing:4px}
+@media(max-width:370px){
+header{gap:7px}.logo{width:58px;font-size:25px}
+.brand{padding-left:8px}.brand p{letter-spacing:1px}
+.hero{min-height:255px}.copy{width:56%}
+.phones{width:47%;gap:2px}
+.phone{height:100px}
+.phone:nth-child(2),.phone:nth-child(5){height:118px}
+.phone:nth-child(3),.phone:nth-child(4){height:110px}
+}
 </style>
 </head>
+
 <body>
 <div class="page">
 
@@ -81,28 +70,31 @@ footer{padding:16px;text-align:center;background:#061b43;color:#dceaff;font-size
 </header>
 
 <nav>
-  <a href="#home">☰ &nbsp; HOME</a>
-  <a href="#phones">MOBILE PHONES</a>
-  <a href="#accessories">ACCESSORIES</a>
-  <a href="#contact">CONTACT US</a>
+  <a href="#home">☰ HOME</a>
+  <a href="#home">MOBILE PHONES</a>
+  <a href="#home">ACCESSORIES</a>
+  <a href="#home">CONTACT US</a>
 </nav>
 
-<div class="searchbar">
+<div class="search">
   <input type="search" placeholder="Search mobiles, brands and accessories...">
 </div>
 
 <section class="hero" id="home">
-  <div class="hero-copy">
+  <div class="copy">
     <div class="bmt">BMT</div>
-    <h2>MOBILE PHONES</h2>
-    <h3>&amp; ACCESSORIES</h3>
-    <p>Premium mobiles. Trusted quality.<br>Wholesale deals across Pakistan.</p>
-    <a class="cta" href="#phones">EXPLORE NOW &nbsp; ➜</a>
+    <h2>SMARTPHONES</h2>
+    <h3>BEST DEALS</h3>
+    <p>Premium mobiles. Trusted quality.</p>
+    <a class="cta" href="#home">EXPLORE NOW &nbsp; ➜</a>
   </div>
 
-  <div class="approved">PTA APPROVED<small>QUALITY YOU CAN TRUST</small></div>
+  <div class="approved">
+    PTA APPROVED
+    <small>QUALITY YOU CAN TRUST</small>
+  </div>
 
-  <div class="phones" aria-label="Mobile phone illustrations">
+  <div class="phones">
     <div class="phone"></div>
     <div class="phone"></div>
     <div class="phone"></div>
@@ -114,64 +106,6 @@ footer{padding:16px;text-align:center;background:#061b43;color:#dceaff;font-size
   <div class="dots"><i></i><i></i><i></i><i></i></div>
   <div class="social">f ◎ ▶️</div>
 </section>
-
-<section id="brands">
-  <div class="section-head">
-    <h2>EXPLORE BY BRAND</h2>
-    <a href="#phones">VIEW ALL &nbsp; ➜</a>
-  </div>
-  <div class="brands">
-    <div class="brand-card"><strong class="apple">●</strong><small>APPLE</small></div>
-    <div class="brand-card"><strong>SAMSUNG</strong><small>GALAXY SERIES</small></div>
-    <div class="brand-card"><strong class="google">Google Pixel</strong><small>PIXEL PHONES</small></div>
-    <div class="brand-card"><strong class="mi">mi</strong><small>XIAOMI</small></div>
-  </div>
-</section>
-
-<section id="phones" class="products">
-  <div class="section-head">
-    <h2>FEATURED MOBILES</h2>
-    <a href="#contact">ASK FOR PRICE ➜</a>
-  </div>
-  <div class="product-grid">
-    <article class="product">
-      <div class="product-art"><div class="mini-phone"></div></div>
-      <h3>iPhone 13 128GB</h3>
-      <p>PTA Approved</p>
-      <p class="price">Rs. 103,000</p>
-      <span class="stock">Available</span>
-    </article>
-    <article class="product">
-      <div class="product-art"><div class="mini-phone"></div></div>
-      <h3>iPhone 13 Pro 128GB</h3>
-      <p>PTA Approved</p>
-      <p class="price">Rs. 135,000</p>
-      <span class="stock">Available</span>
-    </article>
-    <article class="product">
-      <div class="product-art"><div class="mini-phone"></div></div>
-      <h3>Google Pixel 8 Pro</h3>
-      <p>Ask for availability</p>
-      <p class="price">Rs. 100,000</p>
-      <span class="stock">Contact us</span>
-    </article>
-    <article class="product" id="accessories">
-      <div class="product-art">🔌</div>
-      <h3>Mobile Accessories</h3>
-      <p>Cables, chargers &amp; earbuds</p>
-      <p class="price">Ask for price</p>
-      <span class="stock">Contact us</span>
-    </article>
-  </div>
-</section>
-
-<footer id="contact">
-  <strong>BABAR MOBILE TRADER — BMT</strong>
-  <p>Office D-10, Sareena Family Mobile Market, Sakhi Hasan, North Nazimabad</p>
-  <p>Call / WhatsApp: 03122741845 · 03442318337</p>
-  <p>Email: info@babarmobiletrader.com</p>
-  <p>©️ BMT — All Rights Reserved</p>
-</footer>
 
 </div>
 </body>
