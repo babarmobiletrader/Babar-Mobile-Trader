@@ -66,19 +66,39 @@ footer p{line-height:1.8}
  .product{padding:9px}
  .product img{height:145px}
  .buttons{flex-direction:column}
+
+.new-header {
+  background: #ffffff;
+  padding: 18px 0;
+  border-bottom: 3px solid #168bd2;
 }
+
+.bmt-header-logo {
+  display: block;
+  width: 100%;
+  max-width: 675px;
+  height: auto;
+  margin: 0 auto;
+}
+
+@media (max-width: 500px) {
+  .new-header {
+    padding: 12px 0;
+  }
+}
+
 </style>
 </head>
 <body>
-<header id="home">
- <div class="wrap brand">
-  <div class="logo">BMT</div>
-  <div>
-   <h2>BABAR MOBILE TRADER</h2>
-   <p>TRUST • QUALITY • CONNECTIVITY</p>
-  </div>
+
+<header id="home" class="new-header">
+ <div class="wrap">
+  <img src="bmt-header.jpg"
+       alt="BMT - Babar Mobile Trader"
+       class="bmt-header-logo">
  </div>
 </header>
+
 <nav>
  <div class="wrap navrow">
   <div>
