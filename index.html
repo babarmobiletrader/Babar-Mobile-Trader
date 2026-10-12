@@ -1,25 +1,69 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BMT | Babar Mobile Trader</title>
+
 <style>
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;font-family:Arial,sans-serif;background:#f5f9ff;color:#102f60}
 a{text-decoration:none}
 .wrap{width:94%;max-width:1200px;margin:auto}
-header{background:white;padding:18px 0}
-.brand{display:flex;align-items:center;gap:15px}
-.logo{width:75px;height:75px;border:2px solid #075bc5;border-radius:14px;display:grid;place-items:center;color:#075bc5;font-size:26px;font-weight:900}
-.brand h2{margin:0;color:#083a7d;font-size:25px}
-.brand p{margin:6px 0 0;color:#0875c9;font-size:11px;letter-spacing:2px;font-weight:bold}
+
+/* New BMT Header */
+header.new-header{
+ background:#fff;
+ padding:18px 0;
+ border-bottom:3px solid #168bd2;
+}
+.header-logo{
+ display:flex;
+ align-items:center;
+ gap:14px;
+ max-width:675px;
+ margin:auto;
+}
+.logo-mark{
+ width:108px;
+ height:108px;
+ flex-shrink:0;
+ position:relative;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+}
+.logo-mark svg{width:100%;height:100%}
+.header-divider{
+ width:2px;
+ height:75px;
+ background:#075bc5;
+ flex-shrink:0;
+}
+.header-text{min-width:0}
+.header-text h2{
+ margin:0;
+ color:#083a7d;
+ font-size:clamp(17px,3.5vw,30px);
+ font-weight:900;
+ line-height:1.15;
+ white-space:nowrap;
+}
+.header-text p{
+ margin:8px 0 0;
+ color:#31577d;
+ font-size:clamp(9px,1.8vw,14px);
+ line-height:1.5;
+ white-space:normal;
+}
 nav{background:#075bc5;color:white}
 .navrow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 0;flex-wrap:wrap}
 nav a{color:white;font-weight:bold;font-size:14px;padding:8px}
 nav a:hover{background:#087ff4;border-radius:5px}
 #search{padding:11px 15px;border:0;border-radius:22px;max-width:230px;width:100%}
+
 .hero{background:linear-gradient(120deg,#031c4c,#075bc5,#1596f0);color:white;padding:45px 0}
 .heroGrid{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:20px}
 .hero h1{font-size:clamp(38px,6vw,65px);line-height:1;margin:0}
@@ -27,7 +71,8 @@ nav a:hover{background:#087ff4;border-radius:5px}
 .hero p{line-height:1.7}
 .btn{display:inline-block;padding:12px 20px;background:#fff;color:#075bc5;border-radius:24px;font-weight:bold;margin:8px 6px 0 0}
 .heroPhones{display:flex;align-items:center;justify-content:center;gap:8px}
-.heroPhones img{width:30%;height:230px;object-fit:contain;filter:drop-shadow(0 8px 8px #00112c88)}
+.heroPhones img{width:45%;height:230px;object-fit:contain;filter:drop-shadow(0 8px 8px #00112c88)}
+
 section{padding:36px 0}
 h2.sectionTitle{text-align:center;margin:0 0 24px;color:#073577}
 .brands{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
@@ -51,51 +96,58 @@ footer{background:#031b40;color:white;padding:30px 0}
 footer a{color:white}
 footer p{line-height:1.8}
 .small{font-size:12px;color:#c6d8f4}
+
 @media(max-width:800px){
  .heroGrid{grid-template-columns:1fr}
  .heroPhones img{height:175px}
  .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
  .features{grid-template-columns:repeat(2,1fr)}
  .brands{grid-template-columns:repeat(2,1fr)}
- .brand h2{font-size:20px}
  .navrow{justify-content:center}
  #search{max-width:100%}
+ .header-logo{gap:9px}
+ .logo-mark{width:85px;height:85px}
+ .header-divider{height:65px}
 }
+
 @media(max-width:400px){
  .cards{gap:8px}
  .product{padding:9px}
  .product img{height:145px}
  .buttons{flex-direction:column}
-
-.new-header {
-  background: #ffffff;
-  padding: 18px 0;
-  border-bottom: 3px solid #168bd2;
+ .header-logo{gap:6px}
+ .logo-mark{width:68px;height:68px}
+ .header-divider{height:55px}
+ .header-text h2{font-size:15px}
+ .header-text p{font-size:9px;margin-top:5px}
 }
-
-.bmt-header-logo {
-  display: block;
-  width: 100%;
-  max-width: 675px;
-  height: auto;
-  margin: 0 auto;
-}
-
-@media (max-width: 500px) {
-  .new-header {
-    padding: 12px 0;
-  }
-}
-
 </style>
 </head>
-<body>
 
+<body>
 <header id="home" class="new-header">
  <div class="wrap">
-  <img src="bmt-header.jpg"
-       alt="BMT - Babar Mobile Trader"
-       class="bmt-header-logo">
+  <div class="header-logo">
+
+   <div class="logo-mark">
+    <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="BMT Logo">
+     <rect x="24" y="13" width="65" height="94" rx="13" fill="none" stroke="#075bc5" stroke-width="5"/>
+     <rect x="32" y="23" width="49" height="70" rx="5" fill="#eaf5ff"/>
+     <path d="M5 73 Q30 45 52 49 L42 61 Q27 62 5 73" fill="#168bd2"/>
+     <text x="57" y="76" font-size="37" font-weight="900" text-anchor="middle" fill="#075bc5">BMT</text>
+     <path d="M77 14 Q99 1 105 22 L101 35 L94 22 Z" fill="#168bd2"/>
+     <text x="99" y="12" font-size="8" font-weight="bold" fill="#083a7d">TM</text>
+    </svg>
+   </div>
+
+   <div class="header-divider"></div>
+
+   <div class="header-text">
+    <h2>BABAR MOBILE TRADER</h2>
+    <p>Used Mobile Phones &nbsp; | &nbsp; Trading &nbsp; | &nbsp; Commercial Import</p>
+   </div>
+
+  </div>
  </div>
 </header>
 
@@ -184,8 +236,8 @@ footer p{line-height:1.8}
   <p>📍 Office D10, Sareena Family Mobile Market, Sakhi Hasan, North Nazimabad, Karachi</p>
   <p>💬 WhatsApp: <a href="https://wa.me/923442318337">0344-2318337</a></p>
   <p>📞 Product inquiries & orders: <a href="https://wa.me/923122741845">0312-2741845</a></p>
-  <p class="small">Email: info@babarmobiletrader.com — confirm this email is active before publishing.</p>
-  <p class="small">©️ 2026 BMT. All rights reserved.</p>
+  <p class="small">Email: info@babarmobiletrader.com</p>
+  <p class="small">© 2026 BMT. All rights reserved.</p>
  </div>
 </footer>
 
