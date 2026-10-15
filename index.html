@@ -1,6 +1,114 @@
 
 <!DOCTYPE html>
 <html lang="en">
+<style>
+.bmt-hero {
+  background: linear-gradient(135deg, #0b1f42, #174a85);
+  color: white;
+  padding: 32px 18px;
+  border-radius: 0 0 22px 22px;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+.bmt-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+.bmt-logo {
+  background: white;
+  color: #174a85;
+  border-radius: 12px;
+  padding: 13px 9px;
+  font-weight: 800;
+  font-size: 23px;
+}
+.bmt-brand-name {
+  text-align: left;
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+.bmt-tagline {
+  font-size: 11px;
+  color: #d7e7ff;
+  margin-top: 5px;
+}
+.bmt-hero h1 {
+  font-size: clamp(27px, 6vw, 42px);
+  margin: 15px 0 10px;
+}
+.bmt-hero p {
+  color: #e0eaff;
+  line-height: 1.7;
+}
+.bmt-phones {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  gap: 12px;
+  margin: 28px auto;
+}
+.bmt-phone {
+  width: 27%;
+  max-width: 125px;
+  height: 165px;
+  border: 4px solid #d9e2ef;
+  border-radius: 22px;
+  background: linear-gradient(145deg, #f8fbff, #8ca9ce);
+  box-shadow: 0 10px 25px #06152b88;
+  position: relative;
+}
+.bmt-phone:nth-child(2) {
+  height: 190px;
+  background: linear-gradient(145deg, #b8d9ff, #174a85);
+}
+.bmt-phone:nth-child(3) {
+  background: linear-gradient(145deg, #e6e9ee, #555e6b);
+}
+.bmt-camera {
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: #26354c;
+  border: 2px solid #9eb1ca;
+}
+.bmt-camera:before,
+.bmt-camera:after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #111b2b;
+  border: 2px solid #8b9cb3;
+}
+.bmt-camera:before { top: 3px; left: 3px; }
+.bmt-camera:after { bottom: 3px; right: 3px; }
+.bmt-button {
+  display: inline-block;
+  background: white;
+  color: #123d70;
+  padding: 13px 23px;
+  border-radius: 9px;
+  text-decoration: none;
+  font-weight: 800;
+  margin-top: 10px;
+}
+.bmt-menu {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  margin-top: 22px;
+  display: block;
+}
+</style>
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
