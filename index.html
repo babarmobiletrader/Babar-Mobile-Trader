@@ -368,70 +368,20 @@ const products = [
 ];
 
 let activeBrand = "All";
-
 function renderProducts(){
  const q = document.getElementById("search").value.toLowerCase();
-
  const shown = products.filter(p =>
   (activeBrand === "All" || p.brand === activeBrand) &&
   (p.name + " " + p.spec + " " + p.brand).toLowerCase().includes(q)
  );
-
  document.getElementById("productList").innerHTML = shown.map(p => {
   const price = p.price ? "Rs. " + p.price.toLocaleString("en-PK") : "Contact for price";
   const message = encodeURIComponent("Assalam-o-Alaikum BMT, I am interested in " + p.name + " " + p.spec + ". Please confirm actual photos, stock, PTA status and final price.");
-  const is13Pro = p.name === "iPhone 13 Pro";
-
-  const colors = [
-   {name:"Graphite",dot:"#454545",img:"https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-13-pro-graphite-select?wid=940&hei=1112&fmt=png-alpha"},
-   {name:"Gold",dot:"#e3c99a",img:"https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-13-pro-gold-select?wid=940&hei=1112&fmt=png-alpha"},
-   {name:"Silver",dot:"#d8dce2",img:"https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-13-pro-silver-select?wid=940&hei=1112&fmt=png-alpha"},
-   {name:"Sierra Blue",dot:"#9bb9d1",img:"https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-13-pro-blue-select?wid=940&hei=1112&fmt=png-alpha"},
-   {name:"Alpine Green",dot:"#52685d",img:"https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-13-pro-green-select?wid=940&hei=1112&fmt=png-alpha"}
-  ];
-
-  const startImage = is13Pro ? colors[0].img : p.img;
-
-  const picker = is13Pro ? `
-   <div style="font-size:12px;margin:10px 0 5px;color:#183b68">Choose a colour:</div>
-   <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px">
-    ${colors.map((c,i) => `
-     <button type="button"
-      aria-pressed="${i===0}"
-      onclick="(function(b){
-       var card=b.closest('.product');
-       card.querySelectorAll('[data-colour]').forEach(function(x){
-        x.setAttribute('aria-pressed','false');
-        x.style.border='1px solid #cbd8e8';
-       });
-       b.setAttribute('aria-pressed','true');
-       b.style.border='2px solid #075bc5';
-       var im=card.querySelector('img');
-       im.src=b.getAttribute('data-image');
-       im.alt='iPhone 13 Pro '+b.getAttribute('data-colour');
-       im.style.display='block';
-       var fallback=im.nextElementSibling;
-       if(fallback) fallback.style.display='none';
-       var label=card.querySelector('[data-selected-colour]');
-       if(label) label.textContent='Selected: '+b.getAttribute('data-colour');
-      })(this)"
-      data-colour="${c.name}"
-      data-image="${c.img}"
-      style="display:flex;align-items:center;gap:4px;padding:5px;border:1px solid ${i===0?'#075bc5':'#cbd8e8'};border-radius:7px;background:white;color:#183b68;font-size:10px;cursor:pointer">
-      <span style="width:13px;height:13px;border-radius:50%;border:1px solid #aaa;background:${c.dot};display:inline-block;flex-shrink:0"></span>${c.name}
-     </button>
-    `).join("")}
-   </div>
-   <div data-selected-colour style="font-size:11px;color:#64748b;margin-bottom:8px">Selected: Graphite</div>
-  ` : "";
-
   return `<article class="product">
    <span class="stock">${p.stock}</span>
-   <img loading="lazy" src="${startImage}" alt="${p.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+   <img loading="lazy" src="${p.img}" alt="${p.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
    <div style="display:none;background:#f1f6fd;padding:35px 5px;text-align:center;color:#60748e">Product image unavailable</div>
-   <h3>${p.name}</h3>
-   <div class="spec">${p.spec}</div>
-   ${picker}
+   <h3>${p.name}</h3><div class="spec">${p.spec}</div>
    <div class="price">${price}</div>
    <div class="available">${p.stock}</div>
    <div class="buttons">
@@ -441,3 +391,16 @@ function renderProducts(){
   </article>`;
  }).join("") || "<p>No mobiles found. Try another search.</p>";
 }
+
+document.querySelectorAll(".brandBtn").forEach(button => {
+ button.addEventListener("click", () => {
+  activeBrand = button.dataset.brand;
+  document.querySelectorAll(".brandBtn").forEach(b => b.classList.toggle("active", b === button));
+  renderProducts();
+ });
+});
+document.getElementById("search").addEventListener("input", renderProducts);
+renderProducts();
+</script>
+</body>
+</html>
