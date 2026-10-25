@@ -106,7 +106,35 @@
   font-size: 14px;
   margin-top: 22px;
   display: block;
+} .pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 25px 0;
 }
+
+.pagination button {
+  border: 1px solid #075bc5;
+  background: white;
+  color: #075bc5;
+  padding: 10px 14px;
+  border-radius: 7px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.pagination button.active,
+.pagination button:hover {
+  background: #075bc5;
+  color: white;
+}
+
+.pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+} 
 </style>
 
 <head>
@@ -303,7 +331,8 @@ footer p{line-height:1.8}
 <section id="mobiles">
  <div class="wrap">
   <h2 class="sectionTitle">Featured Mobiles</h2>
-  <div class="cards" id="productList"></div>
+  <div class="cards" id="productList"></div>  
+  <div id="pagination" class="pagination"></div>
  </div>
 </section>
 
@@ -375,8 +404,91 @@ const products = [
  {name:"OnePlus 16",spec:"Multiple variants",price:null,brand:"OnePlus",img:"https://fdn2.gsmarena.com/vv/bigpic/oneplus-16.jpg",stock:"Ask for price"}
 ];
 
+
 let activeBrand = "All";
-function renderProducts(){
+let currentPage = 1;
+const productsPerPage = 10;
+
+function renderProducts() {
+ const q = document.getElementById("search").value.toLowerCase();
+
+ const shown = products.filter(p =>
+  (activeBrand === "All" || p.brand === activeBrand) &&
+  (p.name + " " + p.spec + " " + p.brand).toLowerCase().includes(q)
+ );
+
+ const totalPages = Math.ceil(shown.length / productsPerPage);
+
+ if (currentPage > totalPages) {
+  currentPage = Math.max(1, totalPages);
+ }
+
+ const start = (currentPage - 1) * productsPerPage;
+ const pageProducts = shown.slice(start, start + productsPerPage);
+
+ document.getElementById("productList").innerHTML =
+  pageProducts.map(p => {
+   const price = p.price
+    ? "Rs. " + p.price.toLocaleString("en-PK")
+    : "Contact for price";
+
+   const message = encodeURIComponent(
+    "Assalam-o-Alaikum BMT, I am interested in " +
+    p.name + " " + p.spec +
+    ". Please confirm actual photos, stock, PTA status and final price."
+   );
+
+   return `<article class="product">
+    <span class="stock">${p.stock}</span>
+    <img loading="lazy" src="${p.img}" alt="${p.name}"
+     onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+    <div style="display:none;background:#f1f6fd;padding:35px 5px;text-align:center;color:#60748e">Product image unavailable</div>
+    <h3>${p.name}</h3>
+    <div class="spec">${p.spec}</div>
+    <div class="price">${price}</div>
+    <div class="available">${p.stock}</div>
+    <div class="buttons">
+     <a target="_blank" rel="noopener" href="https://wa.me/${inquiryNumber}?text=${message}">Order / Inquiry</a>
+     <a target="_blank" rel="noopener" href="https://wa.me/${inquiryNumber}?text=${message}">WhatsApp</a>
+    </div>
+   </article>`;
+  }).join("") || "<p>No mobiles found. Try another search.</p>";
+
+ const pagination = document.getElementById("pagination");
+
+ if (totalPages <= 1) {
+  pagination.innerHTML = "";
+  return;
+ }
+
+ let pageButtons = `
+  <button ${currentPage === 1 ? "disabled" : ""}
+   onclick="changePage(${currentPage - 1})">Previous</button>
+ `;
+
+ for (let i = 1; i <= totalPages; i++) {
+  pageButtons += `
+   <button class="${i === currentPage ? "active" : ""}"
+    onclick="changePage(${i})">${i}</button>
+  `;
+ }
+
+ pageButtons += `
+  <button ${currentPage === totalPages ? "disabled" : ""}
+   onclick="changePage(${currentPage + 1})">Next</button>
+ `;
+
+ pagination.innerHTML = pageButtons;
+}
+
+function changePage(page) {
+ currentPage = page;
+ renderProducts();
+ document.getElementById("mobiles").scrollIntoView({
+  behavior: "smooth"
+ });
+}
+
  const q = document.getElementById("search").value.toLowerCase();
  const shown = products.filter(p =>
   (activeBrand === "All" || p.brand === activeBrand) &&
@@ -403,11 +515,15 @@ function renderProducts(){
 document.querySelectorAll(".brandBtn").forEach(button => {
  button.addEventListener("click", () => {
   activeBrand = button.dataset.brand;
+   currentPage = 1;
   document.querySelectorAll(".brandBtn").forEach(b => b.classList.toggle("active", b === button));
   renderProducts();
  });
 });
-document.getElementById("search").addEventListener("input", renderProducts);
+document.getElementById("search").addEventListener("input", () => {
+ currentPage = 1;
+ renderProducts();
+});
 renderProducts();
 </script>
 </body>
