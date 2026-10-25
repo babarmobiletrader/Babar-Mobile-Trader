@@ -489,29 +489,6 @@ function changePage(page) {
  });
 }
 
- const q = document.getElementById("search").value.toLowerCase();
- const shown = products.filter(p =>
-  (activeBrand === "All" || p.brand === activeBrand) &&
-  (p.name + " " + p.spec + " " + p.brand).toLowerCase().includes(q)
- );
- document.getElementById("productList").innerHTML = shown.map(p => {
-  const price = p.price ? "Rs. " + p.price.toLocaleString("en-PK") : "Contact for price";
-  const message = encodeURIComponent("Assalam-o-Alaikum BMT, I am interested in " + p.name + " " + p.spec + ". Please confirm actual photos, stock, PTA status and final price.");
-  return `<article class="product">
-   <span class="stock">${p.stock}</span>
-   <img loading="lazy" src="${p.img}" alt="${p.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-   <div style="display:none;background:#f1f6fd;padding:35px 5px;text-align:center;color:#60748e">Product image unavailable</div>
-   <h3>${p.name}</h3><div class="spec">${p.spec}</div>
-   <div class="price">${price}</div>
-   <div class="available">${p.stock}</div>
-   <div class="buttons">
-    <a target="_blank" rel="noopener" href="https://wa.me/${inquiryNumber}?text=${message}">Order / Inquiry</a>
-    <a target="_blank" rel="noopener" href="https://wa.me/${inquiryNumber}?text=${message}">WhatsApp</a>
-   </div>
-  </article>`;
- }).join("") || "<p>No mobiles found. Try another search.</p>";
-}
-
 document.querySelectorAll(".brandBtn").forEach(button => {
  button.addEventListener("click", () => {
   activeBrand = button.dataset.brand;
