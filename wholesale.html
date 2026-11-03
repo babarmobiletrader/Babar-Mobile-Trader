@@ -182,79 +182,85 @@
   </div>
 
   <script>
-    const form = document.getElementById("wholesaleForm");
+  const form = document.getElementById("wholesaleForm");
 
-    form.addEventListener("submit", async function(event) {
-      event.preventDefault();
+  form.addEventListener("submit", async function(event) {
+    event.preventDefault();
 
-      const button = document.getElementById("submitBtn");
-      const message = document.getElementById("message");
+    const button = document.getElementById("submitBtn");
+    const message = document.getElementById("message");
 
-      const fullName = document.getElementById("fullName").value.trim();
-      const business = document.getElementById("business").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const whatsapp = document.getElementById("whatsapp").value.trim();
-      const city = document.getElementById("city").value.trim();
+    const fullName = document.getElementById("fullName").value.trim();
+    const business = document.getElementById("business").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const whatsapp = document.getElementById("whatsapp").value.trim();
+    const city = document.getElementById("city").value.trim();
 
-      const data = {
-        _subject: "New Wholesale Registration - Babar Mobile Trader",
-        _template: "table",
-        "Full Name": fullName,
-        "Business / Shop Name & Market": business,
-        "Email Address": email,
-        "WhatsApp Number": whatsapp,
-        "City": city
-      };
+    const data = {
+      _subject: "New Wholesale Registration - Babar Mobile Trader",
+      _template: "table",
+      "Full Name": fullName,
+      "Business / Shop Name & Market": business,
+      "Email Address": email,
+      "WhatsApp Number": whatsapp,
+      "City": city
+    };
 
-      button.disabled = true;
-      button.textContent = "Submitting...";
-      message.textContent = "";
+    button.disabled = true;
+    button.textContent = "Submitting...";
+    message.textContent = "Please wait, submitting your registration...";
+
+    try {
+      const response = await fetch(
+        "https://formsubmit.co/ajax/info@babarmobiletrader.com",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify(data)
+        }
+      );
+
+      const responseText = await response.text();
+      let result;
 
       try {
-        const response = await fetch(
-          "https://formsubmit.co/ajax/info@babarmobiletrader.com",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "Accept": "application/json"
-            },
-            body: JSON.stringify(data)
-          }
-        );
+        result = JSON.parse(responseText);
+      } catch {
+        throw new Error("Invalid response from email service");
+      }
 
-        const result = await response.json();
+      if (!response.ok || result.success !== true && result.success !== "true") {
+        throw new Error(result.message || "Email submission failed");
+      }
 
-        if (!response.ok || result.success !== "true") {
-          throw new Error("Submission failed");
-        }
+      message.textContent =
+        "Registration submitted successfully! Opening WhatsApp...";
 
-        message.textContent =
-          "Registration submitted! WhatsApp is opening. Press Send there to share your details.";
+      const whatsappText =
+        "Wholesale Registration - Babar Mobile Trader\n\n" +
+        "Full Name: " + fullName + "\n" +
+        "Business / Shop Name & Market: " + business + "\n" +
+        "Email: " + email + "\n" +
+        "WhatsApp: " + whatsapp + "\n" +
+        "City: " + city;
 
-        const whatsappText =
-          "Wholesale Registration - Babar Mobile Trader\n\n" +
-          "Full Name: " + fullName + "\n" +
-          "Business / Shop Name & Market: " + business + "\n" +
-          "Email: " + email + "\n" +
-          "WhatsApp: " + whatsapp + "\n" +
-          "City: " + city;
+      button.textContent = "Submitted Successfully";
 
+      setTimeout(function() {
         window.location.href =
           "https://wa.me/923122741845?text=" +
           encodeURIComponent(whatsappText);
+      }, 1500);
 
-        form.reset();
-
-      } catch (error) {
-        message.textContent =
-          "Submission could not be confirmed. Please try again or contact us on WhatsApp.";
-      }
-
+    } catch (error) {
+      message.textContent = "Error: " + error.message;
       button.disabled = false;
       button.textContent = "Submit Registration";
-    });
-  </script>
-
+    }
+  });
+</script>
 </body>
 </html>
