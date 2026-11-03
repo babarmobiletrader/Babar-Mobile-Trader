@@ -515,9 +515,12 @@ function renderProducts() {
  document.getElementById("productList").innerHTML =
   pageProducts.map(p => {
    const price = p.price
-    ? "Rs. " + p.price.toLocaleString("en-PK")
-    : "Contact for price";
+ ? "Rs. " + p.price.toLocaleString("en-PK")
+ : "Contact for price";
 
+const oldPrice = p.oldPrice
+ ? `<del style="color:#888;margin-right:8px;">Rs. ${Number(p.oldPrice).toLocaleString("en-PK")}</del>`
+ : "";
    const message = encodeURIComponent(
     "Assalam-o-Alaikum BMT, I am interested in " +
     p.name + " " + p.spec +
@@ -531,7 +534,7 @@ function renderProducts() {
     <div style="display:none;background:#f1f6fd;padding:35px 5px;text-align:center;color:#60748e">Product image unavailable</div>
     <h3>${p.name}</h3>
     <div class="spec">${p.spec}</div>
-    <div class="price">${price}</div>
+    <div class="price">${oldPrice}${price}</div>
     <div class="available">${p.stock}</div>
     <div class="buttons">
      <a target="_blank" rel="noopener" href="https://wa.me/${inquiryNumber}?text=${message}">Order / Inquiry</a>
