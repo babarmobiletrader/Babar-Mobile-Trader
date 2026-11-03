@@ -1,0 +1,32 @@
+
+media: media
+
+content:
+  - name: products
+    label: Products
+    type: file
+    path: products.json
+    format: json
+    list: true
+    fields:
+      - name: name
+        label: Product Name
+        type: string
+      - name: spec
+        label: Storage
+        type: string
+      - name: price
+        label: Price
+        type: number
+      - name: oldPrice
+        label: Old Price
+        type: number
+      - name: brand
+        label: Brand
+        type: string
+      - name: img
+        label: Image URL
+        type: string
+      - name: stock
+        label: Stock Status
+        type: string
