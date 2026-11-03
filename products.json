@@ -255,8 +255,9 @@
   {
     "name": "Samsung chager ",
     "spec": "40 wat",
-    "price": 12222,
-    "brand": "Samsung",
+    "price": 9999,
+    "oldPrice": 10500,
+    "brand": "Belkin",
     "img": "https://raw.githubusercontent.com/babarmobiletrader/Babar-Mobile-Trader/main/media/IMG_4526.jpeg",
     "stock": "In stock"
   }
