@@ -20,7 +20,8 @@
   {
     "name": "iPhone 16 Pro Max",
     "spec": "256GB",
-    "price": 320000,
+    "price": 350000,
+    "oldPrice": 360000,
     "brand": "Apple",
     "img": "https://raw.githubusercontent.com/babarmobiletrader/Babar-Mobile-Trader/main/media/IMG_4641.jpeg ",
     "stock": "Available"
