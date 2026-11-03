@@ -3,6 +3,7 @@
     "name": "iPhone 18 Pro Max",
     "spec": "256/512GB",
     "price": 605000,
+    "oldPrice": 620000,
     "brand": "Apple",
     "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0M6It05g53mANPUc2lb_JIB1SmLLjKcjZdvp6yOh4QZOSvGEr0SvcuFI&s=10 ",
     "stock": "Available"
