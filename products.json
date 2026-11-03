@@ -251,7 +251,11 @@
     "stock": "In stock"
   },
   {
-    "name": "Charger ",
-    "img": "https://raw.githubusercontent.com/babarmobiletrader/Babar-Mobile-Trader/main/media/IMG_4526.jpeg"
+    "name": "Samsung chager ",
+    "spec": "40 wat",
+    "price": 12222,
+    "brand": "Samsung",
+    "img": "https://raw.githubusercontent.com/babarmobiletrader/Babar-Mobile-Trader/main/media/IMG_4526.jpeg",
+    "stock": "In stock"
   }
 ]
