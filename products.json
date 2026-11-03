@@ -102,7 +102,8 @@
   {
     "name": "Google Pixel 8 Pro",
     "spec": "128GB",
-    "price": 90000,
+    "price": 108000,
+    "oldPrice": 95999,
     "brand": "Google Pixel",
     "img": "https://fdn2.gsmarena.com/vv/bigpic/google-pixel-8-pro.jpg",
     "stock": "Confirm availability"
