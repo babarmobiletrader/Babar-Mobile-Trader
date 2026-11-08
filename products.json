@@ -36,33 +36,37 @@
     "stock": "Available"
   },
   {
-    "name": "iPhone 18 Pro Max",
+    "name": "iPhone 18 Pro Max -NEW BOX PACK",
     "spec": "256/512GB",
-    "price": 605000,
+    "price": 599000,
+    "oldPrice": 605000,
     "brand": "Apple",
     "img": "https://mymobile.pk/images/782-6aa2a584e0820-iphone-18-pro-max-price-in-pakistan-3.webp ",
     "stock": "Available"
   },
   {
-    "name": "iPhone 17 Pro Max",
+    "name": "iPhone 17 Pro Max-NEW BOX PACK",
     "spec": "256GB",
-    "price": 498000,
+    "price": 489000,
+    "oldPrice": 499000,
     "brand": "Apple",
     "img": "https://uaedubai-bucket.s3.me-central-1.amazonaws.com/wp-content/uploads/2025/09/Apple-iPhone-17-Pro-Max-Silver_4-1.jpg",
     "stock": "Available"
   },
   {
-    "name": "iPhone 12 Pro Max",
+    "name": "iPhone 12 Pro Max-USED PTA/approved",
     "spec": "128/256GB",
     "price": 110000,
+    "oldPrice": 120000,
     "brand": "Apple",
     "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzUL1KYM8ArILgPzPxybZ4KSICWrKhlzf5OlFG1sHrBDwqEVJBbAratCE&s=10 ",
     "stock": "Available"
   },
   {
-    "name": "iPhone 13",
+    "name": "iPhone 13 -USED PTA /approved ",
     "spec": "128/256GB",
-    "price": 103000,
+    "price": 105000,
+    "oldPrice": 110000,
     "brand": "Apple",
     "img": "https://m.media-amazon.com/images/I/61CpZkUmKQL.jpg ",
     "stock": "Available"
