@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Babar Mobile Trader</title>
+<style>
+  body{margin:0;font-family:Arial,sans-serif;background:#f5f5f5;color:#222}
+  header{background:#111;padding:12px 16px}
+  header a{color:#fff;text-decoration:none;font-weight:bold}
+  .wrap{max-width:600px;margin:0 auto;padding:16px}
+  #main{width:100%;border-radius:12px;background:#fff;aspect-ratio:1/1;object-fit:contain}
+  #thumbs{display:flex;gap:8px;margin:10px 0;overflow-x:auto}
+  #thumbs img{width:64px;height:64px;object-fit:cover;border-radius:8px;border:2px solid transparent;cursor:pointer;background:#fff}
+  #thumbs img.active{border-color:#25d366}
+  h1{font-size:22px;margin:8px 0}
+  .price{font-size:24px;font-weight:bold;color:#0a7d2c}
+  .old{text-decoration:line-through;color:#888;margin-left:8px;font-size:16px;font-weight:normal}
+  .tags span{display:inline-block;background:#e8f5e9;border-radius:20px;padding:4px 12px;margin:4px 4px 4px 0;font-size:14px}
+  .box{background:#fff;border-radius:12px;padding:12px 16px;margin:12px 0;line-height:1.7}
+  .wa{display:block;text-align:center;background:#25d366;color:#fff;text-decoration:none;font-weight:bold;padding:14px;border-radius:12px;font-size:18px}
+</style>
+</head>
+<body>
+<header><a href="index.html">← Babar Mobile Trader</a></header>
+<div class="wrap" id="app">لوڈ ہو رہا ہے...</div>
+
+<script>
+var WA = "923122741845";
+var app = document.getElementById("app");
+
+function el(tag, cls, text){
+  var e = document.createElement(tag);
+  if(cls) e.className = cls;
+  if(text !== undefined) e.textContent = text;
+  return e;
+}
+
+var name = new URLSearchParams(location.search).get("name");
+
+fetch("products.json")
+  .then(function(r){ return r.json(); })
+  .then(function(data){
+    var list = Array.isArray(data) ? data : (data.products || []);
+    var p = list.find(function(x){ return x.name === name; });
+    app.textContent = "";
+    if(!p){ app.textContent = "یہ فون نہیں ملا۔"; return; }
+
+    document.title = p.name + " | Babar Mobile Trader";
+
+    var pics = [];
+    if(p.gallery){
+      pics = String(p.gallery).split(",").map(function(s){ return s.trim(); }).filter(Boolean);
+    }
+    if(p.img){ pics.unshift(String(p.img).trim()); }
+    pics = pics.filter(function(v,i){ return pics.indexOf(v) === i; });
+
+    var main = el("img"); main.id = "main"; main.src = pics[0] || ""; main.alt = p.name;
+    app.appendChild(main);
+
+    var thumbs = el("div"); thumbs.id = "thumbs";
+    pics.forEach(function(u, i){
+      var t = el("img", i === 0 ? "active" : ""); t.src = u; t.alt = p.name;
+      t.onclick = function(){
+        main.src = u;
+        thumbs.querySelectorAll("img").forEach(function(x){ x.classList.remove("active"); });
+        t.classList.add("active");
+      };
+      thumbs.appendChild(t);
+    });
+    if(pics.length > 1) app.appendChild(thumbs);
+
+    app.appendChild(el("h1", "", p.name));
+
+    var pr = el("div", "price");
+    if(p.price){
+      pr.textContent = "Rs " + Number(p.price).toLocaleString();
+      if(p.oldPrice){ pr.appendChild(el("span", "old", "Rs " + Number(p.oldPrice).toLocaleString())); }
+    } else {
+      pr.textContent = "قیمت کے لیے WhatsApp پر پوچھیں";
+    }
+    app.appendChild(pr);
+
+    var tags = el("div", "tags");
+    [p.condition, p.pta, p.spec, p.brand, p.stock].forEach(function(v){
+      if(v && String(v).trim()){ tags.appendChild(el("span", "", String(v).trim())); }
+    });
+    app.appendChild(tags);
+
+    if(p.description){
+      var d = el("div", "box"); d.appendChild(el("b", "", "تفصیل")); d.appendChild(el("div", "", p.description));
+      app.appendChild(d);
+    }
+
+    var msg = "السلام علیکم، مجھے " + p.name + " کے بارے میں معلومات چاہیے۔ " + location.href;
+    var a = el("a", "wa", "WhatsApp پر پوچھیں");
+    a.href = "https://wa.me/" + WA + "?text=" + encodeURIComponent(msg);
+    app.appendChild(a);
+  })
+  .catch(function(){ app.textContent = "ڈیٹا لوڈ نہیں ہو سکا۔"; });
+</script>
+</body>
+</html>
