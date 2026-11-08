@@ -30,3 +30,18 @@ content:
       - name: stock
         label: Stock Status
         type: string
+      - name: stock
+        label: Stock Status
+        type: string
+      - name: condition
+        label: Condition (New / Used / Open Box)
+        type: string
+      - name: pta
+        label: PTA Status (PTA Approved / Non-PTA / JV)
+        type: string
+      - name: description
+        label: Description
+        type: string
+      - name: gallery
+        label: Gallery Image Links (comma separated)
+        type: string
