@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ur">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,7 +23,7 @@
 </head>
 <body>
 <header><a href="index.html">← Babar Mobile Trader</a></header>
-<div class="wrap" id="app">لوڈ ہو رہا ہے...</div>
+<div class="wrap" id="app">Loading...</div>
 
 <script>
 var WA = "923122741845";
@@ -36,17 +36,17 @@ function el(tag, cls, text){
   return e;
 }
 
-var name = new URLSearchParams(location.search).get("name");
+var name = (new URLSearchParams(location.search).get("name") || "").trim();
 
 fetch("products.json")
   .then(function(r){ return r.json(); })
   .then(function(data){
     var list = Array.isArray(data) ? data : (data.products || []);
-    var p = list.find(function(x){ return x.name === name; });
+    var p = list.find(function(x){ return String(x.name).trim() === name; });
     app.textContent = "";
-    if(!p){ app.textContent = "یہ فون نہیں ملا۔"; return; }
+    if(!p){ app.textContent = "Phone not found."; return; }
 
-    document.title = p.name + " | Babar Mobile Trader";
+    document.title = p.name.trim() + " | Babar Mobile Trader";
 
     var pics = [];
     if(p.gallery){
@@ -70,14 +70,14 @@ fetch("products.json")
     });
     if(pics.length > 1) app.appendChild(thumbs);
 
-    app.appendChild(el("h1", "", p.name));
+    app.appendChild(el("h1", "", p.name.trim()));
 
     var pr = el("div", "price");
     if(p.price){
       pr.textContent = "Rs " + Number(p.price).toLocaleString();
       if(p.oldPrice){ pr.appendChild(el("span", "old", "Rs " + Number(p.oldPrice).toLocaleString())); }
     } else {
-      pr.textContent = "قیمت کے لیے WhatsApp پر پوچھیں";
+      pr.textContent = "Ask for price on WhatsApp";
     }
     app.appendChild(pr);
 
@@ -88,16 +88,16 @@ fetch("products.json")
     app.appendChild(tags);
 
     if(p.description){
-      var d = el("div", "box"); d.appendChild(el("b", "", "تفصیل")); d.appendChild(el("div", "", p.description));
+      var d = el("div", "box"); d.appendChild(el("b", "", "Details")); d.appendChild(el("div", "", p.description));
       app.appendChild(d);
     }
 
-    var msg = "السلام علیکم، مجھے " + p.name + " کے بارے میں معلومات چاہیے۔ " + location.href;
-    var a = el("a", "wa", "WhatsApp پر پوچھیں");
+    var msg = "Hello, I want details about " + p.name.trim() + ". " + location.href;
+    var a = el("a", "wa", "Ask on WhatsApp");
     a.href = "https://wa.me/" + WA + "?text=" + encodeURIComponent(msg);
     app.appendChild(a);
   })
-  .catch(function(){ app.textContent = "ڈیٹا لوڈ نہیں ہو سکا۔"; });
+  .catch(function(){ app.textContent = "Could not load data."; });
 </script>
 </body>
 </html>
