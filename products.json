@@ -24,7 +24,11 @@
     "oldPrice": 360000,
     "brand": "Apple",
     "img": "https://raw.githubusercontent.com/babarmobiletrader/Babar-Mobile-Trader/main/media/IMG_4641.jpeg ",
-    "stock": "Available"
+    "stock": "Available",
+    "condition": "Used",
+    "pta": "Pta approved ",
+    "description": "10/10",
+    "gallery": "https://raw.githubusercontent.com/babarmobiletrader/Babar-Mobile-Trader/main/media/IMG_4641.jpeg,https://raw.githubusercontent.com/babarmobiletrader/Babar-Mobile-Trader/main/media/IMG_4526.jpeg,https://raw.githubusercontent.com/babarmobiletrader/Babar-Mobile-Trader/main/media/IMG_4503.jpeg,https://raw.githubusercontent.com/babarmobiletrader/Babar-Mobile-Trader/main/media/IMG_4515.jpeg"
   },
   {
     "name": "iPhone 15 Pro Max -used/pta approved ",
