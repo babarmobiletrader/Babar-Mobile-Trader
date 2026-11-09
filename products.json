@@ -174,11 +174,16 @@
     "stock": "Ask for price"
   },
   {
-    "name": "vivo x300 pro",
-    "spec": "Multiple variants",
+    "name": "vivo y32 ",
+    "spec": "6/128",
+    "price": 73999,
+    "oldPrice": 78000,
     "brand": "vivo",
-    "img": "https://fdn2.gsmarena.com/vv/bigpic/vivo-x300-pro.jpg",
-    "stock": "Ask for price"
+    "img": "https://raw.githubusercontent.com/babarmobiletrader/Babar-Mobile-Trader/main/media/Vivo/IMG_4841.jpeg",
+    "stock": "Available ",
+    "condition": "New",
+    "pta": "Pta approved ",
+    "gallery": "https://raw.githubusercontent.com/babarmobiletrader/Babar-Mobile-Trader/main/media/Vivo/IMG_4841.jpeg,https://raw.githubusercontent.com/babarmobiletrader/Babar-Mobile-Trader/main/media/Vivo/IMG_4840.png,https://raw.githubusercontent.com/babarmobiletrader/Babar-Mobile-Trader/main/media/Vivo/IMG_4839.jpeg"
   },
   {
     "name": "vivo x300 pro",
