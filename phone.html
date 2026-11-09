@@ -92,6 +92,17 @@ fetch("products.json")
       app.appendChild(d);
     }
 
+    var c = String(p.condition || "").trim().toLowerCase();
+    var perks = [];
+    if (c === "new") { perks = ["Sealed box pack", "1 year company warranty"]; }
+    else if (c === "used") { perks = ["7 days checking warranty", "Condition and battery health confirmed on WhatsApp"]; }
+    if (perks.length) {
+      var t = el("div", "box");
+      t.appendChild(el("b", "", "Why buy from BMT"));
+      perks.forEach(function(x){ t.appendChild(el("div", "", "✓ " + x)); });
+      app.appendChild(t);
+    }
+
     var msg = "Hello, I want details about " + p.name.trim() + ". " + location.href;
     var a = el("a", "wa", "Ask on WhatsApp");
     a.href = "https://wa.me/" + WA + "?text=" + encodeURIComponent(msg);
