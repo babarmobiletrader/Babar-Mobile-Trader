@@ -306,6 +306,7 @@
     "oldPrice": 70000,
     "brand": "Samsung ",
     "stock": "Available ",
-    "condition": "New"
+    "condition": "New",
+    "pta": "Pta approved "
   }
 ]
