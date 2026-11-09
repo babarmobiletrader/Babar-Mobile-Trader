@@ -273,5 +273,16 @@
     "brand": "Belkin",
     "img": "https://raw.githubusercontent.com/babarmobiletrader/Babar-Mobile-Trader/main/media/IMG_4526.jpeg",
     "stock": "In stock"
+  },
+  {
+    "name": "Samsung A07 ",
+    "spec": "4/128",
+    "price": 36999,
+    "oldPrice": 40000,
+    "brand": "Samsung",
+    "img": "https://raw.githubusercontent.com/babarmobiletrader/Babar-Mobile-Trader/main/media/Samsung/IMG_4826.jpeg ",
+    "stock": "Available ",
+    "condition": "Box pack",
+    "description": "4/128"
   }
 ]
