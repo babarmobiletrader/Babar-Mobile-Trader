@@ -285,5 +285,15 @@
     "condition": "New ",
     "description": "4/128",
     "gallery": "https://raw.githubusercontent.com/babarmobiletrader/Babar-Mobile-Trader/main/media/Samsung/IMG_4826.jpeg,https://raw.githubusercontent.com/babarmobiletrader/Babar-Mobile-Trader/main/media/Samsung/IMG_4828.webp,https://raw.githubusercontent.com/babarmobiletrader/Babar-Mobile-Trader/main/media/Samsung/IMG_4827.webp"
+  },
+  {
+    "name": "Samsung A57",
+    "spec": "12/256 ,12/512",
+    "price": 110000,
+    "oldPrice": 120000,
+    "brand": "Samsung ",
+    "img": "https://raw.githubusercontent.com/babarmobiletrader/Babar-Mobile-Trader/main/media/Samsung/IMG_4832.webp",
+    "stock": "Available ",
+    "condition": "New"
   }
 ]
