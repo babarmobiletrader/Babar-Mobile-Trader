@@ -250,12 +250,14 @@
     "stock": "In stock"
   },
   {
-    "name": "Samsung 25W USB-C Charger",
-    "spec": "25W Fast Charging",
-    "price": 2499,
-    "brand": "Accessories",
-    "img": "https://media.ldlc.com/r1600/ld/products/00/06/25/99/LD0006259936.jpg ",
-    "stock": "In stock"
+    "name": "Samsung S26 FE",
+    "spec": "8/256",
+    "price": 234999,
+    "oldPrice": 240000,
+    "brand": "Samsung",
+    "stock": "In stock",
+    "condition": "New",
+    "pta": "Pta approved "
   },
   {
     "name": "Samsung Galaxy Fit 3",
