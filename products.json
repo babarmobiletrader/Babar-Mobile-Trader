@@ -298,5 +298,14 @@
     "condition": "New ",
     "pta": "Pta approved ",
     "gallery": "https://raw.githubusercontent.com/babarmobiletrader/Babar-Mobile-Trader/main/media/Samsung/IMG_4829.jpeg,https://raw.githubusercontent.com/babarmobiletrader/Babar-Mobile-Trader/main/media/Samsung/IMG_4830.webp,https://raw.githubusercontent.com/babarmobiletrader/Babar-Mobile-Trader/main/media/Samsung/IMG_4833.webp,https://raw.githubusercontent.com/babarmobiletrader/Babar-Mobile-Trader/main/media/Samsung/IMG_4834.jpeg"
+  },
+  {
+    "name": "Samsung A17",
+    "spec": "6/128",
+    "price": 65999,
+    "oldPrice": 70000,
+    "brand": "Samsung ",
+    "stock": "Available ",
+    "condition": "New"
   }
 ]
