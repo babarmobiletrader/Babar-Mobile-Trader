@@ -127,15 +127,24 @@ fetch("products.json")
         s.style.cssText = "display:flex;flex:none";
         b.appendChild(s);
       }
-      b.appendChild(el("span", "", it.text));
+           if (!it.logo) { b.appendChild(el("span", "", it.text)); }
+
       row.appendChild(b);
     });
     app.appendChild(row);
 
-    var msg = "Hello, I want details about " + p.name.trim() + ". " + location.href;
+        var priceTxt = p.price ? " Price: Rs " + Number(p.price).toLocaleString() + "." : "";
+    var orderMsg = "Hello, I want to confirm my order for " + p.name.trim() + "." + priceTxt + " " + location.href;
+    var o = el("a", "wa", "Confirm Order");
+    o.href = "https://wa.me/" + WA + "?text=" + encodeURIComponent(orderMsg);
+    app.appendChild(o);
+
+    var askMsg = "Hello, I want details about " + p.name.trim() + ". " + location.href;
     var a = el("a", "wa", "Ask on WhatsApp");
-    a.href = "https://wa.me/" + WA + "?text=" + encodeURIComponent(msg);
+    a.style.cssText = "background:#111;margin-top:10px";
+    a.href = "https://wa.me/" + WA + "?text=" + encodeURIComponent(askMsg);
     app.appendChild(a);
+
   })
   .catch(function(){ app.textContent = "Could not load data."; });
 </script>
