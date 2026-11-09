@@ -22,11 +22,12 @@
 </style>
 </head>
 <body>
-<header><a href="index.html">← Babar Mobile Trader</a></header>
+<header><a href="index.html">← BMT</a></header>
 <div class="wrap" id="app">Loading...</div>
 
 <script>
 var WA = "923122741845";
+var LOGO = "IMG_4176.jpg";
 var app = document.getElementById("app");
 
 function el(tag, cls, text){
@@ -81,7 +82,7 @@ fetch("products.json")
     }
     app.appendChild(pr);
 
-   var tags = el("div", "tags");
+    var tags = el("div", "tags");
     [p.condition, p.pta, p.spec, p.brand, p.stock].forEach(function(v){
       if(v && String(v).trim()){ tags.appendChild(el("span", "", String(v).trim())); }
     });
@@ -92,14 +93,13 @@ fetch("products.json")
       app.appendChild(d);
     }
 
-    var LOGO = "IMG_4176.jpg";
     var c = String(p.condition || "").trim().toLowerCase();
     var ptaText = String(p.pta || "").trim().toLowerCase();
     var SHIELD = "M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z";
     var CHECK = "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z";
     var TRUCK = "M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z";
 
-    var items = [{ logo: true, text: "Babar Mobile Trader" }];
+    var items = [{ logo: true }];
     if (ptaText.indexOf("approved") > -1 && ptaText.indexOf("non") === -1) {
       items.push({ icon: SHIELD, text: "PTA Approved" });
     }
@@ -108,19 +108,19 @@ fetch("products.json")
     } else if (c === "used") {
       items.push({ icon: CHECK, text: "7 Days Checking Warranty" });
     }
-    items.push({ icon: TRUCK, text: "Delivery Available" });
+    items.push({ icon: TRUCK, text: "Fast Delivery" });
 
     var row = el("div", "box");
     row.style.cssText = "display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px";
     items.forEach(function(it){
       var b = el("div");
-      b.style.cssText = "display:flex;align-items:center;gap:8px;background:#eef8f1;border-radius:10px;padding:8px 10px;font-size:13px;font-weight:bold;line-height:1.3";
+      b.style.cssText = "display:flex;align-items:center;gap:8px;background:#eef8f1;border-radius:10px;padding:10px;font-size:13px;font-weight:bold;line-height:1.3";
       if (it.logo) {
-      b.style.justifyContent = "center";
-
-        im.src = LOGO; im.alt = "BMT";
-                im.style.cssText = "height:34px;width:auto;max-width:100%;object-fit:contain;border-radius:6px";
-
+        b.style.justifyContent = "center";
+        var im = el("img");
+        im.src = LOGO;
+        im.alt = "BMT";
+        im.style.cssText = "height:34px;width:auto;max-width:100%;object-fit:contain;border-radius:6px";
         im.onerror = function(){ im.style.display = "none"; };
         b.appendChild(im);
       } else {
@@ -128,14 +128,24 @@ fetch("products.json")
         s.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="#0a7d2c"><path d="' + it.icon + '"/></svg>';
         s.style.cssText = "display:flex;flex:none";
         b.appendChild(s);
+        b.appendChild(el("span", "", it.text));
       }
-           if (!it.logo) { b.appendChild(el("span", "", it.text)); }
-
       row.appendChild(b);
     });
     app.appendChild(row);
 
-        var priceTxt = p.price ? " Price: Rs " + Number(p.price).toLocaleString() + "." : "";
+    var why = el("div", "box");
+    why.appendChild(el("b", "", "Why choose BMT"));
+    [
+      "PTA approved",
+      "Company warranty on box pack, 7 days checking warranty on used",
+      "Real photos and stock confirmed on WhatsApp"
+    ].forEach(function(t){
+      why.appendChild(el("div", "", "✓ " + t));
+    });
+    app.appendChild(why);
+
+    var priceTxt = p.price ? " Price: Rs " + Number(p.price).toLocaleString() + "." : "";
     var orderMsg = "Hello, I want to confirm my order for " + p.name.trim() + "." + priceTxt + " " + location.href;
     var o = el("a", "wa", "Confirm Order");
     o.href = "https://wa.me/" + WA + "?text=" + encodeURIComponent(orderMsg);
@@ -146,7 +156,6 @@ fetch("products.json")
     a.style.cssText = "background:#111;margin-top:10px";
     a.href = "https://wa.me/" + WA + "?text=" + encodeURIComponent(askMsg);
     app.appendChild(a);
-
   })
   .catch(function(){ app.textContent = "Could not load data."; });
 </script>
