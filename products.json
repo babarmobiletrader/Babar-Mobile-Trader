@@ -186,18 +186,29 @@
     "gallery": "https://raw.githubusercontent.com/babarmobiletrader/Babar-Mobile-Trader/main/media/Vivo/IMG_4841.jpeg,https://raw.githubusercontent.com/babarmobiletrader/Babar-Mobile-Trader/main/media/Vivo/IMG_4840.png,https://raw.githubusercontent.com/babarmobiletrader/Babar-Mobile-Trader/main/media/Vivo/IMG_4839.jpeg"
   },
   {
-    "name": "vivo x300 pro",
-    "spec": "Multiple variants",
+    "name": "vivo y500",
+    "spec": "6/128",
+    "price": 78500,
+    "oldPrice": 81000,
     "brand": "vivo",
-    "img": "https://fdn2.gsmarena.com/vv/bigpic/vivo-x300-pro.jpg",
-    "stock": "Ask for price"
+    "img": "https://raw.githubusercontent.com/babarmobiletrader/Babar-Mobile-Trader/main/media/Vivo/IMG_4845.webp",
+    "stock": "Available ",
+    "condition": "New",
+    "pta": "Pta approved ",
+    "description": "All variants available ",
+    "gallery": "https://raw.githubusercontent.com/babarmobiletrader/Babar-Mobile-Trader/main/media/Vivo/IMG_4845.webp,https://raw.githubusercontent.com/babarmobiletrader/Babar-Mobile-Trader/main/media/Vivo/IMG_4844.png,https://raw.githubusercontent.com/babarmobiletrader/Babar-Mobile-Trader/main/media/Vivo/IMG_4843.jpeg,https://raw.githubusercontent.com/babarmobiletrader/Babar-Mobile-Trader/main/media/Vivo/IMG_4842.webp "
   },
   {
-    "name": "vivo x300 pro",
-    "spec": "Multiple variants",
+    "name": "vivo  y05",
+    "spec": "4/64",
+    "price": 41500,
+    "oldPrice": 44000,
     "brand": "vivo",
-    "img": "https://fdn2.gsmarena.com/vv/bigpic/vivo-x300-pro.jpg",
-    "stock": "Ask for price"
+    "img": "https://raw.githubusercontent.com/babarmobiletrader/Babar-Mobile-Trader/main/media/Vivo/IMG_4845.webp",
+    "stock": "Available ",
+    "condition": "New",
+    "pta": "Pta approved ",
+    "gallery": "https://raw.githubusercontent.com/babarmobiletrader/Babar-Mobile-Trader/main/media/Vivo/IMG_4845.webp,https://raw.githubusercontent.com/babarmobiletrader/Babar-Mobile-Trader/main/media/Vivo/IMG_4846.jpeg,https://raw.githubusercontent.com/babarmobiletrader/Babar-Mobile-Trader/main/media/Vivo/IMG_4848.jpeg,https://raw.githubusercontent.com/babarmobiletrader/Babar-Mobile-Trader/main/media/Vivo/IMG_4849.jpeg"
   },
   {
     "name": "OnePlus 16",
