@@ -328,5 +328,14 @@
     "stock": "Available ",
     "condition": "New",
     "pta": "Pta approved "
+  },
+  {
+    "name": "Belkin charger 45w",
+    "spec": "Super fast",
+    "price": 4500,
+    "oldPrice": 4800,
+    "brand": "Belkin",
+    "stock": "Available ",
+    "condition": "New"
   }
 ]
