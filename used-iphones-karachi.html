@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Used iPhones in Karachi | PTA Approved | BMT</title>
+<meta name="description" content="PTA approved used iPhones in Karachi with honest condition details, clear prices and 7 days checking warranty. Babar Mobile Trader, Sakhi Hasan, North Nazimabad.">
+<style>
+  body{margin:0;font-family:Arial,sans-serif;background:#f5f5f5;color:#222}
+  header{background:#111;padding:12px 16px}
+  header a{color:#fff;text-decoration:none;font-weight:bold}
+  .wrap{max-width:900px;margin:0 auto;padding:16px}
+  h1{font-size:26px;margin:8px 0}
+  .intro{line-height:1.7;color:#444}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin:16px 0}
+  .card{display:block;text-decoration:none;color:#222;background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,.08);padding:10px}
+  .card img{width:100%;aspect-ratio:1/1;object-fit:contain;background:#fafafa;border-radius:10px}
+  .card .n{font-size:14px;font-weight:bold;margin-top:8px;line-height:1.3}
+  .card .p{font-size:16px;font-weight:bold;color:#0a7d2c;margin-top:4px}
+  .box{background:#fff;border-radius:14px;padding:16px;margin:16px 0}
+  .box label{display:block;font-size:14px;font-weight:bold;margin:12px 0 4px}
+  .box input,.box textarea{width:100%;box-sizing:border-box;padding:10px;border:1px solid #ccc;border-radius:8px;font-size:16px;font-family:inherit}
+  .btn{display:block;text-align:center;background:#25d366;color:#fff;font-weight:bold;padding:14px;border-radius:12px;font-size:18px;margin-top:14px;cursor:pointer}
+  #msg{margin-top:10px;font-size:14px;font-weight:bold}
+</style>
+</head>
+<body>
+<header><a href="index.html">← BMT</a></header>
+<div class="wrap">
+  <h1>Used iPhones in Karachi</h1>
+  <p class="intro">Looking for a PTA approved used iPhone in Karachi? Every phone here is listed with its condition, PTA status and price. We offer 7 days checking warranty on used phones. Visit us at Sareena Family Mobile Market, Sakhi Hasan, North Nazimabad, Karachi, or order and ask questions on WhatsApp.</p>
+
+  <div id="list" class="grid">Loading...</div>
+
+  <div class="box">
+    <b style="font-size:18px">Used iPhone Inquiry</b>
+    <p style="color:#666;margin:6px 0 0">Tell us which iPhone you want and we will contact you with available options.</p>
+    <label>Your name</label>
+    <input id="fn" type="text" placeholder="Full name">
+    <label>Phone / WhatsApp number</label>
+    <input id="fp" type="tel" placeholder="03xx xxxxxxx">
+    <label>City</label>
+    <input id="fc" type="text" placeholder="e.g. Karachi">
+    <label>Which iPhone do you want? (model, storage, budget)</label>
+    <textarea id="fm" rows="3" placeholder="e.g. iPhone 13, 128GB, budget 110,000"></textarea>
+    <div id="msg"></div>
+    <a id="send" class="btn">Send Inquiry</a>
+  </div>
+</div>
+
+<script>
+var ORDER_EMAIL = "info@babarmobiletrader.com";
+
+function isUsedIphone(p){
+  var t = (String(p.condition || "") + " " + String(p.name || "")).toLowerCase();
+  var used = t.indexOf("used") > -1 || t.indexOf("open box") > -1;
+  var iph = String(p.name || "").toLowerCase().indexOf("iphone") > -1 || String(p.brand || "").toLowerCase().indexOf("apple") > -1;
+  return used && iph;
+}
+
+fetch("products.json")
+  .then(function(r){ return r.json(); })
+  .then(function(data){
+    var list = Array.isArray(data) ? data : (data.products || []);
+    var box = document.getElementById("list");
+    box.textContent = "";
+    var seen = {};
+    var items = list.filter(function(p){
+      var n = String(p.name || "").trim();
+      if(!n || seen[n] || !isUsedIphone(p)) return false;
+      seen[n] = true;
+      return true;
+    });
+    if(!items.length){ box.textContent = "No used iPhones listed right now. Send an inquiry below."; return; }
+    items.forEach(function(p){
+      var n = String(p.name).trim();
+      var a = document.createElement("a");
+      a.className = "card";
+      a.href = "phone.html?name=" + encodeURIComponent(n);
+      var im = document.createElement("img");
+      im.src = String(p.img || "").trim();
+      im.alt = n;
+      im.loading = "lazy";
+      im.onerror = function(){ im.style.visibility = "hidden"; };
+      var nm = document.createElement("div");
+      nm.className = "n";
+      nm.textContent = n;
+      var pr = document.createElement("div");
+      pr.className = "p";
+      pr.textContent = p.price ? "Rs " + Number(p.price).toLocaleString() : "Ask for price";
+      a.appendChild(im); a.appendChild(nm); a.appendChild(pr);
+      box.appendChild(a);
+    });
+  })
+  .catch(function(){ document.getElementById("list").textContent = "Could not load phones. Please send an inquiry below."; });
+
+var sending = false;
+document.getElementById("send").onclick = function(){
+  if(sending) return;
+  var n = document.getElementById("fn").value.trim();
+  var ph = document.getElementById("fp").value.trim();
+  var ci = document.getElementById("fc").value.trim();
+  var m = document.getElementById("fm").value.trim();
+  var msg = document.getElementById("msg");
+  var btn = document.getElementById("send");
+  msg.style.color = "#b00020";
+  if(!n || !ph || !ci || !m){ msg.textContent = "Please fill all fields."; return; }
+  if(ph.replace(/\D/g, "").length < 10){ msg.textContent = "Please enter a valid phone number."; return; }
+  sending = true;
+  btn.textContent = "Sending...";
+  msg.textContent = "";
+  fetch("https://formsubmit.co/ajax/" + ORDER_EMAIL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "Accept": "application/json" },
+    body: JSON.stringify({
+      _subject: "Used iPhone inquiry",
+      _template: "table",
+      Name: n,
+      Phone: ph,
+      City: ci,
+      Looking_for: m
+    })
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(res){
+    if(res && (res.success === true || res.success === "true")){
+      msg.style.color = "#0a7d2c";
+      msg.textContent = "Inquiry received. We will contact you shortly.";
+      btn.style.display = "none";
+    } else { throw new Error("fail"); }
+  })
+  .catch(function(){
+    sending = false;
+    btn.textContent = "Send Inquiry";
+    msg.textContent = "Could not send. Please message us on WhatsApp instead.";
+  });
+};
+</script>
+</body>
+</html>
