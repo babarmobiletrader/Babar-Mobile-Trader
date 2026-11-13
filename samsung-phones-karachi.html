@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Babar Mobile Trader | Mobile Phones in Karachi</title>
+<meta name="description" content="Mobile phones in Karachi from Babar Mobile Trader.">
+<style>
+  body{margin:0;font-family:Arial,sans-serif;background:#f5f5f5;color:#222}
+  header{background:#111;padding:12px 16px}
+  header a{color:#fff;text-decoration:none;font-weight:bold;font-size:18px}
+  .wrap{max-width:900px;margin:0 auto;padding:16px}
+  h1{font-size:26px;margin:8px 0}
+  .intro{line-height:1.7;color:#444}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin:16px 0}
+  .card{display:block;text-decoration:none;color:#222;background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,.08);padding:10px}
+  .card img{width:100%;aspect-ratio:1/1;object-fit:contain;background:#fafafa;border-radius:10px}
+  .card .n{font-size:14px;font-weight:bold;margin-top:8px;line-height:1.3}
+  .card .p{font-size:16px;font-weight:bold;color:#0a7d2c;margin-top:4px}
+  .box{background:#fff;border-radius:14px;padding:16px;margin:16px 0}
+  .box label{display:block;font-size:14px;font-weight:bold;margin:12px 0 4px}
+  .box input,.box textarea{width:100%;box-sizing:border-box;padding:10px;border:1px solid #ccc;border-radius:8px;font-size:16px;font-family:inherit}
+  .btn{display:block;text-align:center;background:#25d366;color:#fff;font-weight:bold;padding:14px;border-radius:12px;font-size:18px;margin-top:14px;cursor:pointer;text-decoration:none}
+  #msg{margin-top:10px;font-size:14px;font-weight:bold}
+  .more a{display:inline-block;margin:4px 8px 4px 0;padding:8px 14px;background:#eef8f1;color:#0a7d2c;border-radius:20px;text-decoration:none;font-weight:bold;font-size:14px}
+  footer{background:#111;color:#fff;padding:24px 16px;margin-top:24px}
+  .fwrap{max-width:900px;margin:0 auto;text-align:center}
+  .fwrap h3{margin:0 0 12px;font-size:18px}
+  .fwrap a.line{display:block;color:#fff;text-decoration:none;font-size:16px;padding:6px 0}
+  .fwrap a.wa2{display:inline-block;background:#25d366;color:#fff;text-decoration:none;font-weight:bold;padding:12px 22px;border-radius:12px;margin-top:10px}
+  .fwrap p{color:#bbb;font-size:13px;margin:14px 0 0}
+</style>
+</head>
+<body>
+<header><a href="index.html">← BMT</a></header>
+
+<div class="wrap">
+  <h1 id="h1">Mobile Phones in Karachi</h1>
+  <p class="intro" id="intro"></p>
+
+  <div id="list" class="grid">Loading...</div>
+
+  <div class="box">
+    <b style="font-size:18px">Inquiry</b>
+    <p style="color:#666;margin:6px 0 0">Tell us what you are looking for and we will contact you with available options.</p>
+    <label>Your name</label>
+    <input id="fn" type="text" placeholder="Full name">
+    <label>Phone / WhatsApp number</label>
+    <input id="fp" type="tel" placeholder="03xx xxxxxxx">
+    <label>City</label>
+    <input id="fc" type="text" placeholder="e.g. Karachi">
+    <label>What do you want? (model, storage, budget)</label>
+    <textarea id="fm" rows="3" placeholder="e.g. iPhone 15 Pro Max, 256GB, budget 280,000"></textarea>
+    <div id="msg"></div>
+    <a id="send" class="btn">Send Inquiry</a>
+  </div>
+
+  <div class="box more">
+    <b style="font-size:18px;display:block;margin-bottom:6px">Browse more</b>
+    <a href="new-iphones-karachi.html">New iPhones</a>
+    <a href="used-iphones-karachi.html">Used iPhones</a>
+    <a href="samsung-phones-karachi.html">Samsung</a>
+    <a href="google-pixel-karachi.html">Google Pixel</a>
+    <a href="mobile-accessories-karachi.html">Accessories</a>
+    <a href="wholesale.html">Wholesale</a>
+  </div>
+</div>
+
+<footer>
+  <div class="fwrap">
+    <h3>Customer Support</h3>
+    <a class="line" href="mailto:info@babarmobiletrader.com">info@babarmobiletrader.com</a>
+    <a class="line" href="tel:+923122741845">0312-2741845</a>
+    <a class="wa2" href="https://wa.me/923122741845" target="_blank" rel="noopener">Chat on WhatsApp</a>
+    <p>Sareena Family Mobile Market, Sakhi Hasan, North Nazimabad, Karachi</p>
+  </div>
+</footer>
+
+<script>
+var ORDER_EMAIL = "info@babarmobiletrader.com";
+var SHOP = " Visit us at Sareena Family Mobile Market, Sakhi Hasan, North Nazimabad, Karachi, or ask questions and order on WhatsApp.";
+
+function txt(p){ return (String(p.condition || "") + " " + String(p.name || "")).toLowerCase(); }
+function brand(p){ return String(p.brand || "").trim().toLowerCase(); }
+
+var PAGES = {
+  "new-iphones-karachi": {
+    title: "New PTA Approved iPhones in Karachi | Box Pack | BMT",
+    desc: "New box pack PTA approved iPhones in Karachi with clear prices and company warranty. Babar Mobile Trader, Sakhi Hasan, North Nazimabad.",
+    h1: "New iPhones in Karachi",
+    intro: "Looking for a brand new PTA approved iPhone in Karachi? Phones here are box pack with the price and PTA status clearly listed, and company warranty on box pack phones." + SHOP,
+    filter: function(p){
+      var t = txt(p);
+      var iph = String(p.name || "").toLowerCase().indexOf("iphone") > -1 || brand(p).indexOf("apple") > -1;
+      return iph && t.indexOf("new") > -1 && t.indexOf("used") === -1 && t.indexOf("open box") === -1;
+    }
+  },
+  "samsung-phones-karachi": {
+    title: "Samsung Phones in Karachi | Prices and Stock | BMT",
+    desc: "Samsung Galaxy phones in Karachi from Babar Mobile Trader. Check prices and stock, then order on WhatsApp.",
+    h1: "Samsung Phones in Karachi",
+    intro: "Browse Samsung Galaxy phones available at Babar Mobile Trader in Karachi. Prices and availability are confirmed on WhatsApp before you order." + SHOP,
+    filter: function(p){ return brand(p).indexOf("samsung") > -1; }
+  },
+  "google-pixel-karachi": {
+    title: "Google Pixel Phones in Karachi | Prices and Stock | BMT",
+    desc: "Google Pixel phones in Karachi from Babar Mobile Trader. Check prices and stock, then order on WhatsApp.",
+    h1: "Google Pixel Phones in Karachi",
+    intro: "Google Pixel phones available at Babar Mobile Trader in Karachi. Availability is confirmed on WhatsApp, and you can ask for real photos before you order." + SHOP,
+    filter: function(p){ return brand(p).indexOf("pixel") > -1; }
+  },
+  "mobile-accessories-karachi": {
+    title: "Mobile Accessories in Karachi | Chargers, Smart Watches | BMT",
+    desc: "Mobile chargers and smart watches in Karachi from Babar Mobile Trader. Clear prices, order on WhatsApp.",
+    h1: "Mobile Accessories in Karachi",
+    intro: "Mobile chargers and smart watches available at Babar Mobile Trader in Karachi. Prices are listed below and stock is confirmed on WhatsApp." + SHOP,
+    filter: function(p){ var b = brand(p); return b === "accessories" || b === "watches"; }
+  }
+};
+
+var key = location.pathname.split("/").filter(Boolean).pop() || "";
+key = key.replace(".html", "");
+var cfg = PAGES[key] || { title: document.title, desc: "", h1: "Mobile Phones in Karachi", intro: "Browse mobile phones at Babar Mobile Trader in Karachi." + SHOP, filter: function(){ return true; } };
+
+document.title = cfg.title;
+var md = document.querySelector('meta[name="description"]');
+if(md && cfg.desc){ md.setAttribute("content", cfg.desc); }
+document.getElementById("h1").textContent = cfg.h1;
+document.getElementById("intro").textContent = cfg.intro;
+
+fetch("products.json")
+  .then(function(r){ return r.json(); })
+  .then(function(data){
+    var list = Array.isArray(data) ? data : (data.products || []);
+    var box = document.getElementById("list");
+    box.textContent = "";
+    var seen = {};
+    var items = list.filter(function(p){
+      var n = String(p.name || "").trim();
+      if(!n || seen[n] || !cfg.filter(p)) return false;
+      seen[n] = true;
+      return true;
+    });
+    if(!items.length){ box.textContent = "Nothing listed here right now. Send an inquiry below."; return; }
+    items.forEach(function(p){
+      var n = String(p.name).trim();
+      var a = document.createElement("a");
+      a.className = "card";
+      a.href = "phone.html?name=" + encodeURIComponent(n);
+      var im = document.createElement("img");
+      im.src = String(p.img || "").trim();
+      im.alt = n;
+      im.loading = "lazy";
+      im.onerror = function(){ im.style.visibility = "hidden"; };
+      var nm = document.createElement("div");
+      nm.className = "n";
+      nm.textContent = n;
+      var pr = document.createElement("div");
+      pr.className = "p";
+      pr.textContent = p.price ? "Rs " + Number(p.price).toLocaleString() : "Ask for price";
+      a.appendChild(im); a.appendChild(nm); a.appendChild(pr);
+      box.appendChild(a);
+    });
+  })
+  .catch(function(){ document.getElementById("list").textContent = "Could not load products. Please send an inquiry below."; });
+
+var sending = false;
+document.getElementById("send").onclick = function(){
+  if(sending) return;
+  var n = document.getElementById("fn").value.trim();
+  var ph = document.getElementById("fp").value.trim();
+  var ci = document.getElementById("fc").value.trim();
+  var m = document.getElementById("fm").value.trim();
+  var msg = document.getElementById("msg");
+  var btn = document.getElementById("send");
+  msg.style.color = "#b00020";
+  if(!n || !ph || !ci || !m){ msg.textContent = "Please fill all fields."; return; }
+  if(ph.replace(/\D/g, "").length < 10){ msg.textContent = "Please enter a valid phone number."; return; }
+  sending = true;
+  btn.textContent = "Sending...";
+  msg.textContent = "";
+  fetch("https://formsubmit.co/ajax/" + ORDER_EMAIL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "Accept": "application/json" },
+    body: JSON.stringify({
+      _subject: "Inquiry: " + cfg.h1,
+      _template: "table",
+      Name: n,
+      Phone: ph,
+      City: ci,
+      Looking_for: m,
+      Page: location.href
+    })
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(res){
+    if(res && (res.success === true || res.success === "true")){
+      msg.style.color = "#0a7d2c";
+      msg.textContent = "Inquiry received. We will contact you shortly.";
+      btn.style.display = "none";
+    } else { throw new Error("fail"); }
+  })
+  .catch(function(){
+    sending = false;
+    btn.textContent = "Send Inquiry";
+    msg.textContent = "Could not send. Please message us on WhatsApp instead.";
+  });
+};
+</script>
+</body>
+</html>
