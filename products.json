@@ -18,7 +18,9 @@
     "oldPrice": 510000,
     "brand": "Apple",
     "img": "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-17-pro-max.jpg",
-    "stock": "Available"
+    "stock": "Available",
+    "condition": "New ",
+    "pta": "Pra a"
   },
   {
     "name": "iPhone 16 Pro Max",
