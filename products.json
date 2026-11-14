@@ -5,11 +5,12 @@
     "price": 605000,
     "oldPrice": 620000,
     "brand": "Apple",
-    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0M6It05g53mANPUc2lb_JIB1SmLLjKcjZdvp6yOh4QZOSvGEr0SvcuFI&s=10 ",
+    "img": "https://raw.githubusercontent.com/babarmobiletrader/Babar-Mobile-Trader/main/media/18%20pro%20max/IMG_4912.jpeg",
     "stock": "Available",
     "condition": "New ",
     "pta": "Pta approved ",
-    "description": "One year accidental warranty "
+    "description": "One year accidental warranty ",
+    "gallery": "https://raw.githubusercontent.com/babarmobiletrader/Babar-Mobile-Trader/main/media/18%20pro%20max/IMG_4915.webp,https://raw.githubusercontent.com/babarmobiletrader/Babar-Mobile-Trader/main/media/18%20pro%20max/IMG_4914.webp,https://raw.githubusercontent.com/babarmobiletrader/Babar-Mobile-Trader/main/media/18%20pro%20max/IMG_4913.webp,https://raw.githubusercontent.com/babarmobiletrader/Babar-Mobile-Trader/main/media/18%20pro%20max/IMG_4912.jpeg"
   },
   {
     "name": "iPhone 17 Pro Max",
