@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BMT Suppliers</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f1f5f9;font-family:Arial;color:#173b70}
+header{background:#173b70;color:white;padding:22px;text-align:center}
+header a{color:white}
+main{max-width:950px;margin:20px auto;padding:15px}
+.card{background:white;padding:20px;border-radius:12px;margin-bottom:18px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+label{font-weight:bold;font-size:14px}
+input{width:100%;padding:12px;margin-top:6px;border:1px solid #ccc;border-radius:7px}
+button{background:#173b70;color:white;padding:12px 20px;border:0;border-radius:7px;margin-top:15px;cursor:pointer}
+.delete{background:#c62828;padding:7px 10px;margin:0}
+.stat{font-size:23px;font-weight:bold;color:green}
+table{width:100%;border-collapse:collapse}
+td,th{padding:10px;border-bottom:1px solid #ddd;text-align:left}
+@media(max-width:550px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header>
+<h2>BABAR MOBILE TRADER</h2>
+<p>Supplier Management</p>
+<a href="../index.html">Back to Dashboard</a>
+</header>
+
+<main>
+
+<div class="card">
+<h3>Total Suppliers</h3>
+<p class="stat" id="total">0</p>
+</div>
+
+<div class="card">
+<h3>Add New Supplier</h3>
+
+<div class="grid">
+
+<label>Supplier Name
+<input id="name" placeholder="Supplier full name">
+</label>
+
+<label>Phone Number
+<input id="phone" placeholder="03XXXXXXXXX">
+</label>
+
+<label>City
+<input id="city" placeholder="Karachi">
+</label>
+
+<label>Opening Balance (Rs.)
+<input id="balance" type="number" value="0">
+</label>
+
+</div>
+
+<button onclick="saveSupplier()">Save Supplier</button>
+</div>
+
+<div class="card">
+<h3>Supplier Records</h3>
+<div style="overflow-x:auto">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Phone</th>
+<th>City</th>
+<th>Opening Balance</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody id="records"></tbody>
+</table>
+</div>
+</div>
+
+</main>
+
+<script>
+let suppliers = JSON.parse(localStorage.getItem("bmt_suppliers") || "[]");
+
+function render(){
+document.getElementById("total").textContent = suppliers.length;
+
+let body = document.getElementById("records");
+body.replaceChildren();
+
+suppliers.forEach((s,index)=>{
+let tr = document.createElement("tr");
+
+[s.name,s.phone,s.city,"Rs. "+s.balance.toLocaleString()].forEach(value=>{
+let td = document.createElement("td");
+td.textContent = value;
+tr.appendChild(td);
+});
+
+let action = document.createElement("td");
+let btn = document.createElement("button");
+btn.textContent = "Delete";
+btn.className = "delete";
+btn.onclick = ()=>deleteSupplier(index);
+action.appendChild(btn);
+tr.appendChild(action);
+
+body.appendChild(tr);
+});
+}
+
+function saveSupplier(){
+let name = document.getElementById("name").value.trim();
+let phone = document.getElementById("phone").value.trim();
+let city = document.getElementById("city").value.trim();
+let balance = Number(document.getElementById("balance").value);
+
+if(!name || !phone || !Number.isFinite(balance)){
+alert("Please enter supplier name, phone and valid balance.");
+return;
+}
+
+suppliers.push({name,phone,city,balance});
+localStorage.setItem("bmt_suppliers",JSON.stringify(suppliers));
+
+document.getElementById("name").value = "";
+document.getElementById("phone").value = "";
+document.getElementById("city").value = "";
+document.getElementById("balance").value = "0";
+
+render();
+alert("Supplier saved successfully!");
+}
+
+function deleteSupplier(index){
+if(confirm("Are you sure you want to delete this supplier?")){
+suppliers.splice(index,1);
+localStorage.setItem("bmt_suppliers",JSON.stringify(suppliers));
+render();
+}
+}
+
+render();
+</script>
+
+</body>
+</html>
