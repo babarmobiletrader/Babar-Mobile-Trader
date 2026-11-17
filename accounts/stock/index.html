@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BMT Stock Management</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f1f5f9;font-family:Arial;color:#173b70}
+header{background:#173b70;color:white;padding:22px;text-align:center}
+main{max-width:950px;margin:20px auto;padding:15px}
+.card{background:white;padding:20px;border-radius:12px;margin-bottom:18px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+input{width:100%;padding:12px;margin-top:6px;border:1px solid #ccc;border-radius:7px}
+label{font-size:14px;font-weight:bold}
+button{background:#173b70;color:white;padding:12px 20px;border:0;border-radius:7px;margin-top:15px}
+table{width:100%;border-collapse:collapse}
+td,th{padding:10px;border-bottom:1px solid #ddd;text-align:left}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.stat{background:#eff6ff;padding:15px;border-radius:9px}
+.stat strong{display:block;font-size:23px;margin-top:8px}
+@media(max-width:550px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+<h2>BABAR MOBILE TRADER</h2>
+<p>Stock Management</p>
+<a href="../index.html" style="color:white">Back to Dashboard</a>
+</header>
+<main>
+<div class="card">
+<h3>Stock Summary</h3>
+<div class="stats">
+<div class="stat">Total Stock Quantity<strong id="qty">0</strong></div>
+<div class="stat">Stock Value<strong id="value">Rs. 0</strong></div>
+</div>
+</div>
+
+<div class="card">
+<h3>Add Stock Entry</h3>
+<div class="grid">
+<label>Mobile Model<input id="model" placeholder="iPhone 13 Pro"></label>
+<label>IMEI Number<input id="imei" placeholder="IMEI number"></label>
+<label>Quantity<input id="quantity" type="number" min="1" value="1"></label>
+<label>Purchase Price Per Phone<input id="price" type="number" min="0"></label>
+</div>
+<button onclick="addStock()">Save Stock</button>
+</div>
+
+<div class="card">
+<h3>Stock Records</h3>
+<div style="overflow-x:auto">
+<table>
+<thead><tr><th>Model</th><th>IMEI</th><th>Quantity</th><th>Purchase Price</th><th>Total</th></tr></thead>
+<tbody id="records"></tbody>
+</table>
+</div>
+</div>
+</main>
+<script>
+let stock=JSON.parse(localStorage.getItem("bmt_stock")||"[]");
+
+function render(){
+let qty=0,value=0;
+let body=document.getElementById("records");
+body.innerHTML="";
+stock.forEach(s=>{
+qty+=s.quantity;
+value+=s.quantity*s.price;
+let tr=document.createElement("tr");
+[s.model,s.imei,s.quantity,"Rs. "+s.price.toLocaleString(),
+"Rs. "+(s.quantity*s.price).toLocaleString()].forEach(v=>{
+let td=document.createElement("td");
+td.textContent=v;
+tr.appendChild(td);
+});
+body.appendChild(tr);
+});
+document.getElementById("qty").textContent=qty;
+document.getElementById("value").textContent="Rs. "+value.toLocaleString();
+}
+
+function addStock(){
+let model=document.getElementById("model").value.trim();
+let imei=document.getElementById("imei").value.trim();
+let quantity=Number(document.getElementById("quantity").value);
+let price=Number(document.getElementById("price").value);
+if(!model||quantity<=0||price<0||!Number.isFinite(price)){
+alert("Please complete the required fields");
+return;
+}
+stock.push({model,imei,quantity,price});
+localStorage.setItem("bmt_stock",JSON.stringify(stock));
+render();
+alert("Stock entry saved");
+}
+render();
+</script>
+</body>
+</html>
