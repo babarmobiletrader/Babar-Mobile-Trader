@@ -72,7 +72,7 @@
         if (error) throw error;
 
         message.style.color = "green";
-        message.textContent = "Login successful: " + data.user.email;
+        window.location.href = "admin.html";
       } catch (error) {
         message.style.color = "red";
         message.textContent = error.message;
