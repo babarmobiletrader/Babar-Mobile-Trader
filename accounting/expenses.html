@@ -1,0 +1,221 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BMT Expenses Management</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;padding:16px;background:#f2f5fa;font-family:Arial;color:#17243a}
+main{max-width:850px;margin:auto}
+header{background:#123d70;color:white;padding:20px;border-radius:12px;margin-bottom:16px}
+.card{background:white;padding:18px;border-radius:12px;margin-bottom:16px}
+label{display:block;font-weight:bold;margin:12px 0 6px}
+input,select,textarea{width:100%;padding:12px;border:1px solid #ccd5e2;border-radius:7px;font-size:16px}
+button{padding:12px 16px;border:0;border-radius:7px;background:#123d70;color:white;margin:8px 5px 0 0;font-size:15px}
+.secondary{background:#64748b}
+.danger{background:#b42318}
+.item{border:1px solid #dce3ed;padding:13px;border-radius:8px;margin:10px 0}
+.small{color:#64748b;font-size:13px;margin-top:6px}
+#message{font-weight:bold;margin:10px 0;overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<main>
+<header>
+<h2>BMT Expenses Management</h2>
+<div>کاروباری اخراجات کا مکمل ریکارڈ</div>
+</header>
+
+<div class="card">
+<h3 id="formTitle">Add New Expense</h3>
+<form id="expenseForm">
+<input type="hidden" id="expenseId">
+
+<label>Expense Title *</label>
+<input id="title" required placeholder="Example: Office Rent">
+
+<label>Expense Category *</label>
+<select id="category" required>
+<option value="">Select Category</option>
+<option value="rent">Shop / Office Rent</option>
+<option value="salary">Salary</option>
+<option value="shipping">Shipping</option>
+<option value="customs">Customs / Clearance</option>
+<option value="transport">Transport</option>
+<option value="utility">Electricity / Utilities</option>
+<option value="repair">Repair / Maintenance</option>
+<option value="marketing">Marketing</option>
+<option value="other">Other</option>
+</select>
+
+<label>Expense Date *</label>
+<input type="date" id="expense_date" required>
+
+<label>Amount (PKR) *</label>
+<input type="number" id="amount" min="0.01" step="0.01" required>
+
+<label>Payment Method</label>
+<select id="payment_method">
+<option value="">Select Method</option>
+<option value="cash">Cash</option>
+<option value="bank">Bank Transfer</option>
+<option value="online">Online Transfer</option>
+<option value="cheque">Cheque</option>
+<option value="other">Other</option>
+</select>
+
+<label>Paid To</label>
+<input id="paid_to" placeholder="Person / Company name">
+
+<label>Reference Number</label>
+<input id="reference_number" placeholder="Receipt / Transaction number">
+
+<label>Notes</label>
+<textarea id="notes" rows="3" placeholder="Additional details"></textarea>
+
+<button type="submit">Save Expense</button>
+<button type="button" class="secondary" onclick="resetForm()">Clear Form</button>
+</form>
+<div id="message"></div>
+</div>
+
+<div class="card">
+<h3>Saved Expenses</h3>
+<div id="expenseList">Loading expenses...</div>
+</div>
+
+<button class="secondary" onclick="location.href='../admin.html'">Back to Admin Dashboard</button>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../supabase.js"></script>
+<script>
+const db=window.bmtSupabase;
+const $=id=>document.getElementById(id);
+
+function msg(t,color="#123d70"){
+ $("message").textContent=t;
+ $("message").style.color=color;
+}
+
+function resetForm(){
+ $("expenseForm").reset();
+ $("expenseId").value="";
+ $("formTitle").textContent="Add New Expense";
+ $("expense_date").value=new Date().toISOString().slice(0,10);
+ $("message").textContent="";
+}
+
+async function loadExpenses(){
+ if(!db){
+  $("expenseList").textContent="Supabase connection not found.";
+  return;
+ }
+
+ const {data,error}=await db.from("expenses")
+ .select("*").order("created_at",{ascending:false});
+
+ if(error){
+  $("expenseList").textContent="Load error: "+error.message;
+  return;
+ }
+
+ if(!data||!data.length){
+  $("expenseList").textContent="No expenses saved yet.";
+  return;
+ }
+
+ $("expenseList").innerHTML="";
+ data.forEach(x=>{
+  const div=document.createElement("div");
+  div.className="item";
+
+  const title=document.createElement("strong");
+  title.textContent=x.title||"Expense";
+
+  const detail=document.createElement("div");
+  detail.className="small";
+  detail.textContent="PKR "+Number(x.amount||0).toLocaleString()+
+   " | Date: "+(x.expense_date||"-")+
+   " | Category: "+(x.category||"-");
+
+  const edit=document.createElement("button");
+  edit.textContent="Edit";
+  edit.onclick=()=>editExpense(x);
+
+  const del=document.createElement("button");
+  del.textContent="Delete";
+  del.className="danger";
+  del.onclick=()=>deleteExpense(x.id);
+
+  div.append(title,detail,edit,del);
+  $("expenseList").append(div);
+ });
+}
+
+function editExpense(x){
+ $("expenseId").value=x.id||"";
+ $("title").value=x.title||"";
+ $("category").value=x.category||"";
+ $("expense_date").value=x.expense_date||"";
+ $("amount").value=x.amount||"";
+ $("payment_method").value=x.payment_method||"";
+ $("paid_to").value=x.paid_to||"";
+ $("reference_number").value=x.reference_number||"";
+ $("notes").value=x.notes||"";
+ $("formTitle").textContent="Edit Expense";
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+async function deleteExpense(id){
+ if(!confirm("Delete this expense record?"))return;
+ const {error}=await db.from("expenses").delete().eq("id",id);
+ if(error){msg("Delete error: "+error.message,"#b42318");return;}
+ msg("Expense deleted.");
+ await loadExpenses();
+}
+
+$("expenseForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ if(!db){msg("Supabase connection not found.","#b42318");return;}
+
+ const id=$("expenseId").value;
+ const record={
+  title:$("title").value.trim(),
+  category:$("category").value,
+  expense_date:$("expense_date").value,
+  amount:Number($("amount").value),
+  payment_method:$("payment_method").value||null,
+  paid_to:$("paid_to").value.trim()||null,
+  reference_number:$("reference_number").value.trim()||null,
+  notes:$("notes").value.trim()||null
+ };
+
+ let result;
+ if(id){
+  result=await db.from("expenses").update(record).eq("id",id);
+ }else{
+  result=await db.from("expenses").insert(record);
+ }
+
+ if(result.error){
+  msg("Save error: "+result.error.message,"#b42318");
+  return;
+ }
+
+ msg(id?"Expense updated.":"Expense saved.");
+ resetForm();
+ await loadExpenses();
+});
+
+async function start(){
+ if(!db){msg("Supabase connection not found.","#b42318");return;}
+ $("expense_date").value=new Date().toISOString().slice(0,10);
+ await loadExpenses();
+}
+start();
+</script>
+</body>
+</html>
