@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BMT Customer Receipts</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;padding:16px;background:#f2f5fa;font-family:Arial;color:#17243a}
+main{max-width:850px;margin:auto}
+header{background:#123d70;color:white;padding:20px;border-radius:12px;margin-bottom:16px}
+.card{background:white;padding:18px;border-radius:12px;margin-bottom:16px}
+label{display:block;font-weight:bold;margin:12px 0 6px}
+input,select,textarea{width:100%;padding:12px;border:1px solid #ccd5e2;border-radius:7px;font-size:16px}
+button{padding:12px 16px;border:0;border-radius:7px;background:#123d70;color:white;margin:8px 5px 0 0;font-size:15px}
+.secondary{background:#64748b}
+.danger{background:#b42318}
+.item{border:1px solid #dce3ed;padding:13px;border-radius:8px;margin:10px 0}
+.small{color:#64748b;font-size:13px;margin-top:6px}
+#message{font-weight:bold;margin:10px 0;overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<main>
+<header>
+<h2>BMT Customer Receipts</h2>
+<div>کسٹمر سے وصول ہونے والی رقم کا ریکارڈ</div>
+</header>
+
+<div class="card">
+<h3 id="formTitle">Add Customer Receipt</h3>
+<form id="receiptForm">
+<input type="hidden" id="receiptId">
+
+<label>Customer *</label>
+<select id="customer_id" required>
+<option value="">Select Customer</option>
+</select>
+
+<label>Receipt Date *</label>
+<input type="date" id="receipt_date" required>
+
+<label>Received Amount (PKR) *</label>
+<input type="number" id="amount" min="0.01" step="0.01" required>
+
+<label>Payment Method</label>
+<select id="payment_method">
+<option value="">Select Method</option>
+<option value="cash">Cash</option>
+<option value="bank">Bank Transfer</option>
+<option value="online">Online Transfer</option>
+<option value="cheque">Cheque</option>
+<option value="other">Other</option>
+</select>
+
+<label>Reference Number</label>
+<input id="reference_number" placeholder="Transaction / Cheque number">
+
+<label>Notes</label>
+<textarea id="notes" rows="3" placeholder="Additional details"></textarea>
+
+<button type="submit">Save Receipt</button>
+<button type="button" class="secondary" onclick="resetForm()">Clear Form</button>
+</form>
+<div id="message"></div>
+</div>
+
+<div class="card">
+<h3>Saved Customer Receipts</h3>
+<div id="receiptList">Loading receipts...</div>
+</div>
+
+<button class="secondary" onclick="location.href='../admin.html'">Back to Admin Dashboard</button>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../supabase.js"></script>
+<script>
+const db=window.bmtSupabase;
+const $=id=>document.getElementById(id);
+
+function msg(t,color="#123d70"){
+ $("message").textContent=t;
+ $("message").style.color=color;
+}
+
+function resetForm(){
+ $("receiptForm").reset();
+ $("receiptId").value="";
+ $("formTitle").textContent="Add Customer Receipt";
+ $("receipt_date").value=new Date().toISOString().slice(0,10);
+ $("message").textContent="";
+}
+
+async function loadCustomers(){
+ const {data,error}=await db.from("customers").select("*");
+ if(error){
+  $("customer_id").innerHTML='<option value="">Customer loading error</option>';
+  return;
+ }
+ $("customer_id").innerHTML='<option value="">Select Customer</option>';
+ (data||[]).forEach(c=>{
+  const op=document.createElement("option");
+  op.value=c.id;
+  op.textContent=c.name||"Customer";
+  $("customer_id").append(op);
+ });
+}
+
+async function loadReceipts(){
+ const {data,error}=await db.from("customer_receipts")
+ .select("*").order("created_at",{ascending:false});
+
+ if(error){
+  $("receiptList").textContent="Load error: "+error.message;
+  return;
+ }
+ if(!data||!data.length){
+  $("receiptList").textContent="No receipts saved yet.";
+  return;
+ }
+
+ $("receiptList").innerHTML="";
+ data.forEach(r=>{
+  const div=document.createElement("div");
+  div.className="item";
+  const title=document.createElement("strong");
+  title.textContent="PKR "+Number(r.amount||0).toLocaleString();
+
+  const detail=document.createElement("div");
+  detail.className="small";
+  detail.textContent="Date: "+(r.receipt_date||"-")+
+   " | Method: "+(r.payment_method||"-");
+
+  const edit=document.createElement("button");
+  edit.textContent="Edit";
+  edit.onclick=()=>editReceipt(r);
+
+  const del=document.createElement("button");
+  del.textContent="Delete";
+  del.className="danger";
+  del.onclick=()=>deleteReceipt(r.id);
+
+  div.append(title,detail,edit,del);
+  $("receiptList").append(div);
+ });
+}
+
+function editReceipt(r){
+ $("receiptId").value=r.id||"";
+ $("customer_id").value=r.customer_id||"";
+ $("receipt_date").value=r.receipt_date||"";
+ $("amount").value=r.amount||"";
+ $("payment_method").value=r.payment_method||"";
+ $("reference_number").value=r.reference_number||"";
+ $("notes").value=r.notes||"";
+ $("formTitle").textContent="Edit Customer Receipt";
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+async function deleteReceipt(id){
+ if(!confirm("Delete this receipt record?"))return;
+ const {error}=await db.from("customer_receipts").delete().eq("id",id);
+ if(error){msg("Delete error: "+error.message,"#b42318");return;}
+ msg("Receipt deleted.");
+ await loadReceipts();
+}
+
+$("receiptForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ const id=$("receiptId").value;
+ const record={
+  customer_id:$("customer_id").value,
+  receipt_date:$("receipt_date").value,
+  amount:Number($("amount").value),
+  payment_method:$("payment_method").value||null,
+  reference_number:$("reference_number").value.trim()||null,
+  notes:$("notes").value.trim()||null
+ };
+
+ let result;
+ if(id){
+  result=await db.from("customer_receipts").update(record).eq("id",id);
+ }else{
+  result=await db.from("customer_receipts").insert(record);
+ }
+
+ if(result.error){
+  msg("Save error: "+result.error.message,"#b42318");
+  return;
+ }
+
+ msg(id?"Receipt updated.":"Receipt saved.");
+ resetForm();
+ await loadReceipts();
+});
+
+async function start(){
+ if(!db){msg("Supabase connection not found.","#b42318");return;}
+ $("receipt_date").value=new Date().toISOString().slice(0,10);
+ await loadCustomers();
+ await loadReceipts();
+}
+start();
+</script>
+</body>
+</html>
