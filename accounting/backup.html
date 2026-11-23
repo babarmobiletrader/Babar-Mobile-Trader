@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BMT Data Backup</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;padding:16px;background:#f2f5fa;font-family:Arial;color:#17243a}
+main{max-width:850px;margin:auto}
+header{background:#123d70;color:white;padding:20px;border-radius:12px;margin-bottom:16px}
+.card{background:white;padding:18px;border-radius:12px;margin-bottom:16px}
+button{width:100%;padding:14px;border:0;border-radius:7px;background:#123d70;color:white;margin:7px 0;font-size:15px}
+.secondary{background:#64748b}
+#message{font-weight:bold;margin-top:12px;overflow-wrap:anywhere}
+.small{color:#64748b;font-size:13px;line-height:1.7}
+</style>
+</head>
+<body>
+<main>
+<header>
+<h2>BMT Data Backup</h2>
+<div>اپنے کاروبار کے ریکارڈ کا CSV بیک اَپ بنائیں</div>
+</header>
+
+<div class="card">
+<h3>Download Backup</h3>
+<p class="small">ہر بٹن متعلقہ ٹیبل کا ڈیٹا CSV فائل میں ڈاؤن لوڈ کرے گا۔</p>
+<button onclick="backupTable('customers')">Backup Customers</button>
+<button onclick="backupTable('suppliers')">Backup Suppliers</button>
+<button onclick="backupTable('purchase_invoices')">Backup Purchase Invoices</button>
+<button onclick="backupTable('purchase_items')">Backup Purchase Items</button>
+<button onclick="backupTable('sales_invoices')">Backup Sales Invoices</button>
+<button onclick="backupTable('sales_items')">Backup Sales Items</button>
+<button onclick="backupTable('devices')">Backup Devices / Stock</button>
+<button onclick="backupTable('shipments')">Backup Shipments</button>
+<button onclick="backupTable('customer_receipts')">Backup Customer Receipts</button>
+<button onclick="backupTable('supplier_payments')">Backup Supplier Payments</button>
+<button onclick="backupTable('expenses')">Backup Expenses</button>
+<button onclick="backupTable('device_returns')">Backup Device Returns</button>
+<button onclick="backupTable('device_events')">Backup Device Events</button>
+<div id="message"></div>
+</div>
+
+<div class="card">
+<h3>Important Backup Instructions</h3>
+<div class="small">
+1. ہر ٹیبل کا بیک اَپ الگ CSV فائل ہوگا۔<br>
+2. فائلیں اپنے iPhone یا کمپیوٹر میں محفوظ رکھیں۔<br>
+3. یہ صرف ڈیٹا ڈاؤن لوڈ کرتا ہے، ڈیٹا حذف یا تبدیل نہیں کرتا۔<br>
+4. یہ مکمل Supabase project backup کا متبادل نہیں ہے۔
+</div>
+</div>
+
+<button class="secondary" onclick="location.href='../admin.html'">Back to Admin Dashboard</button>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../supabase.js"></script>
+<script>
+const db=window.bmtSupabase;
+const $=id=>document.getElementById(id);
+
+function csvValue(value){
+ if(value===null||value===undefined)return "";
+ let text=String(value);
+ if(text.includes('"'))text=text.replace(/"/g,'""');
+ if(/[",\n\r]/.test(text))text='"'+text+'"';
+ return text;
+}
+
+async function backupTable(tableName){
+ if(!db){
+  $("message").textContent="Supabase connection not found.";
+  return;
+ }
+
+ $("message").textContent="Preparing "+tableName+" backup...";
+
+ const {data,error}=await db.from(tableName).select("*").limit(10000);
+
+ if(error){
+  $("message").textContent="Backup error: "+error.message;
+  return;
+ }
+
+ if(!data||!data.length){
+  $("message").textContent="No data found in "+tableName+".";
+  return;
+ }
+
+ const columns=Object.keys(data[0]);
+ const lines=[
+  columns.map(csvValue).join(","),
+  ...data.map(row=>columns.map(col=>csvValue(row[col])).join(","))
+ ];
+
+ const blob=new Blob(["\uFEFF"+lines.join("\r\n")],{
+  type:"text/csv;charset=utf-8;"
+ });
+
+ const url=URL.createObjectURL(blob);
+ const link=document.createElement("a");
+ link.href=url;
+ link.download="BMT_"+tableName+"_backup_"+new Date().toISOString().slice(0,10)+".csv";
+ document.body.appendChild(link);
+ link.click();
+ link.remove();
+ URL.revokeObjectURL(url);
+
+ $("message").textContent=tableName+" backup downloaded. Rows: "+data.length;
+}
+</script>
+</body>
+</html>
