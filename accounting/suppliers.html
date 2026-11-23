@@ -1,0 +1,184 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BMT Suppliers</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;padding:16px;background:#f2f5fa;font-family:Arial;color:#17243a}
+main{max-width:850px;margin:auto}
+header{background:#123d70;color:white;padding:20px;border-radius:12px;margin-bottom:16px}
+.card{background:white;padding:18px;border-radius:12px;margin-bottom:16px}
+label{display:block;font-weight:bold;margin:12px 0 6px}
+input,textarea{width:100%;padding:12px;border:1px solid #ccd5e2;border-radius:7px;font-size:16px}
+button{padding:12px 16px;border:0;border-radius:7px;background:#123d70;color:white;margin:8px 5px 0 0;font-size:15px}
+.secondary{background:#64748b}
+.danger{background:#b42318}
+.item{border:1px solid #dce3ed;padding:13px;border-radius:8px;margin:10px 0;overflow-wrap:anywhere}
+.small{color:#64748b;font-size:13px;line-height:1.8}
+#message{font-weight:bold;margin-top:12px;overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<main>
+<header>
+<h2>BMT Supplier Management</h2>
+<div>سپلائرز کا ریکارڈ</div>
+</header>
+
+<div class="card">
+<h3 id="formTitle">Add Supplier</h3>
+<form id="supplierForm">
+<input type="hidden" id="recordId">
+
+<label>Supplier Name *</label>
+<input id="name" required>
+
+<label>Business Name</label>
+<input id="business_name">
+
+<label>Supplier Code</label>
+<input id="supplier_code">
+
+<label>Phone</label>
+<input id="phone">
+
+<label>WhatsApp</label>
+<input id="whatsapp">
+
+<label>Email</label>
+<input type="email" id="email">
+
+<label>Address</label>
+<textarea id="address" rows="2"></textarea>
+
+<label>City</label>
+<input id="city">
+
+<label>Opening Balance (PKR)</label>
+<input type="number" id="opening_balance" value="0" step="0.01">
+
+<label>Notes</label>
+<textarea id="notes" rows="3"></textarea>
+
+<button type="submit">Save Supplier</button>
+<button type="button" class="secondary" onclick="resetForm()">Clear</button>
+</form>
+<div id="message"></div>
+</div>
+
+<div class="card">
+<h3>Supplier List</h3>
+<div id="supplierList">Loading...</div>
+</div>
+
+<button class="secondary" onclick="location.href='../admin.html'">Back to Dashboard</button>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../supabase.js"></script>
+<script>
+const db=window.bmtSupabase;
+const $=id=>document.getElementById(id);
+
+function msg(t,color="#123d70"){
+ $("message").textContent=t;
+ $("message").style.color=color;
+}
+
+function resetForm(){
+ $("supplierForm").reset();
+ $("recordId").value="";
+ $("opening_balance").value="0";
+ $("formTitle").textContent="Add Supplier";
+ $("message").textContent="";
+}
+
+async function loadSuppliers(){
+ const {data,error}=await db.from("suppliers")
+  .select("*").order("created_at",{ascending:false});
+
+ if(error){$("supplierList").textContent=error.message;return;}
+ $("supplierList").innerHTML="";
+
+ if(!data||!data.length){
+  $("supplierList").textContent="No suppliers found.";
+  return;
+ }
+
+ data.forEach(r=>{
+  const box=document.createElement("div");
+  box.className="item";
+  const title=document.createElement("strong");
+  title.textContent=r.name||r.business_name||"Supplier";
+  const detail=document.createElement("div");
+  detail.className="small";
+  detail.textContent="Code: "+(r.supplier_code||"-")+
+   " | Phone: "+(r.phone||"-")+
+   " | City: "+(r.city||"-")+
+   " | Balance: PKR "+(r.opening_balance||0);
+
+  const edit=document.createElement("button");
+  edit.textContent="Edit";
+  edit.onclick=()=>editSupplier(r);
+
+  const del=document.createElement("button");
+  del.textContent="Delete";
+  del.className="danger";
+  del.onclick=()=>deleteSupplier(r.id);
+
+  box.append(title,detail,edit,del);
+  $("supplierList").append(box);
+ });
+}
+
+function editSupplier(r){
+ $("recordId").value=r.id;
+ ["name","business_name","supplier_code","phone","whatsapp",
+  "email","address","city","opening_balance","notes"].forEach(k=>{
+  $(k).value=r[k]??"";
+ });
+ $("formTitle").textContent="Edit Supplier";
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+async function deleteSupplier(id){
+ if(!confirm("Delete this supplier?"))return;
+ const {error}=await db.from("suppliers").delete().eq("id",id);
+ if(error){msg(error.message,"#b42318");return;}
+ msg("Supplier deleted.");
+ loadSuppliers();
+}
+
+$("supplierForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ const record={
+  name:$("name").value.trim(),
+  business_name:$("business_name").value.trim()||null,
+  supplier_code:$("supplier_code").value.trim()||null,
+  phone:$("phone").value.trim()||null,
+  whatsapp:$("whatsapp").value.trim()||null,
+  email:$("email").value.trim()||null,
+  address:$("address").value.trim()||null,
+  city:$("city").value.trim()||null,
+  opening_balance:Number($("opening_balance").value||0),
+  notes:$("notes").value.trim()||null
+ };
+ const id=$("recordId").value;
+ const result=id
+  ?await db.from("suppliers").update(record).eq("id",id)
+  :await db.from("suppliers").insert(record);
+
+ if(result.error){msg("Save error: "+result.error.message,"#b42318");return;}
+ msg(id?"Supplier updated.":"Supplier saved.");
+ resetForm();
+ loadSuppliers();
+});
+
+if(db)loadSuppliers();
+else msg("Supabase connection not found.","#b42318");
+</script>
+</body>
+</html>
