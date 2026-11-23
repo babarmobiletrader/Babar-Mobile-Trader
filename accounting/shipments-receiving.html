@@ -1,0 +1,153 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BMT Shipment Receiving</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;padding:16px;background:#f2f5fa;font-family:Arial;color:#17243a}
+main{max-width:850px;margin:auto}
+header{background:#123d70;color:white;padding:20px;border-radius:12px;margin-bottom:16px}
+.card{background:white;padding:18px;border-radius:12px;margin-bottom:16px}
+label{display:block;font-weight:bold;margin:14px 0 6px}
+input,select,textarea{width:100%;padding:12px;border:1px solid #ccd5e2;border-radius:7px;font-size:16px}
+button{padding:12px 16px;border:0;border-radius:7px;background:#123d70;color:white;margin:10px 5px 0 0;font-size:15px}
+.secondary{background:#64748b}
+.result{background:#eef4fb;padding:14px;border-radius:8px;margin-top:16px;line-height:2}
+#message{font-weight:bold;margin-top:12px;overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<main>
+<header>
+<h2>BMT Shipment Receiving</h2>
+<div>Shipment میں موصول اور باقی موبائل کا حساب</div>
+</header>
+
+<div class="card">
+<h3>Receiving Entry</h3>
+
+<label>Shipment Number *</label>
+<select id="shipment" required>
+<option value="">Loading shipments...</option>
+</select>
+
+<label>Expected Quantity *</label>
+<input type="number" id="expected" min="0" value="0">
+
+<label>Previously Received Quantity</label>
+<input type="number" id="previous" min="0" value="0">
+
+<label>Received Now *</label>
+<input type="number" id="received" min="0" value="0">
+
+<label>Receiving Date *</label>
+<input type="date" id="receiving_date" required>
+
+<label>Notes</label>
+<textarea id="notes" rows="3" placeholder="Receiving details"></textarea>
+
+<div class="result">
+<div>Expected: <strong id="showExpected">0</strong></div>
+<div>Previously Received: <strong id="showPrevious">0</strong></div>
+<div>Received Now: <strong id="showNow">0</strong></div>
+<div>Total Received: <strong id="showTotal">0</strong></div>
+<div>Remaining: <strong id="showRemaining">0</strong></div>
+</div>
+
+<button type="button" onclick="calculate()">Calculate</button>
+<button type="button" class="secondary" onclick="clearForm()">Clear Form</button>
+
+<div id="message"></div>
+</div>
+
+<div class="card">
+<h3>Important</h3>
+یہ ابتدائی Receiving Calculator ہے۔ ابھی یہ صرف موصول اور باقی موبائل کی تعداد کا حساب دکھاتا ہے۔ ڈیٹا بیس میں محفوظ کرنے اور IMEI کے ساتھ موبائل اسٹاک میں شامل کرنے کا کام تمام فارم مکمل ہونے کے بعد جوڑیں گے۔
+</div>
+
+<button class="secondary" onclick="location.href='../admin.html'">Back to Admin Dashboard</button>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../supabase.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const db=window.bmtSupabase;
+
+async function loadShipments(){
+ if(!db){
+  $("shipment").innerHTML='<option value="">Supabase connection not found</option>';
+  return;
+ }
+
+ const {data,error}=await db.from("shipments")
+  .select("id,shipment_number")
+  .order("created_at",{ascending:false});
+
+ if(error){
+  $("shipment").innerHTML='<option value="">Shipment load error</option>';
+  $("message").textContent=error.message;
+  return;
+ }
+
+ $("shipment").innerHTML='<option value="">Select Shipment</option>';
+
+ (data||[]).forEach(s=>{
+  const op=document.createElement("option");
+  op.value=s.id;
+  op.textContent=s.shipment_number||s.id;
+  $("shipment").append(op);
+ });
+}
+
+function calculate(){
+ const expected=Number($("expected").value||0);
+ const previous=Number($("previous").value||0);
+ const now=Number($("received").value||0);
+ const total=previous+now;
+ const remaining=expected-total;
+
+ $("showExpected").textContent=expected;
+ $("showPrevious").textContent=previous;
+ $("showNow").textContent=now;
+ $("showTotal").textContent=total;
+ $("showRemaining").textContent=remaining;
+
+ if(! $("shipment").value){
+  $("message").textContent="Please select a shipment.";
+ }else if(expected<0||previous<0||now<0){
+  $("message").textContent="Quantity cannot be negative.";
+ }else if(total>expected){
+  $("message").textContent="Error: Received quantity exceeds expected quantity.";
+ }else{
+  $("message").textContent=remaining===0
+   ?"Shipment fully received."
+   :"Calculation complete. "+remaining+" mobile(s) remaining.";
+ }
+}
+
+function clearForm(){
+ $("expected").value=0;
+ $("previous").value=0;
+ $("received").value=0;
+ $("notes").value="";
+ $("shipment").value="";
+ $("receiving_date").value=new Date().toISOString().slice(0,10);
+ ["showExpected","showPrevious","showNow","showTotal","showRemaining"]
+ .forEach(id=>$(id).textContent="0");
+ $("message").textContent="";
+}
+
+$("expected").addEventListener("input",calculate);
+$("previous").addEventListener("input",calculate);
+$("received").addEventListener("input",calculate);
+$("shipment").addEventListener("change",calculate);
+
+$("receiving_date").value=new Date().toISOString().slice(0,10);
+loadShipments();
+</script>
+</body>
+</html>
