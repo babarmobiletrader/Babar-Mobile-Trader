@@ -1,0 +1,209 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BMT Device Events</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;padding:16px;background:#f2f5fa;font-family:Arial;color:#17243a}
+main{max-width:850px;margin:auto}
+header{background:#123d70;color:white;padding:20px;border-radius:12px;margin-bottom:16px}
+.card{background:white;padding:18px;border-radius:12px;margin-bottom:16px}
+label{display:block;font-weight:bold;margin:12px 0 6px}
+input,select,textarea{width:100%;padding:12px;border:1px solid #ccd5e2;border-radius:7px;font-size:16px}
+button{padding:12px 16px;border:0;border-radius:7px;background:#123d70;color:white;margin:8px 5px 0 0;font-size:15px}
+.secondary{background:#64748b}
+.danger{background:#b42318}
+.item{border:1px solid #dce3ed;padding:13px;border-radius:8px;margin:10px 0;overflow-wrap:anywhere}
+.small{color:#64748b;font-size:13px;line-height:1.8}
+#message{font-weight:bold;margin-top:12px;overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<main>
+<header>
+<h2>BMT Device Events</h2>
+<div>ہر موبائل کی سرگرمیوں اور تبدیلیوں کا ریکارڈ</div>
+</header>
+
+<div class="card">
+<h3 id="formTitle">Add Device Event</h3>
+<form id="eventForm">
+<input type="hidden" id="eventId">
+
+<label>IMEI *</label>
+<input id="imei1" required inputmode="numeric" maxlength="15" placeholder="Enter device IMEI">
+
+<label>Event Type *</label>
+<select id="event_type" required>
+<option value="">Select Event</option>
+<option value="received">Device Received</option>
+<option value="sold">Device Sold</option>
+<option value="returned">Device Returned</option>
+<option value="repair">Sent for Repair</option>
+<option value="repaired">Repair Completed</option>
+<option value="status_change">Status Changed</option>
+<option value="other">Other</option>
+</select>
+
+<label>Event Date *</label>
+<input type="date" id="event_date" required>
+
+<label>Details</label>
+<textarea id="details" rows="3" placeholder="Enter event details"></textarea>
+
+<label>Notes</label>
+<textarea id="notes" rows="3" placeholder="Additional notes"></textarea>
+
+<button type="submit">Save Event</button>
+<button type="button" class="secondary" onclick="resetForm()">Clear Form</button>
+</form>
+<div id="message"></div>
+</div>
+
+<div class="card">
+<h3>Device Event History</h3>
+<div id="eventList">Loading events...</div>
+</div>
+
+<button class="secondary" onclick="location.href='../admin.html'">Back to Admin Dashboard</button>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../supabase.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const db=window.bmtSupabase;
+
+function showMessage(t,color="#123d70"){
+ $("message").textContent=t;
+ $("message").style.color=color;
+}
+
+function resetForm(){
+ $("eventForm").reset();
+ $("eventId").value="";
+ $("event_date").value=new Date().toISOString().slice(0,10);
+ $("formTitle").textContent="Add Device Event";
+ $("message").textContent="";
+}
+
+async function loadEvents(){
+ if(!db){
+  $("eventList").textContent="Supabase connection not found.";
+  return;
+ }
+
+ const {data,error}=await db.from("device_events")
+ .select("*").order("created_at",{ascending:false});
+
+ if(error){
+  $("eventList").textContent="Load error: "+error.message;
+  return;
+ }
+
+ if(!data||!data.length){
+  $("eventList").textContent="No device events saved yet.";
+  return;
+ }
+
+ $("eventList").innerHTML="";
+
+ data.forEach(r=>{
+  const box=document.createElement("div");
+  box.className="item";
+
+  const heading=document.createElement("strong");
+  heading.textContent=(r.event_type||"Event")+" | IMEI: "+(r.imei1||r.device_id||"-");
+
+  const detail=document.createElement("div");
+  detail.className="small";
+  detail.textContent="Date: "+(r.event_date||"-")+
+   " | Details: "+(r.details||"-")+
+   " | Notes: "+(r.notes||"-");
+
+  const edit=document.createElement("button");
+  edit.textContent="Edit";
+  edit.onclick=()=>editEvent(r);
+
+  const del=document.createElement("button");
+  del.textContent="Delete";
+  del.className="danger";
+  del.onclick=()=>deleteEvent(r.id);
+
+  box.append(heading,detail,edit,del);
+  $("eventList").append(box);
+ });
+}
+
+function editEvent(r){
+ $("eventId").value=r.id||"";
+ $("imei1").value=r.imei1||"";
+ $("event_type").value=r.event_type||"";
+ $("event_date").value=r.event_date||"";
+ $("details").value=r.details||"";
+ $("notes").value=r.notes||"";
+ $("formTitle").textContent="Edit Device Event";
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+async function deleteEvent(id){
+ if(!confirm("Delete this event record?"))return;
+
+ const {error}=await db.from("device_events").delete().eq("id",id);
+
+ if(error){
+  showMessage("Delete error: "+error.message,"#b42318");
+  return;
+ }
+
+ showMessage("Event deleted.");
+ await loadEvents();
+}
+
+$("eventForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+
+ if(!db){
+  showMessage("Supabase connection not found.","#b42318");
+  return;
+ }
+
+ const record={
+  imei1:$("imei1").value.trim(),
+  event_type:$("event_type").value,
+  event_date:$("event_date").value,
+  details:$("details").value.trim()||null,
+  notes:$("notes").value.trim()||null
+ };
+
+ const id=$("eventId").value;
+ let result;
+
+ if(id){
+  result=await db.from("device_events").update(record).eq("id",id);
+ }else{
+  result=await db.from("device_events").insert(record);
+ }
+
+ if(result.error){
+  showMessage("Save error: "+result.error.message,"#b42318");
+  return;
+ }
+
+ showMessage(id?"Event updated.":"Event saved.");
+ resetForm();
+ await loadEvents();
+});
+
+async function start(){
+ $("event_date").value=new Date().toISOString().slice(0,10);
+ await loadEvents();
+}
+
+start();
+</script>
+</body>
+</html>
