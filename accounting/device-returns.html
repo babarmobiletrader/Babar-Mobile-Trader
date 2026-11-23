@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BMT Device Returns</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;padding:16px;background:#f2f5fa;font-family:Arial;color:#17243a}
+main{max-width:850px;margin:auto}
+header{background:#123d70;color:white;padding:20px;border-radius:12px;margin-bottom:16px}
+.card{background:white;padding:18px;border-radius:12px;margin-bottom:16px}
+label{display:block;font-weight:bold;margin:12px 0 6px}
+input,select,textarea{width:100%;padding:12px;border:1px solid #ccd5e2;border-radius:7px;font-size:16px}
+button{padding:12px 16px;border:0;border-radius:7px;background:#123d70;color:white;margin:8px 5px 0 0;font-size:15px}
+.secondary{background:#64748b}
+.danger{background:#b42318}
+.item{border:1px solid #dce3ed;padding:13px;border-radius:8px;margin:10px 0}
+.small{color:#64748b;font-size:13px;margin-top:6px}
+#message{font-weight:bold;margin:10px 0;overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<main>
+<header>
+<h2>BMT Device Returns</h2>
+<div>موبائل کی خریداری یا فروخت کی واپسی کا ریکارڈ</div>
+</header>
+
+<div class="card">
+<h3 id="formTitle">Add Device Return</h3>
+<form id="returnForm">
+<input type="hidden" id="returnId">
+
+<label>Return Type *</label>
+<select id="return_type" required>
+<option value="">Select Return Type</option>
+<option value="purchase">Purchase Return</option>
+<option value="sales">Sales Return</option>
+</select>
+
+<label>IMEI *</label>
+<input id="imei1" required inputmode="numeric" placeholder="Enter device IMEI">
+
+<label>Return Date *</label>
+<input type="date" id="return_date" required>
+
+<label>Return Reason *</label>
+<select id="reason" required>
+<option value="">Select Reason</option>
+<option value="defective">Defective Device</option>
+<option value="customer_return">Customer Return</option>
+<option value="supplier_return">Supplier Return</option>
+<option value="wrong_model">Wrong Model</option>
+<option value="other">Other</option>
+</select>
+
+<label>Return Amount (PKR)</label>
+<input type="number" id="amount" min="0" step="0.01" value="0">
+
+<label>Device Condition</label>
+<select id="condition">
+<option value="">Select Condition</option>
+<option value="working">Working</option>
+<option value="damaged">Damaged</option>
+<option value="faulty">Faulty</option>
+<option value="under_inspection">Under Inspection</option>
+</select>
+
+<label>Notes</label>
+<textarea id="notes" rows="3" placeholder="Additional details"></textarea>
+
+<button type="submit">Save Return</button>
+<button type="button" class="secondary" onclick="resetForm()">Clear Form</button>
+</form>
+<div id="message"></div>
+</div>
+
+<div class="card">
+<h3>Saved Device Returns</h3>
+<div id="returnList">Loading returns...</div>
+</div>
+
+<button class="secondary" onclick="location.href='../admin.html'">Back to Admin Dashboard</button>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../supabase.js"></script>
+<script>
+const db=window.bmtSupabase;
+const $=id=>document.getElementById(id);
+
+function msg(t,color="#123d70"){
+ $("message").textContent=t;
+ $("message").style.color=color;
+}
+
+function resetForm(){
+ $("returnForm").reset();
+ $("returnId").value="";
+ $("amount").value="0";
+ $("formTitle").textContent="Add Device Return";
+ $("return_date").value=new Date().toISOString().slice(0,10);
+ $("message").textContent="";
+}
+
+async function loadReturns(){
+ if(!db){
+  $("returnList").textContent="Supabase connection not found.";
+  return;
+ }
+
+ const {data,error}=await db.from("device_returns")
+ .select("*").order("created_at",{ascending:false});
+
+ if(error){
+  $("returnList").textContent="Load error: "+error.message;
+  return;
+ }
+
+ if(!data||!data.length){
+  $("returnList").textContent="No device returns saved yet.";
+  return;
+ }
+
+ $("returnList").innerHTML="";
+ data.forEach(r=>{
+  const div=document.createElement("div");
+  div.className="item";
+
+  const title=document.createElement("strong");
+  title.textContent=(r.return_type||"Return")+" | "+(r.imei1||"IMEI not available");
+
+  const detail=document.createElement("div");
+  detail.className="small";
+  detail.textContent="Date: "+(r.return_date||"-")+
+   " | Reason: "+(r.reason||"-");
+
+  const edit=document.createElement("button");
+  edit.textContent="Edit";
+  edit.onclick=()=>editReturn(r);
+
+  const del=document.createElement("button");
+  del.textContent="Delete";
+  del.className="danger";
+  del.onclick=()=>deleteReturn(r.id);
+
+  div.append(title,detail,edit,del);
+  $("returnList").append(div);
+ });
+}
+
+function editReturn(r){
+ $("returnId").value=r.id||"";
+ $("return_type").value=r.return_type||"";
+ $("imei1").value=r.imei1||"";
+ $("return_date").value=r.return_date||"";
+ $("reason").value=r.reason||"";
+ $("amount").value=r.amount||0;
+ $("condition").value=r.condition||"";
+ $("notes").value=r.notes||"";
+ $("formTitle").textContent="Edit Device Return";
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+async function deleteReturn(id){
+ if(!confirm("Delete this return record?"))return;
+ const {error}=await db.from("device_returns").delete().eq("id",id);
+ if(error){msg("Delete error: "+error.message,"#b42318");return;}
+ msg("Return deleted.");
+ await loadReturns();
+}
+
+$("returnForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ if(!db){msg("Supabase connection not found.","#b42318");return;}
+
+ const id=$("returnId").value;
+ const record={
+  return_type:$("return_type").value,
+  imei1:$("imei1").value.trim(),
+  return_date:$("return_date").value,
+  reason:$("reason").value,
+  amount:Number($("amount").value||0),
+  condition:$("condition").value||null,
+  notes:$("notes").value.trim()||null
+ };
+
+ let result;
+ if(id){
+  result=await db.from("device_returns").update(record).eq("id",id);
+ }else{
+  result=await db.from("device_returns").insert(record);
+ }
+
+ if(result.error){
+  msg("Save error: "+result.error.message,"#b42318");
+  return;
+ }
+
+ msg(id?"Return updated.":"Return saved.");
+ resetForm();
+ await loadReturns();
+});
+
+async function start(){
+ if(!db){msg("Supabase connection not found.","#b42318");return;}
+ $("return_date").value=new Date().toISOString().slice(0,10);
+ await loadReturns();
+}
+start();
+</script>
+</body>
+</html>
