@@ -1,0 +1,250 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BMT Shipment Management</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;padding:16px;background:#f2f5fa;font-family:Arial;color:#17243a}
+main{max-width:850px;margin:auto}
+header{background:#123d70;color:white;padding:20px;border-radius:12px;margin-bottom:16px}
+h2{margin:0 0 8px}
+.card{background:white;padding:18px;border-radius:12px;margin-bottom:16px;box-shadow:0 2px 8px #0000000d}
+label{display:block;font-weight:bold;margin:12px 0 6px}
+input,select,textarea{width:100%;padding:12px;border:1px solid #ccd5e2;border-radius:7px;font-size:16px;background:white}
+button{padding:12px 16px;border:0;border-radius:7px;background:#123d70;color:white;font-size:15px;margin:8px 5px 0 0}
+.secondary{background:#64748b}
+.danger{background:#b42318}
+.item{border:1px solid #dce3ed;padding:13px;border-radius:8px;margin:10px 0}
+.small{color:#64748b;font-size:13px;margin-top:6px}
+#message{font-weight:bold;margin:10px 0;overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<main>
+
+<header>
+<h2>BMT Shipment Management</h2>
+<div>شپمنٹ کا ریکارڈ شامل کریں اور Edit کریں</div>
+</header>
+
+<div class="card">
+<h3 id="formTitle">Add New Shipment</h3>
+
+<form id="shipmentForm">
+<input type="hidden" id="shipmentId">
+
+<label>Shipment Number *</label>
+<input id="shipment_number" required placeholder="Enter shipment number">
+
+<label>Supplier</label>
+<select id="supplier_id">
+<option value="">Select Supplier</option>
+</select>
+
+<label>Shipment Date</label>
+<input id="shipment_date" type="date">
+
+<label>Origin</label>
+<input id="origin" placeholder="Example: Dubai, UAE">
+
+<label>Destination</label>
+<input id="destination" placeholder="Example: Karachi, Pakistan">
+
+<label>Status</label>
+<select id="status">
+<option value="pending">Pending</option>
+<option value="in_transit">In Transit</option>
+<option value="received">Received</option>
+<option value="completed">Completed</option>
+</select>
+
+<label>Notes</label>
+<textarea id="notes" rows="3" placeholder="Additional details"></textarea>
+
+<button type="submit">Save Shipment</button>
+<button type="button" class="secondary" onclick="resetForm()">Clear Form</button>
+</form>
+
+<div id="message"></div>
+</div>
+
+<div class="card">
+<h3>Saved Shipments</h3>
+<div id="shipmentList">Loading shipments...</div>
+</div>
+
+<button class="secondary" onclick="location.href='../admin.html'">Back to Admin Dashboard</button>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../supabase.js"></script>
+
+<script>
+const db=window.bmtSupabase;
+const $=id=>document.getElementById(id);
+
+function msg(text,color="#123d70"){
+ $("message").textContent=text;
+ $("message").style.color=color;
+}
+
+function resetForm(){
+ $("shipmentForm").reset();
+ $("shipmentId").value="";
+ $("formTitle").textContent="Add New Shipment";
+ $("message").textContent="";
+}
+
+async function loadSuppliers(){
+ if(!db)return;
+
+ const {data,error}=await db.from("suppliers").select("*");
+
+ if(error){
+  $("supplier_id").innerHTML='<option value="">Supplier loading error</option>';
+  return;
+ }
+
+ $("supplier_id").innerHTML='<option value="">Select Supplier</option>';
+
+ (data||[]).forEach(s=>{
+  const op=document.createElement("option");
+  op.value=s.id;
+  op.textContent=s.name||s.business_name||"Supplier";
+  $("supplier_id").append(op);
+ });
+}
+
+async function loadShipments(){
+ if(!db){
+  $("shipmentList").textContent="Supabase connection not found.";
+  return;
+ }
+
+ const {data,error}=await db.from("shipments")
+ .select("*")
+ .order("created_at",{ascending:false});
+
+ if(error){
+  $("shipmentList").textContent="Load error: "+error.message;
+  return;
+ }
+
+ if(!data||!data.length){
+  $("shipmentList").textContent="No shipments saved yet.";
+  return;
+ }
+
+ $("shipmentList").innerHTML="";
+
+ data.forEach(s=>{
+  const div=document.createElement("div");
+  div.className="item";
+
+  const title=document.createElement("strong");
+  title.textContent=s.shipment_number||"Unnamed Shipment";
+
+  const details=document.createElement("div");
+  details.className="small";
+  details.textContent=[
+   "Date: "+(s.shipment_date||"-"),
+   "Origin: "+(s.origin||"-"),
+   "Destination: "+(s.destination||"-"),
+   "Status: "+(s.status||"-")
+  ].join(" | ");
+
+  const edit=document.createElement("button");
+  edit.textContent="Edit";
+  edit.onclick=()=>editShipment(s);
+
+  const del=document.createElement("button");
+  del.textContent="Delete";
+  del.className="danger";
+  del.onclick=()=>deleteShipment(s.id);
+
+  div.append(title,details,edit,del);
+  $("shipmentList").append(div);
+ });
+}
+
+function editShipment(s){
+ $("shipmentId").value=s.id||"";
+ $("shipment_number").value=s.shipment_number||"";
+ $("supplier_id").value=s.supplier_id||"";
+ $("shipment_date").value=s.shipment_date||"";
+ $("origin").value=s.origin||"";
+ $("destination").value=s.destination||"";
+ $("status").value=s.status||"pending";
+ $("notes").value=s.notes||"";
+
+ $("formTitle").textContent="Edit Shipment";
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+async function deleteShipment(id){
+ if(!confirm("Are you sure you want to delete this shipment?"))return;
+
+ const {error}=await db.from("shipments").delete().eq("id",id);
+
+ if(error){
+  msg("Delete error: "+error.message,"#b42318");
+  return;
+ }
+
+ msg("Shipment deleted successfully.");
+ await loadShipments();
+}
+
+$("shipmentForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+
+ if(!db){
+  msg("Supabase connection not found.","#b42318");
+  return;
+ }
+
+ const id=$("shipmentId").value;
+
+ const record={
+  shipment_number:$("shipment_number").value.trim(),
+  supplier_id:$("supplier_id").value||null,
+  shipment_date:$("shipment_date").value||null,
+  origin:$("origin").value.trim()||null,
+  destination:$("destination").value.trim()||null,
+  status:$("status").value,
+  notes:$("notes").value.trim()||null
+ };
+
+ let result;
+
+ if(id){
+  result=await db.from("shipments").update(record).eq("id",id);
+ }else{
+  result=await db.from("shipments").insert(record);
+ }
+
+ if(result.error){
+  msg("Save error: "+result.error.message,"#b42318");
+  return;
+ }
+
+ msg(id?"Shipment updated successfully.":"Shipment saved successfully.");
+
+ resetForm();
+ await loadShipments();
+});
+
+async function start(){
+ await loadSuppliers();
+ await loadShipments();
+}
+
+start();
+</script>
+
+</body>
+</html>
