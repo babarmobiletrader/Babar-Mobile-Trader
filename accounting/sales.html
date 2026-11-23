@@ -1,0 +1,264 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BMT Sales Invoice</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;padding:16px;background:#f2f5fa;font-family:Arial;color:#17243a}
+main{max-width:850px;margin:auto}
+header{background:#123d70;color:white;padding:20px;border-radius:12px;margin-bottom:16px}
+.card{background:white;padding:18px;border-radius:12px;margin-bottom:16px}
+label{display:block;font-weight:bold;margin:12px 0 6px}
+input,select,textarea{width:100%;padding:12px;border:1px solid #ccd5e2;border-radius:7px;font-size:16px}
+button{padding:12px 16px;border:0;border-radius:7px;background:#123d70;color:white;margin:8px 5px 0 0;font-size:15px}
+.secondary{background:#64748b}
+.danger{background:#b42318}
+.item{border:1px solid #dce3ed;padding:13px;border-radius:8px;margin:10px 0}
+.small{color:#64748b;font-size:13px;margin-top:6px}
+#message{font-weight:bold;margin:10px 0;overflow-wrap:anywhere}
+.total{font-size:20px;font-weight:bold;margin-top:15px}
+</style>
+</head>
+<body>
+<main>
+
+<header>
+<h2>BMT Sales Invoice</h2>
+<div>موبائل فروخت اور سیلز انوائس کا ریکارڈ</div>
+</header>
+
+<div class="card">
+<h3 id="formTitle">New Sales Invoice</h3>
+
+<form id="salesForm">
+<input type="hidden" id="invoiceId">
+
+<label>Invoice Number *</label>
+<input id="invoice_number" required placeholder="Invoice number">
+
+<label>Sale Date *</label>
+<input id="invoice_date" type="date" required>
+
+<label>Customer *</label>
+<select id="customer_id" required>
+<option value="">Select Customer</option>
+</select>
+
+<label>IMEI *</label>
+<input id="imei1" required inputmode="numeric" placeholder="Enter mobile IMEI">
+
+<label>Mobile Model</label>
+<input id="model" placeholder="Mobile model">
+
+<label>Sale Price (PKR) *</label>
+<input id="sale_price" type="number" min="0" step="0.01" required>
+
+<label>Discount (PKR)</label>
+<input id="discount" type="number" min="0" step="0.01" value="0">
+
+<label>Payment Received (PKR)</label>
+<input id="amount_received" type="number" min="0" step="0.01" value="0">
+
+<label>Payment Method</label>
+<select id="payment_method">
+<option value="">Select Payment Method</option>
+<option value="cash">Cash</option>
+<option value="bank">Bank</option>
+<option value="online">Online Transfer</option>
+<option value="other">Other</option>
+</select>
+
+<label>Notes</label>
+<textarea id="notes" rows="2"></textarea>
+
+<div class="total">Net Amount: PKR <span id="netAmount">0.00</span></div>
+<div class="total">Balance: PKR <span id="balance">0.00</span></div>
+
+<button type="submit">Save Sales Invoice</button>
+<button type="button" class="secondary" onclick="resetForm()">Clear Form</button>
+</form>
+<div id="message"></div>
+</div>
+
+<div class="card">
+<h3>Saved Sales Invoices</h3>
+<div id="invoiceList">Loading invoices...</div>
+</div>
+
+<button class="secondary" onclick="location.href='../admin.html'">Back to Admin Dashboard</button>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../supabase.js"></script>
+
+<script>
+const db=window.bmtSupabase;
+const $=id=>document.getElementById(id);
+
+function msg(t,color="#123d70"){
+ $("message").textContent=t;
+ $("message").style.color=color;
+}
+
+function calculate(){
+ const price=Number($("sale_price").value||0);
+ const discount=Number($("discount").value||0);
+ const received=Number($("amount_received").value||0);
+ const net=price-discount;
+ $("netAmount").textContent=net.toFixed(2);
+ $("balance").textContent=(net-received).toFixed(2);
+}
+
+["sale_price","discount","amount_received"].forEach(id=>{
+ $(id).addEventListener("input",calculate);
+});
+
+function resetForm(){
+ $("salesForm").reset();
+ $("invoiceId").value="";
+ $("discount").value="0";
+ $("amount_received").value="0";
+ $("formTitle").textContent="New Sales Invoice";
+ $("invoice_date").value=new Date().toISOString().slice(0,10);
+ calculate();
+ msg("");
+}
+
+async function loadCustomers(){
+ const {data,error}=await db.from("customers").select("*");
+ if(error){
+  $("customer_id").innerHTML='<option value="">Customer load error</option>';
+  return;
+ }
+ $("customer_id").innerHTML='<option value="">Select Customer</option>';
+ (data||[]).forEach(c=>{
+  const op=document.createElement("option");
+  op.value=c.id;
+  op.textContent=c.name||"Customer";
+  $("customer_id").append(op);
+ });
+}
+
+async function loadInvoices(){
+ const {data,error}=await db.from("sales_invoices")
+ .select("*").order("created_at",{ascending:false});
+
+ if(error){
+  $("invoiceList").textContent="Load error: "+error.message;
+  return;
+ }
+ if(!data||!data.length){
+  $("invoiceList").textContent="No sales invoices saved yet.";
+  return;
+ }
+
+ $("invoiceList").innerHTML="";
+ data.forEach(inv=>{
+  const div=document.createElement("div");
+  div.className="item";
+  const title=document.createElement("strong");
+  title.textContent=inv.invoice_number||"Sales Invoice";
+  const detail=document.createElement("div");
+  detail.className="small";
+  detail.textContent="Date: "+(inv.invoice_date||"-")+" | Total: PKR "+(inv.total_amount??"-");
+
+  const edit=document.createElement("button");
+  edit.textContent="Edit";
+  edit.onclick=()=>editInvoice(inv);
+
+  const del=document.createElement("button");
+  del.textContent="Delete";
+  del.className="danger";
+  del.onclick=()=>deleteInvoice(inv.id);
+
+  div.append(title,detail,edit,del);
+  $("invoiceList").append(div);
+ });
+}
+
+function editInvoice(inv){
+ $("invoiceId").value=inv.id||"";
+ $("invoice_number").value=inv.invoice_number||"";
+ $("invoice_date").value=inv.invoice_date||"";
+ $("customer_id").value=inv.customer_id||"";
+ $("sale_price").value=inv.total_amount||0;
+ $("discount").value=inv.discount||0;
+ $("amount_received").value=inv.amount_received||0;
+ $("payment_method").value=inv.payment_method||"";
+ $("notes").value=inv.notes||"";
+ $("formTitle").textContent="Edit Sales Invoice";
+ calculate();
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+async function deleteInvoice(id){
+ if(!confirm("Delete this sales invoice?"))return;
+ const {error}=await db.from("sales_invoices").delete().eq("id",id);
+ if(error){msg("Delete error: "+error.message,"#b42318");return;}
+ msg("Invoice deleted.");
+ await loadInvoices();
+}
+
+$("salesForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ if(!db){msg("Supabase connection not found.","#b42318");return;}
+
+ const id=$("invoiceId").value;
+ const price=Number($("sale_price").value||0);
+ const discount=Number($("discount").value||0);
+ const received=Number($("amount_received").value||0);
+ const net=price-discount;
+
+ if(discount>price){
+  msg("Discount cannot exceed sale price.","#b42318");
+  return;
+ }
+ if(received>net){
+  msg("Received amount cannot exceed net amount.","#b42318");
+  return;
+ }
+
+ const record={
+  invoice_number:$("invoice_number").value.trim(),
+  invoice_date:$("invoice_date").value,
+  customer_id:$("customer_id").value,
+  total_amount:net,
+  notes:$("notes").value.trim()||null
+ };
+
+ let result;
+ if(id){
+  result=await db.from("sales_invoices").update(record).eq("id",id);
+ }else{
+  result=await db.from("sales_invoices").insert(record);
+ }
+
+ if(result.error){
+  msg("Save error: "+result.error.message,"#b42318");
+  return;
+ }
+
+ msg(id?"Invoice updated.":"Invoice saved.");
+ resetForm();
+ await loadInvoices();
+});
+
+async function start(){
+ if(!db){
+  msg("Supabase connection not found.","#b42318");
+  return;
+ }
+ $("invoice_date").value=new Date().toISOString().slice(0,10);
+ await loadCustomers();
+ await loadInvoices();
+ calculate();
+}
+start();
+</script>
+
+</body>
+</html>
