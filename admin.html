@@ -5,186 +5,371 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>BMT Admin Dashboard</title>
+
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f1f5f9;color:#172b4d}
-header{background:#123b70;color:white;padding:17px;display:flex;justify-content:space-between;align-items:center;gap:10px}
-header h1{font-size:19px;margin:0}
-button{border:0;border-radius:7px;padding:11px 13px;cursor:pointer;font-weight:bold}
-#logoutButton{background:white;color:#123b70}
-main{max-width:1100px;margin:auto;padding:18px}
-.welcome,.panel{background:white;border-radius:12px;padding:18px;margin-bottom:18px;box-shadow:0 3px 12px #0000000b}
-h2{font-size:19px}
-#status{color:#64748b;overflow-wrap:anywhere}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.module{background:white;border:1px solid #e2e8f0;border-radius:11px;padding:17px 12px;text-align:left;color:#172b4d;min-height:90px}
-.module strong{display:block;font-size:15px;margin-bottom:7px;color:#123b70}
-.module small{color:#64748b;font-size:12px}
-.module:active{background:#eaf1fa}
-#summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.metric{background:#f1f5f9;border-radius:9px;padding:14px;overflow-wrap:anywhere}
-.metric strong{display:block;font-size:20px;margin-top:8px}
-@media(min-width:700px){.grid{grid-template-columns:repeat(4,1fr)}#summary{grid-template-columns:repeat(4,1fr)}}
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f1f5f9;
+  color: #172b4d;
+}
+
+header {
+  background: #123b70;
+  color: white;
+  padding: 17px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+header h1 { font-size: 19px; margin: 0; }
+
+button {
+  border: 0;
+  border-radius: 7px;
+  padding: 10px 13px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#logoutButton {
+  background: white;
+  color: #123b70;
+}
+
+main {
+  max-width: 1100px;
+  margin: auto;
+  padding: 18px;
+}
+
+.welcome, .panel {
+  background: white;
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 18px;
+  box-shadow: 0 3px 12px #0000000b;
+}
+
+h2 { font-size: 19px; }
+
+#status {
+  color: #64748b;
+  overflow-wrap: anywhere;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.module {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 11px;
+  padding: 17px 12px;
+  text-align: left;
+  color: #172b4d;
+  min-height: 90px;
+}
+
+.module strong {
+  display: block;
+  font-size: 15px;
+  margin-bottom: 7px;
+  color: #123b70;
+}
+
+.module small {
+  color: #64748b;
+  font-size: 12px;
+}
+
+.module:active {
+  background: #eaf1fa;
+}
+
+#summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.metric {
+  background: #f1f5f9;
+  border-radius: 9px;
+  padding: 14px;
+  overflow-wrap: anywhere;
+}
+
+.metric strong {
+  display: block;
+  font-size: 20px;
+  margin-top: 8px;
+}
+
+#moduleMessage {
+  color: #475569;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 700px) {
+  .grid { grid-template-columns: repeat(4, 1fr); }
+  #summary { grid-template-columns: repeat(4, 1fr); }
+}
 </style>
 </head>
+
 <body>
+
 <header>
-<h1>Babar Mobile Trader</h1>
-<button id="logoutButton">Logout</button>
+  <h1>Babar Mobile Trader</h1>
+  <button id="logoutButton">Logout</button>
 </header>
 
 <main>
-<section class="welcome">
-<h2>Admin Dashboard</h2>
-<p id="welcomeText">Checking account...</p>
-<p id="status">Please wait...</p>
-</section>
 
-<section class="panel">
-<h2>Business Summary</h2>
-<div id="summary">Loading summary...</div>
-</section>
+  <section class="welcome">
+    <h2>Admin Dashboard</h2>
+    <p id="welcomeText">Checking account...</p>
+    <p id="status">Please wait...</p>
+  </section>
 
-<section class="panel">
-<h2>Management Modules</h2>
-<div class="grid">
+  <section class="panel">
+    <h2>Business Summary</h2>
+    <div id="summary">Loading summary...</div>
+  </section>
 
-<button class="module" data-page="accounting/customer-receipts.html">
-<strong>Customer Receipts</strong><small>Customer payments received</small>
-</button>
+  <section class="panel">
+    <h2>Management Modules</h2>
+    <div class="grid" id="modules">
 
-<button class="module" data-page="accounting/customers.html">
-<strong>Customers</strong><small>Customer records and accounts</small>
-</button>
+      <button class="module" data-name="Customer Receipts" data-page="accounting/customer-receipts.html">
+        <strong>Customer Receipts</strong>
+        <small>Customer payments received</small>
+      </button>
 
-<button class="module" data-page="accounting/device-events.html">
-<strong>Device Events</strong><small>Device movement history</small>
-</button>
+      <button class="module" data-name="Customers" data-page="accounting/customers.html">
+        <strong>Customers</strong>
+        <small>Customer records and accounts</small>
+      </button>
 
-<button class="module" data-page="accounting/device-returns.html">
-<strong>Device Returns</strong><small>Returned mobile records</small>
-</button>
+      <button class="module" data-name="Device Events" data-page="accounting/device-events.html">
+        <strong>Device Events</strong>
+        <small>Device movement history</small>
+      </button>
 
-<button class="module" data-page="accounting/stock.html">
-<strong>Devices / Stock</strong><small>Mobile stock and IMEI records</small>
-</button>
+      <button class="module" data-name="Device Returns" data-page="accounting/device-returns.html">
+        <strong>Device Returns</strong>
+        <small>Returned mobile records</small>
+      </button>
 
-<button class="module" data-page="accounting/expenses.html">
-<strong>Expenses</strong><small>Business expenses</small>
-</button>
+      <button class="module" data-name="Devices / Stock" data-page="accounting/stock.html">
+        <strong>Devices / Stock</strong>
+        <small>Mobile stock and IMEI records</small>
+      </button>
 
-<button class="module" data-page="accounting/purchase.html">
-<strong>Purchase Invoices</strong><small>Supplier purchase invoices</small>
-</button>
+      <button class="module" data-name="Expenses" data-page="accounting/expenses.html">
+        <strong>Expenses</strong>
+        <small>Business expenses</small>
+      </button>
 
-<button class="module" data-page="accounting/suppliers.html">
-<strong>Suppliers</strong><small>Supplier records and accounts</small>
-</button>
+      <button class="module" data-name="Profiles">
+        <strong>Profiles / Users</strong>
+        <small>Admin and staff accounts - Coming Soon</small>
+      </button>
 
-<button class="module" data-page="accounting/shipments.html">
-<strong>Shipments</strong><small>Import and delivery records</small>
-</button>
+      <button class="module" data-name="Purchase Invoices" data-page="accounting/purchase.html">
+        <strong>Purchase Invoices</strong>
+        <small>Supplier purchase invoices</small>
+      </button>
 
-<button class="module" data-page="accounting/supplier-payments.html">
-<strong>Supplier Payments</strong><small>Payments to suppliers</small>
-</button>
+      <button class="module" data-name="Purchase Items" data-page="accounting/purchase.html">
+        <strong>Purchase Items</strong>
+        <small>Purchased mobile details</small>
+      </button>
 
-<button class="module" data-page="accounting/sales.html">
-<strong>Sales</strong><small>Sales invoices and mobile sales</small>
-</button>
+      <button class="module" data-name="Sales Invoices" data-page="accounting/sales.html">
+        <strong>Sales Invoices</strong>
+        <small>Customer sales invoices</small>
+      </button>
 
-<button class="module" data-page="accounting/shipments-receiving.html">
-<strong>Shipment Receiving</strong><small>Record received shipment units</small>
-</button>
+      <button class="module" data-name="Sales Items" data-page="accounting/sales.html">
+        <strong>Sales Items</strong>
+        <small>Sold mobile details</small>
+      </button>
 
-<button class="module" data-page="accounting/device-search.html">
-<strong>IMEI Search</strong><small>Search mobile by IMEI</small>
-</button>
+      <button class="module" data-name="Shipments" data-page="accounting/shipments.html">
+        <strong>Shipments</strong>
+        <small>Import and delivery records</small>
+      </button>
 
-<button class="module" data-page="accounting/reports.html">
-<strong>Reports</strong><small>Business reports and totals</small>
-</button>
+      <button class="module" data-name="Supplier Payments" data-page="accounting/supplier-payments.html">
+        <strong>Supplier Payments</strong>
+        <small>Payments to suppliers</small>
+      </button>
 
-<button class="module" data-page="accounting/backup.html">
-<strong>Backup</strong><small>Export business records</small>
-</button>
+      <button class="module" data-name="Suppliers" data-page="accounting/suppliers.html">
+        <strong>Suppliers</strong>
+        <small>Supplier records and accounts</small>
+      </button>
 
-</div>
-</section>
+      <button class="module" data-name="Shipment Receiving" data-page="accounting/shipments-receiving.html">
+        <strong>Shipment Receiving</strong>
+        <small>Shipment receiving records</small>
+      </button>
+
+      <button class="module" data-name="IMEI Search" data-page="accounting/device-search.html">
+        <strong>IMEI Search</strong>
+        <small>Search mobile by IMEI</small>
+      </button>
+
+      <button class="module" data-name="Reports" data-page="accounting/reports.html">
+        <strong>Reports</strong>
+        <small>Business reports and totals</small>
+      </button>
+
+      <button class="module" data-name="Backup" data-page="accounting/backup.html">
+        <strong>Backup</strong>
+        <small>Export business records</small>
+      </button>
+
+    </div>
+  </section>
+
+  <section class="panel" id="modulePanel" hidden>
+    <h2 id="moduleTitle">Module</h2>
+    <p id="moduleMessage"></p>
+    <button id="backButton">Back to Dashboard</button>
+  </section>
+
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase.js"></script>
+
 <script>
-const statusText=document.getElementById("status");
-const welcomeText=document.getElementById("welcomeText");
-const summaryBox=document.getElementById("summary");
+const statusText = document.getElementById("status");
+const welcomeText = document.getElementById("welcomeText");
+const summaryBox = document.getElementById("summary");
 
-async function loadDashboard(){
-try{
-const {data:sessionData,error:sessionError}=await window.bmtSupabase.auth.getSession();
-if(sessionError)throw sessionError;
+async function loadDashboard() {
+  try {
+    const { data: sessionData, error: sessionError } =
+      await window.bmtSupabase.auth.getSession();
 
-const user=sessionData.session?.user;
-if(!user){window.location.href="login.html";return;}
+    if (sessionError) throw sessionError;
 
-const {data:profile,error:profileError}=await window.bmtSupabase
-.from("profiles")
-.select("full_name,role,is_active")
-.eq("user_id",user.id)
-.maybeSingle();
+    const user = sessionData.session?.user;
 
-if(profileError)throw profileError;
+    if (!user) {
+      window.location.href = "login.html";
+      return;
+    }
 
-if(!profile||profile.role!=="admin"||profile.is_active!==true){
-statusText.textContent="Access denied. Active admin account required.";
-return;
+    const { data: profile, error: profileError } =
+      await window.bmtSupabase
+        .from("profiles")
+        .select("full_name, role, is_active")
+        .eq("user_id", user.id)
+        .maybeSingle();
+
+    if (profileError) throw profileError;
+
+    if (!profile || profile.role !== "admin" ||
+        profile.is_active !== true) {
+      statusText.textContent =
+        "Access denied. Active admin account required.";
+      return;
+    }
+
+    welcomeText.textContent =
+      "Welcome, " + (profile.full_name || user.email);
+
+    statusText.textContent = "Admin account verified.";
+
+    const { data, error } = await window.bmtSupabase
+      .from("dashboard_summary")
+      .select("*");
+
+    if (error) throw error;
+
+    summaryBox.innerHTML = "";
+
+    if (!data || data.length === 0) {
+      summaryBox.textContent = "No summary figures available.";
+      return;
+    }
+
+    Object.entries(data[0]).forEach(([key, value]) => {
+      const card = document.createElement("div");
+      card.className = "metric";
+
+      const name = document.createElement("span");
+      name.textContent = key.replace(/_/g, " ");
+
+      const number = document.createElement("strong");
+      number.textContent = value === null
+        ? "—"
+        : typeof value === "number"
+          ? value.toLocaleString()
+          : String(value);
+
+      card.appendChild(name);
+      card.appendChild(number);
+      summaryBox.appendChild(card);
+    });
+
+  } catch (error) {
+    statusText.textContent = "Error: " + error.message;
+    summaryBox.textContent = "Summary could not be loaded.";
+  }
 }
 
-welcomeText.textContent="Welcome, "+(profile.full_name||user.email);
-statusText.textContent="Admin account verified.";
+document.querySelectorAll(".module").forEach(button => {
+  button.addEventListener("click", () => {
+    const page = button.dataset.page;
 
-const {data,error}=await window.bmtSupabase
-.from("dashboard_summary").select("*");
+    if (page) {
+      window.location.href = page;
+      return;
+    }
 
-if(error)throw error;
+    document.getElementById("modules").parentElement.hidden = true;
+    document.getElementById("modulePanel").hidden = false;
 
-summaryBox.innerHTML="";
-if(!data||data.length===0){
-summaryBox.textContent="No summary figures available.";
-return;
-}
+    document.getElementById("moduleTitle").textContent =
+      button.dataset.name;
 
-Object.entries(data[0]).forEach(([key,value])=>{
-const card=document.createElement("div");
-card.className="metric";
-const name=document.createElement("span");
-name.textContent=key.replace(/_/g," ");
-const number=document.createElement("strong");
-number.textContent=value===null?"—":
-typeof value==="number"?value.toLocaleString():String(value);
-card.append(name,number);
-summaryBox.append(card);
+    document.getElementById("moduleMessage").textContent =
+      "This module is not connected yet. Its management page will be added later.";
+  });
 });
-}catch(error){
-statusText.textContent="Error: "+error.message;
-summaryBox.textContent="Summary could not be loaded.";
-}
-}
 
-document.querySelectorAll(".module").forEach(button=>{
-button.addEventListener("click",()=>{
-window.location.href=button.dataset.page;
-});
+document.getElementById("backButton").addEventListener("click", () => {
+  document.getElementById("modulePanel").hidden = true;
+  document.getElementById("modules").parentElement.hidden = false;
 });
 
-document.getElementById("logoutButton").addEventListener("click",async()=>{
-const {error}=await window.bmtSupabase.auth.signOut();
-if(error){alert(error.message);return;}
-window.location.href="login.html";
+document.getElementById("logoutButton").addEventListener("click", async () => {
+  const { error } = await window.bmtSupabase.auth.signOut();
+
+  if (error) {
+    alert(error.message);
+    return;
+  }
+
+  window.location.href = "login.html";
 });
 
 loadDashboard();
 </script>
+
 </body>
 </html>
