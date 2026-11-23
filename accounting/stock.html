@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BMT Stock Management</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;padding:16px;background:#f2f5fa;font-family:Arial;color:#17243a}
+main{max-width:950px;margin:auto}
+header{background:#123d70;color:white;padding:20px;border-radius:12px;margin-bottom:16px}
+.card{background:white;padding:18px;border-radius:12px;margin-bottom:16px}
+input,select{width:100%;padding:12px;border:1px solid #ccd5e2;border-radius:7px;font-size:16px;margin:8px 0}
+button{padding:12px 16px;border:0;border-radius:7px;background:#123d70;color:white;margin:8px 5px 0 0;font-size:15px}
+.secondary{background:#64748b}
+.item{border:1px solid #dce3ed;padding:13px;border-radius:8px;margin:10px 0;overflow-wrap:anywhere}
+.small{color:#64748b;font-size:13px;line-height:1.8}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.stat{background:#eef4fb;padding:14px;border-radius:8px}
+.stat strong{display:block;font-size:23px;margin-top:5px}
+#message{font-weight:bold;margin-top:10px;overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<main>
+<header>
+<h2>BMT Stock Management</h2>
+<div>موجودہ موبائل اسٹاک اور دستیاب ڈیوائسز</div>
+</header>
+
+<div class="card">
+<h3>Stock Summary</h3>
+<div class="stats">
+<div class="stat">Total Devices<strong id="total">0</strong></div>
+<div class="stat">Available<strong id="available">0</strong></div>
+<div class="stat">Sold<strong id="sold">0</strong></div>
+<div class="stat">Other Status<strong id="other">0</strong></div>
+</div>
+<div id="message"></div>
+<button onclick="loadStock()">Refresh Stock</button>
+</div>
+
+<div class="card">
+<h3>Search / Filter Stock</h3>
+<input id="search" placeholder="Search IMEI or Model">
+<select id="status">
+<option value="">All Status</option>
+<option value="available">Available</option>
+<option value="sold">Sold</option>
+<option value="returned">Returned</option>
+<option value="repair">Repair</option>
+</select>
+<button onclick="renderStock()">Apply Filter</button>
+<button class="secondary" onclick="clearFilters()">Clear</button>
+</div>
+
+<div class="card">
+<h3>Device Stock List</h3>
+<div id="stockList">Loading stock...</div>
+</div>
+
+<button class="secondary" onclick="location.href='../admin.html'">Back to Admin Dashboard</button>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../supabase.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const db=window.bmtSupabase;
+let stock=[];
+
+async function loadStock(){
+ if(!db){
+  $("message").textContent="Supabase connection not found.";
+  return;
+ }
+
+ $("stockList").textContent="Loading...";
+
+ const {data,error}=await db.from("devices")
+  .select("*").order("created_at",{ascending:false});
+
+ if(error){
+  $("stockList").textContent="Stock load error: "+error.message;
+  $("message").textContent=error.message;
+  return;
+ }
+
+ stock=data||[];
+
+ $("total").textContent=stock.length;
+ $("available").textContent=stock.filter(x=>
+  String(x.status||"").toLowerCase()==="available"
+ ).length;
+ $("sold").textContent=stock.filter(x=>
+  String(x.status||"").toLowerCase()==="sold"
+ ).length;
+ $("other").textContent=stock.filter(x=>
+  !["available","sold"].includes(String(x.status||"").toLowerCase())
+ ).length;
+
+ $("message").textContent="Stock loaded: "+stock.length+" device(s).";
+ renderStock();
+}
+
+function renderStock(){
+ const term=$("search").value.trim().toLowerCase();
+ const status=$("status").value.toLowerCase();
+
+ const filtered=stock.filter(d=>{
+  const matchText=!term||
+   String(d.imei1||"").toLowerCase().includes(term)||
+   String(d.model||"").toLowerCase().includes(term);
+
+  const matchStatus=!status||
+   String(d.status||"").toLowerCase()===status;
+
+  return matchText&&matchStatus;
+ });
+
+ $("stockList").innerHTML="";
+
+ if(!filtered.length){
+  $("stockList").textContent="No matching devices found.";
+  return;
+ }
+
+ filtered.forEach(d=>{
+  const box=document.createElement("div");
+  box.className="item";
+
+  const title=document.createElement("strong");
+  title.textContent=(d.model||"Unknown Model")+" | "+(d.imei1||"-");
+
+  const detail=document.createElement("div");
+  detail.className="small";
+  detail.textContent="Status: "+(d.status||"-")+
+   " | Received: "+(d.received_at||"-");
+
+  box.append(title,detail);
+  $("stockList").append(box);
+ });
+}
+
+function clearFilters(){
+ $("search").value="";
+ $("status").value="";
+ renderStock();
+}
+
+$("search").addEventListener("input",renderStock);
+$("status").addEventListener("change",renderStock);
+
+loadStock();
+</script>
+</body>
+</html>
