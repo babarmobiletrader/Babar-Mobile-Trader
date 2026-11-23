@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BMT Device Search</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;padding:16px;background:#f2f5fa;font-family:Arial;color:#17243a}
+main{max-width:850px;margin:auto}
+header{background:#123d70;color:white;padding:20px;border-radius:12px;margin-bottom:16px}
+.card{background:white;padding:18px;border-radius:12px;margin-bottom:16px}
+input{width:100%;padding:14px;border:1px solid #ccd5e2;border-radius:7px;font-size:17px}
+button{padding:12px 16px;border:0;border-radius:7px;background:#123d70;color:white;margin:10px 5px 0 0;font-size:15px}
+.secondary{background:#64748b}
+.item{border:1px solid #dce3ed;padding:14px;border-radius:8px;margin:12px 0;overflow-wrap:anywhere}
+.item strong{color:#123d70}
+.small{color:#64748b;font-size:13px;line-height:1.8}
+#message{margin-top:12px;font-weight:bold;overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<main>
+<header>
+<h2>BMT Device Search</h2>
+<div>Search mobile by full IMEI or last 4 digits</div>
+</header>
+
+<div class="card">
+<h3>Find Mobile</h3>
+<input id="search" inputmode="numeric" maxlength="15"
+placeholder="Enter full IMEI or last 4 digits">
+<button onclick="searchDevice()">Search</button>
+<button class="secondary" onclick="clearSearch()">Clear</button>
+<div id="message"></div>
+</div>
+
+<div class="card">
+<h3>Search Results</h3>
+<div id="results">Enter an IMEI to search.</div>
+</div>
+
+<button class="secondary" onclick="location.href='../admin.html'">Back to Admin Dashboard</button>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../supabase.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const db=window.bmtSupabase;
+
+function showMessage(t,color="#123d70"){
+ $("message").textContent=t;
+ $("message").style.color=color;
+}
+
+function addField(parent,label,value){
+ const line=document.createElement("div");
+ line.className="small";
+ line.textContent=label+": "+(value??"-");
+ parent.append(line);
+}
+
+async function searchDevice(){
+ const term=$("search").value.trim();
+
+ if(!db){
+  showMessage("Supabase connection not found.","#b42318");
+  return;
+ }
+
+ if(!/^\d{4,15}$/.test(term)){
+  showMessage("Enter at least 4 digits of IMEI.","#b42318");
+  return;
+ }
+
+ $("results").textContent="Searching...";
+ showMessage("");
+
+ let query=db.from("devices").select("*");
+
+ if(term.length===15){
+  query=query.eq("imei1",term);
+ }else{
+  query=query.ilike("imei1","%"+term);
+ }
+
+ const {data,error}=await query.limit(100);
+
+ if(error){
+  $("results").textContent="Search error: "+error.message;
+  return;
+ }
+
+ if(!data||data.length===0){
+  $("results").textContent="No matching mobile found.";
+  return;
+ }
+
+ $("results").innerHTML="";
+
+ data.forEach(device=>{
+  const box=document.createElement("div");
+  box.className="item";
+
+  const heading=document.createElement("strong");
+  heading.textContent="IMEI: "+(device.imei1||"-");
+  box.append(heading);
+
+  addField(box,"Model",device.model);
+  addField(box,"Status",device.status);
+  addField(box,"Received Date",device.received_at);
+  addField(box,"Device ID",device.id);
+
+  $("results").append(box);
+ });
+
+ showMessage(data.length+" matching device(s) found.");
+}
+
+function clearSearch(){
+ $("search").value="";
+ $("results").textContent="Enter an IMEI to search.";
+ showMessage("");
+}
+
+$("search").addEventListener("keydown",e=>{
+ if(e.key==="Enter")searchDevice();
+});
+</script>
+</body>
+</html>
