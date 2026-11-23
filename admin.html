@@ -2,243 +2,347 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BMT Admin Dashboard</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BMT Admin Dashboard</title>
 
-  <style>
-    * { box-sizing: border-box; }
+<style>
+* { box-sizing: border-box; }
 
-    body {
-      margin: 0;
-      background: #f1f5f9;
-      font-family: Arial, sans-serif;
-      color: #172b4d;
-    }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f1f5f9;
+  color: #172b4d;
+}
 
-    header {
-      background: #123b70;
-      color: white;
-      padding: 18px 22px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
+header {
+  background: #123b70;
+  color: white;
+  padding: 17px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
 
-    header h1 { margin: 0; font-size: 22px; }
+header h1 { font-size: 19px; margin: 0; }
 
-    button {
-      border: 0;
-      border-radius: 7px;
-      padding: 10px 16px;
-      cursor: pointer;
-      font-weight: bold;
-    }
+button {
+  border: 0;
+  border-radius: 7px;
+  padding: 10px 13px;
+  cursor: pointer;
+  font-weight: bold;
+}
 
-    #logoutButton {
-      background: white;
-      color: #123b70;
-    }
+#logoutButton {
+  background: white;
+  color: #123b70;
+}
 
-    main {
-      max-width: 1100px;
-      margin: 25px auto;
-      padding: 0 16px;
-    }
+main {
+  max-width: 1100px;
+  margin: auto;
+  padding: 18px;
+}
 
-    .welcome, .panel {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      margin-bottom: 20px;
-      box-shadow: 0 3px 12px rgba(0,0,0,.05);
-    }
+.welcome, .panel {
+  background: white;
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 18px;
+  box-shadow: 0 3px 12px #0000000b;
+}
 
-    .welcome h2 { margin-top: 0; }
+h2 { font-size: 19px; }
 
-    #status {
-      color: #64748b;
-      overflow-wrap: anywhere;
-    }
+#status {
+  color: #64748b;
+  overflow-wrap: anywhere;
+}
 
-    .metrics {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-      gap: 15px;
-    }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
 
-    .metric {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 3px 12px rgba(0,0,0,.05);
-    }
+.module {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 11px;
+  padding: 17px 12px;
+  text-align: left;
+  color: #172b4d;
+  min-height: 90px;
+}
 
-    .metric h3 {
-      margin: 0 0 12px;
-      color: #64748b;
-      font-size: 14px;
-      overflow-wrap: anywhere;
-    }
+.module strong {
+  display: block;
+  font-size: 15px;
+  margin-bottom: 7px;
+  color: #123b70;
+}
 
-    .metric p {
-      margin: 0;
-      font-size: 23px;
-      font-weight: bold;
-      overflow-wrap: anywhere;
-    }
+.module small {
+  color: #64748b;
+  font-size: 12px;
+}
 
-    .modules {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 12px;
-    }
+.module:active {
+  background: #eaf1fa;
+}
 
-    .module {
-      background: #eaf1fa;
-      padding: 17px;
-      border-radius: 9px;
-      text-align: center;
-      font-weight: bold;
-    }
-  </style>
+#summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.metric {
+  background: #f1f5f9;
+  border-radius: 9px;
+  padding: 14px;
+  overflow-wrap: anywhere;
+}
+
+.metric strong {
+  display: block;
+  font-size: 20px;
+  margin-top: 8px;
+}
+
+#moduleMessage {
+  color: #475569;
+  line-height: 1.6;
+}
+
+@media (min-width: 700px) {
+  .grid { grid-template-columns: repeat(4, 1fr); }
+  #summary { grid-template-columns: repeat(4, 1fr); }
+}
+</style>
 </head>
 
 <body>
 
-  <header>
-    <h1>Babar Mobile Trader</h1>
-    <button id="logoutButton">Logout</button>
-  </header>
+<header>
+  <h1>Babar Mobile Trader</h1>
+  <button id="logoutButton">Logout</button>
+</header>
 
-  <main>
+<main>
 
-    <section class="welcome">
-      <h2>Admin Dashboard</h2>
-      <p id="welcomeText">Checking account...</p>
-      <p id="status">Please wait...</p>
-    </section>
+  <section class="welcome">
+    <h2>Admin Dashboard</h2>
+    <p id="welcomeText">Checking account...</p>
+    <p id="status">Please wait...</p>
+  </section>
 
+  <section class="panel">
     <h2>Business Summary</h2>
-    <section id="metrics" class="metrics">
-      <div class="metric">Loading business figures...</div>
-    </section>
+    <div id="summary">Loading summary...</div>
+  </section>
 
-    <section class="panel">
-      <h2>System Modules</h2>
-      <div class="modules">
-        <div class="module">Purchases</div>
-        <div class="module">Sales</div>
-        <div class="module">Stock</div>
-        <div class="module">Customers</div>
-        <div class="module">Suppliers</div>
-        <div class="module">Payments</div>
-        <div class="module">Receipts</div>
-        <div class="module">Expenses</div>
-        <div class="module">IMEI Search</div>
-        <div class="module">Reports</div>
-      </div>
-    </section>
+  <section class="panel">
+    <h2>Management Modules</h2>
+    <div class="grid" id="modules">
 
-  </main>
+      <button class="module" data-name="Customer Receipts">
+        <strong>Customer Receipts</strong>
+        <small>Customer payments received</small>
+      </button>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="supabase.js"></script>
+      <button class="module" data-name="Customers">
+        <strong>Customers</strong>
+        <small>Customer records and accounts</small>
+      </button>
 
-  <script>
-    const statusText = document.getElementById("status");
-    const welcomeText = document.getElementById("welcomeText");
-    const metrics = document.getElementById("metrics");
+      <button class="module" data-name="Device Events">
+        <strong>Device Events</strong>
+        <small>Device movement history</small>
+      </button>
 
-    async function loadDashboard() {
-      try {
-        const { data: sessionData, error: sessionError } =
-          await window.bmtSupabase.auth.getSession();
+      <button class="module" data-name="Device Returns">
+        <strong>Device Returns</strong>
+        <small>Returned mobile records</small>
+      </button>
 
-        if (sessionError) throw sessionError;
+      <button class="module" data-name="Devices">
+        <strong>Devices / Stock</strong>
+        <small>Mobile stock and IMEI records</small>
+      </button>
 
-        const user = sessionData.session?.user;
+      <button class="module" data-name="Expenses">
+        <strong>Expenses</strong>
+        <small>Business expenses</small>
+      </button>
 
-        if (!user) {
-          window.location.href = "login.html";
-          return;
-        }
+      <button class="module" data-name="Profiles">
+        <strong>Profiles / Users</strong>
+        <small>Admin and staff accounts</small>
+      </button>
 
-        const { data: profile, error: profileError } =
-          await window.bmtSupabase
-            .from("profiles")
-            .select("full_name, role, is_active")
-            .eq("id", user.id)
-            .maybeSingle();
+      <button class="module" data-name="Purchase Invoices">
+        <strong>Purchase Invoices</strong>
+        <small>Supplier purchase invoices</small>
+      </button>
 
-        if (profileError) throw profileError;
+      <button class="module" data-name="Purchase Items">
+        <strong>Purchase Items</strong>
+        <small>Purchased mobile details</small>
+      </button>
 
-        if (!profile || profile.role !== "admin" || profile.is_active !== true) {
-          statusText.textContent = "Access denied. Admin account required.";
-          return;
-        }
+      <button class="module" data-name="Sales Invoices">
+        <strong>Sales Invoices</strong>
+        <small>Customer sales invoices</small>
+      </button>
 
-        welcomeText.textContent =
-          "Welcome, " + (profile.full_name || user.email);
+      <button class="module" data-name="Sales Items">
+        <strong>Sales Items</strong>
+        <small>Sold mobile details</small>
+      </button>
 
-        statusText.textContent = "Admin account verified.";
+      <button class="module" data-name="Shipments">
+        <strong>Shipments</strong>
+        <small>Import and delivery records</small>
+      </button>
 
-        const { data: summary, error: summaryError } =
-          await window.bmtSupabase
-            .from("dashboard_summary")
-            .select("*");
+      <button class="module" data-name="Supplier Payments">
+        <strong>Supplier Payments</strong>
+        <small>Payments to suppliers</small>
+      </button>
 
-        if (summaryError) throw summaryError;
+      <button class="module" data-name="Suppliers">
+        <strong>Suppliers</strong>
+        <small>Supplier records and accounts</small>
+      </button>
 
-        metrics.innerHTML = "";
+    </div>
+  </section>
 
-        if (!summary || summary.length === 0) {
-          metrics.textContent = "No dashboard figures found.";
-          return;
-        }
+  <section class="panel" id="modulePanel" hidden>
+    <h2 id="moduleTitle">Module</h2>
+    <p id="moduleMessage"></p>
+    <button id="backButton">Back to Dashboard</button>
+  </section>
 
-        const row = summary[0];
+</main>
 
-        Object.entries(row).forEach(([key, value]) => {
-          const card = document.createElement("div");
-          card.className = "metric";
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
 
-          const heading = document.createElement("h3");
-          heading.textContent = key.replace(/_/g, " ");
+<script>
+const statusText = document.getElementById("status");
+const welcomeText = document.getElementById("welcomeText");
+const summaryBox = document.getElementById("summary");
 
-          const figure = document.createElement("p");
-          figure.textContent =
-            value === null ? "—" :
-            typeof value === "number" ?
-            value.toLocaleString() : String(value);
+async function loadDashboard() {
+  try {
+    const { data: sessionData, error: sessionError } =
+      await window.bmtSupabase.auth.getSession();
 
-          card.appendChild(heading);
-          card.appendChild(figure);
-          metrics.appendChild(card);
-        });
+    if (sessionError) throw sessionError;
 
-      } catch (error) {
-        statusText.textContent = "Error: " + error.message;
-        metrics.textContent = "Dashboard could not be loaded.";
-      }
+    const user = sessionData.session?.user;
+
+    if (!user) {
+      window.location.href = "login.html";
+      return;
     }
 
-    document.getElementById("logoutButton")
-      .addEventListener("click", async function() {
-        const { error } = await window.bmtSupabase.auth.signOut();
+    const { data: profile, error: profileError } =
+      await window.bmtSupabase
+        .from("profiles")
+        .select("full_name, role, is_active")
+        .eq("id", user.id)
+        .maybeSingle();
 
-        if (error) {
-          alert(error.message);
-          return;
-        }
+    if (profileError) throw profileError;
 
-        window.location.href = "login.html";
-      });
+    if (!profile || profile.role !== "admin" ||
+        profile.is_active !== true) {
+      statusText.textContent =
+        "Access denied. Active admin account required.";
+      return;
+    }
 
-    loadDashboard();
-  </script>
+    welcomeText.textContent =
+      "Welcome, " + (profile.full_name || user.email);
+
+    statusText.textContent = "Admin account verified.";
+
+    const { data, error } = await window.bmtSupabase
+      .from("dashboard_summary")
+      .select("*");
+
+    if (error) throw error;
+
+    summaryBox.innerHTML = "";
+
+    if (!data || data.length === 0) {
+      summaryBox.textContent = "No summary figures available.";
+      return;
+    }
+
+    Object.entries(data[0]).forEach(([key, value]) => {
+      const card = document.createElement("div");
+      card.className = "metric";
+
+      const name = document.createElement("span");
+      name.textContent = key.replace(/_/g, " ");
+
+      const number = document.createElement("strong");
+      number.textContent = value === null
+        ? "—"
+        : typeof value === "number"
+          ? value.toLocaleString()
+          : String(value);
+
+      card.appendChild(name);
+      card.appendChild(number);
+      summaryBox.appendChild(card);
+    });
+
+  } catch (error) {
+    statusText.textContent = "Error: " + error.message;
+    summaryBox.textContent = "Summary could not be loaded.";
+  }
+}
+
+document.querySelectorAll(".module").forEach(button => {
+  button.addEventListener("click", () => {
+    document.getElementById("modules").parentElement.hidden = true;
+    document.getElementById("modulePanel").hidden = false;
+
+    document.getElementById("moduleTitle").textContent =
+      button.dataset.name;
+
+    document.getElementById("moduleMessage").textContent =
+      "This section is listed in the Admin Dashboard. " +
+      "Its data-entry forms and management functions will be built next.";
+  });
+});
+
+document.getElementById("backButton").addEventListener("click", () => {
+  document.getElementById("modulePanel").hidden = true;
+  document.getElementById("modules").parentElement.hidden = false;
+});
+
+document.getElementById("logoutButton").addEventListener("click", async () => {
+  const { error } = await window.bmtSupabase.auth.signOut();
+
+  if (error) {
+    alert(error.message);
+    return;
+  }
+
+  window.location.href = "login.html";
+});
+
+loadDashboard();
+</script>
 
 </body>
 </html>
