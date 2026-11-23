@@ -256,7 +256,7 @@ async function loadDashboard() {
       await window.bmtSupabase
         .from("profiles")
         .select("full_name, role, is_active")
-        .eq("id", user.id)
+        .eq("user_id", user.id)
         .maybeSingle();
 
     if (profileError) throw profileError;
