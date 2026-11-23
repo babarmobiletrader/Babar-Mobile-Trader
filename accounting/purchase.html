@@ -1,0 +1,206 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BMT - Purchase Entry</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;padding:16px;background:#f3f6fb;font-family:Arial,sans-serif;color:#17243a}
+.container{max-width:850px;margin:auto}
+.header{background:#123d70;color:white;padding:20px;border-radius:12px;margin-bottom:18px}
+.header h2{margin:0 0 6px}
+.card{background:white;padding:18px;border-radius:12px;margin-bottom:16px;box-shadow:0 2px 9px #0000000d}
+h3{margin:0 0 15px;color:#123d70}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+label{display:block;font-size:13px;font-weight:bold;margin-bottom:6px}
+input,textarea{width:100%;padding:12px;border:1px solid #ccd5e1;border-radius:7px;font-size:15px;background:white}
+textarea{min-height:75px}
+.full{grid-column:1/-1}
+.result{background:#edf5ff;padding:14px;border-radius:9px;margin-top:12px}
+.result p{margin:8px 0;display:flex;justify-content:space-between;gap:10px}
+.imei-row{margin:10px 0}
+button{border:0;border-radius:8px;padding:13px 18px;font-size:15px;font-weight:bold;cursor:pointer}
+.primary{background:#123d70;color:white;width:100%;margin-top:12px}
+.back{background:#e5edf7;color:#123d70}
+.small{font-size:12px;color:#64748b;margin-top:6px}
+@media(max-width:550px){.grid{grid-template-columns:1fr}.full{grid-column:auto}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+<h2>Babar Mobile Trader</h2>
+<div>Purchase Entry Form</div>
+</div>
+
+<div class="card">
+<h3>Invoice Details</h3>
+<div class="grid">
+<div>
+<label>Purchase Date</label>
+<input type="date" id="purchaseDate">
+</div>
+<div>
+<label>Invoice Number</label>
+<input id="invoiceNumber" placeholder="Enter invoice number">
+</div>
+<div>
+<label>Supplier Name</label>
+<input id="supplier" placeholder="Supplier name">
+</div>
+<div>
+<label>Shipment Number</label>
+<input id="shipment" placeholder="Shipment number">
+</div>
+</div>
+</div>
+
+<div class="card">
+<h3>Mobile Details</h3>
+<div class="grid">
+<div>
+<label>Mobile Model</label>
+<input id="model" placeholder="e.g. iPhone 15 Pro Max">
+</div>
+<div>
+<label>Storage</label>
+<input id="storage" placeholder="e.g. 256GB">
+</div>
+<div>
+<label>Quantity</label>
+<input type="number" id="quantity" min="1" value="1">
+</div>
+<div>
+<label>Price Per Mobile (AED)</label>
+<input type="number" id="aedPrice" min="0" step="0.01" placeholder="0">
+</div>
+<div>
+<label>AED to PKR Rate</label>
+<input type="number" id="exchangeRate" min="0" step="0.01" placeholder="0">
+</div>
+</div>
+<div class="result">
+<p><span>One Mobile Cost (PKR)</span><strong id="oneCost">0.00</strong></p>
+<p><span>Total Mobile Cost (PKR)</span><strong id="mobileTotal">0.00</strong></p>
+</div>
+</div>
+
+<div class="card">
+<h3>Import & Other Costs</h3>
+<div class="grid">
+<div>
+<label>Customs Duty (PKR)</label>
+<input type="number" id="customs" min="0" value="0">
+</div>
+<div>
+<label>Other Shipping / Clearance Cost (PKR)</label>
+<input type="number" id="otherCost" min="0" value="0">
+</div>
+<div class="full">
+<label>Notes</label>
+<textarea id="notes" placeholder="Additional details..."></textarea>
+</div>
+</div>
+<div class="result">
+<p><span>Total Purchase Cost</span><strong id="grandTotal">0.00 PKR</strong></p>
+<p><span>Final Cost Per Mobile</span><strong id="finalUnitCost">0.00 PKR</strong></p>
+</div>
+</div>
+
+<div class="card">
+<h3>Individual IMEI Numbers</h3>
+<div id="imeiFields"></div>
+<div class="small">ہر موبائل کا الگ IMEI نمبر درج کریں۔</div>
+</div>
+
+<div class="card">
+<button class="primary" type="button" id="calculateBtn">Calculate & Validate</button>
+<p class="small" id="message">یہ ابتدائی فارم ہے۔ ابھی ڈیٹا بیس میں ریکارڈ محفوظ نہیں ہوتا۔</p>
+</div>
+
+<button class="back" onclick="location.href='../admin.html'">Back to Admin Dashboard</button>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../supabase.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+
+function money(value){
+  return Number(value || 0).toLocaleString("en-PK",{
+    minimumFractionDigits:2,
+    maximumFractionDigits:2
+  });
+}
+
+function makeIMEIFields(){
+  const qty = Math.max(1,Math.min(500,parseInt($("quantity").value)||1));
+  $("imeiFields").innerHTML = "";
+  for(let i=1;i<=qty;i++){
+    const div=document.createElement("div");
+    div.className="imei-row";
+    const label=document.createElement("label");
+    label.textContent="Mobile "+i+" - IMEI";
+    const input=document.createElement("input");
+    input.type="text";
+    input.inputMode="numeric";
+    input.maxLength=15;
+    input.placeholder="Enter 15-digit IMEI";
+    input.className="imei-input";
+    div.append(label,input);
+    $("imeiFields").appendChild(div);
+  }
+  calculate();
+}
+
+function calculate(){
+  const qty=Math.max(1,parseInt($("quantity").value)||1);
+  const aed=Number($("aedPrice").value)||0;
+  const rate=Number($("exchangeRate").value)||0;
+  const customs=Number($("customs").value)||0;
+  const other=Number($("otherCost").value)||0;
+
+  const one=aed*rate;
+  const mobileTotal=one*qty;
+  const grand=mobileTotal+customs+other;
+  const finalUnit=qty ? grand/qty : 0;
+
+  $("oneCost").textContent=money(one);
+  $("mobileTotal").textContent=money(mobileTotal);
+  $("grandTotal").textContent=money(grand)+" PKR";
+  $("finalUnitCost").textContent=money(finalUnit)+" PKR";
+}
+
+$("quantity").addEventListener("input",makeIMEIFields);
+["aedPrice","exchangeRate","customs","otherCost"].forEach(id=>{
+  $(id).addEventListener("input",calculate);
+});
+
+$("calculateBtn").addEventListener("click",()=>{
+  const qty=Math.max(1,parseInt($("quantity").value)||1);
+  const imeis=[...document.querySelectorAll(".imei-input")].map(x=>x.value.trim());
+  if(!$("model").value.trim()){
+    $("message").textContent="Please enter mobile model.";
+    return;
+  }
+  if(imeis.length!==qty || imeis.some(x=>!/^\d{15}$/.test(x))){
+    $("message").textContent="ہر موبائل کے لیے درست 15 ہندسوں کا IMEI درج کریں۔";
+    return;
+  }
+  if(new Set(imeis).size!==imeis.length){
+    $("message").textContent="ایک ہی IMEI دوبارہ درج نہ کریں۔";
+    return;
+  }
+  calculate();
+  $("message").textContent="فارم کی معلومات درست ہیں۔ ڈیٹا بیس Save کی سہولت اگلے مرحلے میں شامل ہوگی۔";
+});
+
+$("purchaseDate").value=new Date().toISOString().slice(0,10);
+makeIMEIFields();
+</script>
+</body>
+</html>
