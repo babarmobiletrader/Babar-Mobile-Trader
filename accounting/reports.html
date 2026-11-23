@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BMT Business Reports</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;padding:16px;background:#f2f5fa;font-family:Arial;color:#17243a}
+main{max-width:950px;margin:auto}
+header{background:#123d70;color:white;padding:20px;border-radius:12px;margin-bottom:16px}
+.card{background:white;padding:18px;border-radius:12px;margin-bottom:16px}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.stat{background:#eef4fb;padding:14px;border-radius:8px}
+.stat strong{display:block;font-size:22px;margin-top:7px}
+button{padding:12px 16px;border:0;border-radius:7px;background:#123d70;color:white;margin:8px 5px 0 0;font-size:15px}
+.secondary{background:#64748b}
+table{width:100%;border-collapse:collapse;margin-top:12px}
+th,td{padding:10px;border-bottom:1px solid #dce3ed;text-align:left;font-size:14px}
+#message{margin-top:12px;font-weight:bold;overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<main>
+<header>
+<h2>BMT Business Reports</h2>
+<div>Purchase, Sales, Stock and Business Summary</div>
+</header>
+
+<div class="card">
+<h3>Business Summary</h3>
+<div class="stats">
+<div class="stat">Total Purchases<strong id="purchases">PKR 0</strong></div>
+<div class="stat">Total Sales<strong id="sales">PKR 0</strong></div>
+<div class="stat">Current Stock<strong id="stock">0</strong></div>
+<div class="stat">Total Expenses<strong id="expenses">PKR 0</strong></div>
+</div>
+<div id="message"></div>
+<button onclick="loadReports()">Refresh Reports</button>
+</div>
+
+<div class="card">
+<h3>Daily Business Summary</h3>
+<div id="daily">Loading report...</div>
+</div>
+
+<div class="card">
+<h3>Stock Summary</h3>
+<div id="stockSummary">Loading stock report...</div>
+</div>
+
+<button class="secondary" onclick="location.href='../admin.html'">Back to Admin Dashboard</button>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../supabase.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const db=window.bmtSupabase;
+
+function money(v){
+ return "PKR "+Number(v||0).toLocaleString("en-PK",{maximumFractionDigits:2});
+}
+
+function showError(area,error){
+ $(area).textContent="Report error: "+error.message;
+}
+
+async function loadReports(){
+ if(!db){
+  $("message").textContent="Supabase connection not found.";
+  return;
+ }
+
+ $("message").textContent="Loading reports...";
+
+ const results=await Promise.all([
+  db.from("purchase_invoices").select("total_amount"),
+  db.from("sales_invoices").select("total_amount"),
+  db.from("devices").select("id,status"),
+  db.from("expenses").select("amount"),
+  db.from("daily_business_summary").select("*"),
+  db.from("stock_summary").select("*")
+ ]);
+
+ const [p,s,d,e,daily,stock]=results;
+
+ if(p.error){showError("message",p.error);return;}
+ if(s.error){showError("message",s.error);return;}
+ if(d.error){showError("message",d.error);return;}
+ if(e.error){showError("message",e.error);return;}
+
+ const purchaseTotal=(p.data||[]).reduce((n,x)=>n+Number(x.total_amount||0),0);
+ const salesTotal=(s.data||[]).reduce((n,x)=>n+Number(x.total_amount||0),0);
+ const expenseTotal=(e.data||[]).reduce((n,x)=>n+Number(x.amount||0),0);
+
+ $("purchases").textContent=money(purchaseTotal);
+ $("sales").textContent=money(salesTotal);
+ $("stock").textContent=(d.data||[]).filter(x=>
+  String(x.status||"").toLowerCase()==="available"
+ ).length;
+ $("expenses").textContent=money(expenseTotal);
+
+ if(daily.error){
+  showError("daily",daily.error);
+ }else{
+  renderTable("daily",daily.data||[]);
+ }
+
+ if(stock.error){
+  showError("stockSummary",stock.error);
+ }else{
+  renderTable("stockSummary",stock.data||[]);
+ }
+
+ $("message").textContent="Reports loaded. Profit and outstanding calculations will be finalized after full integration.";
+}
+
+function renderTable(target,rows){
+ const area=$(target);
+ area.innerHTML="";
+
+ if(!rows.length){
+  area.textContent="No report data available.";
+  return;
+ }
+
+ const table=document.createElement("table");
+ const keys=Object.keys(rows[0]);
+ const thead=document.createElement("tr");
+
+ keys.forEach(k=>{
+  const th=document.createElement("th");
+  th.textContent=k.replaceAll("_"," ");
+  thead.append(th);
+ });
+
+ const header=document.createElement("thead");
+ header.append(thead);
+ table.append(header);
+
+ const body=document.createElement("tbody");
+ rows.forEach(row=>{
+  const tr=document.createElement("tr");
+  keys.forEach(k=>{
+   const td=document.createElement("td");
+   td.textContent=row[k]??"-";
+   tr.append(td);
+  });
+  body.append(tr);
+ });
+ table.append(body);
+ area.append(table);
+}
+
+loadReports();
+</script>
+</body>
+</html>
