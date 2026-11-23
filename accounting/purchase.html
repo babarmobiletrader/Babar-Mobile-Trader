@@ -3,204 +3,298 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BMT - Purchase Entry</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BMT Purchase Entry</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;padding:16px;background:#f3f6fb;font-family:Arial,sans-serif;color:#17243a}
-.container{max-width:850px;margin:auto}
-.header{background:#123d70;color:white;padding:20px;border-radius:12px;margin-bottom:18px}
-.header h2{margin:0 0 6px}
-.card{background:white;padding:18px;border-radius:12px;margin-bottom:16px;box-shadow:0 2px 9px #0000000d}
-h3{margin:0 0 15px;color:#123d70}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
-label{display:block;font-size:13px;font-weight:bold;margin-bottom:6px}
-input,textarea{width:100%;padding:12px;border:1px solid #ccd5e1;border-radius:7px;font-size:15px;background:white}
-textarea{min-height:75px}
-.full{grid-column:1/-1}
-.result{background:#edf5ff;padding:14px;border-radius:9px;margin-top:12px}
-.result p{margin:8px 0;display:flex;justify-content:space-between;gap:10px}
-.imei-row{margin:10px 0}
-button{border:0;border-radius:8px;padding:13px 18px;font-size:15px;font-weight:bold;cursor:pointer}
-.primary{background:#123d70;color:white;width:100%;margin-top:12px}
+body{margin:0;padding:15px;background:#f2f5fa;font-family:Arial;color:#17243a}
+main{max-width:850px;margin:auto}
+header{background:#123d70;color:white;padding:20px;border-radius:12px;margin-bottom:15px}
+.card{background:white;padding:17px;border-radius:12px;margin-bottom:15px}
+h2,h3{margin-top:0}
+h3{color:#123d70}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+label{display:block;font-weight:bold;font-size:13px;margin:9px 0 5px}
+input,select,textarea{width:100%;padding:12px;border:1px solid #ccd5e1;border-radius:7px;font-size:15px;background:white}
+textarea{min-height:65px}
+button{padding:13px;border:0;border-radius:8px;font-weight:bold;font-size:15px;cursor:pointer}
+.save{width:100%;background:#123d70;color:white;margin-top:12px}
 .back{background:#e5edf7;color:#123d70}
-.small{font-size:12px;color:#64748b;margin-top:6px}
-@media(max-width:550px){.grid{grid-template-columns:1fr}.full{grid-column:auto}}
+.result{background:#edf5ff;padding:12px;border-radius:8px;margin-top:12px}
+.result p{display:flex;justify-content:space-between;gap:10px}
+.imei{margin:12px 0}
+.note{font-size:12px;color:#64748b}
+#message{white-space:pre-wrap;font-weight:bold}
+@media(max-width:550px){.grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<div class="container">
-
-<div class="header">
+<main>
+<header>
 <h2>Babar Mobile Trader</h2>
-<div>Purchase Entry Form</div>
-</div>
+Purchase Entry
+</header>
 
-<div class="card">
+<section class="card">
 <h3>Invoice Details</h3>
 <div class="grid">
-<div>
-<label>Purchase Date</label>
-<input type="date" id="purchaseDate">
+<div><label>Purchase Date</label><input type="date" id="purchaseDate"></div>
+<div><label>Invoice Number</label><input id="invoiceNumber" placeholder="Invoice number"></div>
+<div><label>Supplier</label><select id="supplier"><option value="">Loading suppliers...</option></select></div>
+<div><label>Shipment</label><select id="shipment"><option value="">No shipment selected</option></select></div>
 </div>
-<div>
-<label>Invoice Number</label>
-<input id="invoiceNumber" placeholder="Enter invoice number">
-</div>
-<div>
-<label>Supplier Name</label>
-<input id="supplier" placeholder="Supplier name">
-</div>
-<div>
-<label>Shipment Number</label>
-<input id="shipment" placeholder="Shipment number">
-</div>
-</div>
-</div>
+<p class="note">Supplier اور Shipment کی فہرست ڈیٹا بیس سے لوڈ ہوگی۔</p>
+</section>
 
-<div class="card">
+<section class="card">
 <h3>Mobile Details</h3>
 <div class="grid">
-<div>
-<label>Mobile Model</label>
-<input id="model" placeholder="e.g. iPhone 15 Pro Max">
-</div>
-<div>
-<label>Storage</label>
-<input id="storage" placeholder="e.g. 256GB">
-</div>
-<div>
-<label>Quantity</label>
-<input type="number" id="quantity" min="1" value="1">
-</div>
-<div>
-<label>Price Per Mobile (AED)</label>
-<input type="number" id="aedPrice" min="0" step="0.01" placeholder="0">
-</div>
-<div>
-<label>AED to PKR Rate</label>
-<input type="number" id="exchangeRate" min="0" step="0.01" placeholder="0">
-</div>
+<div><label>Mobile Model</label><input id="model" placeholder="iPhone 15 Pro Max"></div>
+<div><label>Storage</label><input id="storage" placeholder="256GB"></div>
+<div><label>Quantity</label><input type="number" id="quantity" min="1" value="1"></div>
+<div><label>Price per Mobile (AED)</label><input type="number" id="aedPrice" min="0" step="0.01"></div>
+<div><label>AED to PKR Rate</label><input type="number" id="exchangeRate" min="0" step="0.01"></div>
 </div>
 <div class="result">
-<p><span>One Mobile Cost (PKR)</span><strong id="oneCost">0.00</strong></p>
-<p><span>Total Mobile Cost (PKR)</span><strong id="mobileTotal">0.00</strong></p>
+<p>One Mobile Cost: <strong id="oneCost">0.00 PKR</strong></p>
+<p>Mobile Total: <strong id="mobileTotal">0.00 PKR</strong></p>
 </div>
-</div>
+</section>
 
-<div class="card">
+<section class="card">
 <h3>Import & Other Costs</h3>
 <div class="grid">
-<div>
-<label>Customs Duty (PKR)</label>
-<input type="number" id="customs" min="0" value="0">
-</div>
-<div>
-<label>Other Shipping / Clearance Cost (PKR)</label>
-<input type="number" id="otherCost" min="0" value="0">
-</div>
-<div class="full">
-<label>Notes</label>
-<textarea id="notes" placeholder="Additional details..."></textarea>
-</div>
+<div><label>Customs Duty (PKR)</label><input type="number" id="customs" min="0" value="0"></div>
+<div><label>Other Shipping / Clearance (PKR)</label><input type="number" id="otherCost" min="0" value="0"></div>
+<div style="grid-column:1/-1"><label>Notes</label><textarea id="notes"></textarea></div>
 </div>
 <div class="result">
-<p><span>Total Purchase Cost</span><strong id="grandTotal">0.00 PKR</strong></p>
-<p><span>Final Cost Per Mobile</span><strong id="finalUnitCost">0.00 PKR</strong></p>
+<p>Total Purchase Cost: <strong id="grandTotal">0.00 PKR</strong></p>
+<p>Final Cost per Mobile: <strong id="finalUnitCost">0.00 PKR</strong></p>
 </div>
-</div>
+</section>
 
-<div class="card">
+<section class="card">
 <h3>Individual IMEI Numbers</h3>
 <div id="imeiFields"></div>
-<div class="small">ہر موبائل کا الگ IMEI نمبر درج کریں۔</div>
-</div>
+<p class="note">ہر موبائل کے لیے الگ 15 ہندسوں کا IMEI درج کریں۔</p>
+</section>
 
-<div class="card">
-<button class="primary" type="button" id="calculateBtn">Calculate & Validate</button>
-<p class="small" id="message">یہ ابتدائی فارم ہے۔ ابھی ڈیٹا بیس میں ریکارڈ محفوظ نہیں ہوتا۔</p>
-</div>
+<section class="card">
+<button class="save" id="saveBtn" type="button">Save Purchase</button>
+<p id="message" class="note">ڈیٹا بیس سے کنکشن چیک کیا جا رہا ہے۔</p>
+</section>
 
 <button class="back" onclick="location.href='../admin.html'">Back to Admin Dashboard</button>
-
-</div>
+</main>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="../supabase.js"></script>
 <script>
 const $ = id => document.getElementById(id);
+const db = window.bmtSupabase;
+let suppliers = [];
+let shipments = [];
 
-function money(value){
-  return Number(value || 0).toLocaleString("en-PK",{
-    minimumFractionDigits:2,
-    maximumFractionDigits:2
+function money(n){
+  return Number(n||0).toLocaleString("en-PK",{
+    minimumFractionDigits:2,maximumFractionDigits:2
   });
 }
 
-function makeIMEIFields(){
-  const qty = Math.max(1,Math.min(500,parseInt($("quantity").value)||1));
+function totals(){
+  const qty = Math.max(1,parseInt($("quantity").value)||1);
+  const base = (Number($("aedPrice").value)||0) *
+               (Number($("exchangeRate").value)||0);
+  const customs = Number($("customs").value)||0;
+  const other = Number($("otherCost").value)||0;
+  const subtotal = base*qty;
+  const total = subtotal+customs+other;
+  $("oneCost").textContent = money(base)+" PKR";
+  $("mobileTotal").textContent = money(subtotal)+" PKR";
+  $("grandTotal").textContent = money(total)+" PKR";
+  $("finalUnitCost").textContent = money(total/qty)+" PKR";
+  return {qty,base,subtotal,total,customs,other,unitCost:total/qty};
+}
+
+function makeIMEIs(){
+  const qty = Math.max(1,Math.min(200,parseInt($("quantity").value)||1));
   $("imeiFields").innerHTML = "";
   for(let i=1;i<=qty;i++){
-    const div=document.createElement("div");
-    div.className="imei-row";
+    const wrap=document.createElement("div");
+    wrap.className="imei";
     const label=document.createElement("label");
-    label.textContent="Mobile "+i+" - IMEI";
+    label.textContent="Mobile "+i+" IMEI";
     const input=document.createElement("input");
+    input.className="imei-input";
     input.type="text";
     input.inputMode="numeric";
     input.maxLength=15;
-    input.placeholder="Enter 15-digit IMEI";
-    input.className="imei-input";
-    div.append(label,input);
-    $("imeiFields").appendChild(div);
+    input.placeholder="15-digit IMEI";
+    wrap.append(label,input);
+    $("imeiFields").append(wrap);
   }
-  calculate();
+  totals();
 }
 
-function calculate(){
-  const qty=Math.max(1,parseInt($("quantity").value)||1);
-  const aed=Number($("aedPrice").value)||0;
+function supplierLabel(row){
+  const keys=["name","supplier_name","company_name","business_name","full_name"];
+  for(const k of keys) if(row[k]) return String(row[k]);
+  const key=Object.keys(row).find(k =>
+    typeof row[k]==="string" && !["created_at","updated_at"].includes(k)
+  );
+  return key ? String(row[key]) : "Supplier";
+}
+
+async function loadLists(){
+  if(!db){
+    $("message").textContent="Supabase connection نہیں ملا۔ supabase.js چیک کرنا ہوگا۔";
+    return;
+  }
+
+  const s=await db.from("suppliers").select("*");
+  if(s.error){
+    $("supplier").innerHTML='<option value="">Supplier load error</option>';
+    $("message").textContent="Supplier list error: "+s.error.message;
+  }else{
+    suppliers=s.data||[];
+    $("supplier").innerHTML='<option value="">Select Supplier</option>';
+    suppliers.forEach(row=>{
+      const op=document.createElement("option");
+      op.value=row.id;
+      op.textContent=supplierLabel(row);
+      $("supplier").append(op);
+    });
+    if(!suppliers.length) $("supplier").innerHTML='<option value="">No suppliers found</option>';
+  }
+
+  const sh=await db.from("shipments").select("*");
+  if(sh.error){
+    $("shipment").innerHTML='<option value="">Shipment load error</option>';
+  }else{
+    shipments=sh.data||[];
+    $("shipment").innerHTML='<option value="">No shipment selected</option>';
+    shipments.forEach(row=>{
+      const op=document.createElement("option");
+      op.value=row.id;
+      op.textContent=row.shipment_number || row.id;
+      $("shipment").append(op);
+    });
+  }
+}
+
+async function savePurchase(){
+  const btn=$("saveBtn");
+  const msg=$("message");
+  if(!db){msg.textContent="Supabase connection نہیں ہے۔";return;}
+
+  const t=totals();
+  const supplierId=$("supplier").value;
+  const shipmentId=$("shipment").value || null;
+  const model=$("model").value.trim();
+  const storage=$("storage").value.trim();
+  const invoiceNumber=$("invoiceNumber").value.trim();
+  const date=$("purchaseDate").value;
   const rate=Number($("exchangeRate").value)||0;
-  const customs=Number($("customs").value)||0;
-  const other=Number($("otherCost").value)||0;
-
-  const one=aed*rate;
-  const mobileTotal=one*qty;
-  const grand=mobileTotal+customs+other;
-  const finalUnit=qty ? grand/qty : 0;
-
-  $("oneCost").textContent=money(one);
-  $("mobileTotal").textContent=money(mobileTotal);
-  $("grandTotal").textContent=money(grand)+" PKR";
-  $("finalUnitCost").textContent=money(finalUnit)+" PKR";
-}
-
-$("quantity").addEventListener("input",makeIMEIFields);
-["aedPrice","exchangeRate","customs","otherCost"].forEach(id=>{
-  $(id).addEventListener("input",calculate);
-});
-
-$("calculateBtn").addEventListener("click",()=>{
-  const qty=Math.max(1,parseInt($("quantity").value)||1);
+  const aed=Number($("aedPrice").value)||0;
   const imeis=[...document.querySelectorAll(".imei-input")].map(x=>x.value.trim());
-  if(!$("model").value.trim()){
-    $("message").textContent="Please enter mobile model.";
-    return;
+
+  if(!supplierId){msg.textContent="پہلے Supplier منتخب کریں۔";return;}
+  if(!invoiceNumber || !date || !model || !storage){
+    msg.textContent="Invoice Number، Date، Model اور Storage لازمی ہیں۔";return;
   }
-  if(imeis.length!==qty || imeis.some(x=>!/^\d{15}$/.test(x))){
-    $("message").textContent="ہر موبائل کے لیے درست 15 ہندسوں کا IMEI درج کریں۔";
-    return;
+  if(aed<=0 || rate<=0){msg.textContent="AED Price اور Exchange Rate درج کریں۔";return;}
+  if(imeis.length!==t.qty || imeis.some(x=>!/^\d{15}$/.test(x))){
+    msg.textContent="ہر موبائل کا درست 15 ہندسوں کا IMEI درج کریں۔";return;
   }
   if(new Set(imeis).size!==imeis.length){
-    $("message").textContent="ایک ہی IMEI دوبارہ درج نہ کریں۔";
-    return;
+    msg.textContent="ایک IMEI دوبارہ درج کیا گیا ہے۔";return;
   }
-  calculate();
-  $("message").textContent="فارم کی معلومات درست ہیں۔ ڈیٹا بیس Save کی سہولت اگلے مرحلے میں شامل ہوگی۔";
-});
 
+  btn.disabled=true;
+  btn.textContent="Saving...";
+  msg.textContent="خریداری محفوظ کی جا رہی ہے۔";
+
+  try{
+    const invoice={
+      invoice_number:invoiceNumber,
+      supplier_id:supplierId,
+      shipment_id:shipmentId,
+      invoice_date:date,
+      currency:"AED",
+      exchange_rate:rate,
+      subtotal:t.subtotal,
+      additional_cost:t.other,
+      customs_duty:t.customs,
+      total_amount:t.total,
+      notes:$("notes").value.trim()
+    };
+
+    const inv=await db.from("purchase_invoices")
+      .insert(invoice).select("id").single();
+
+    if(inv.error) throw new Error("Invoice محفوظ نہیں ہوا: "+inv.error.message);
+
+    const invoiceId=inv.data.id;
+    const itemRows=imeis.map(imei=>({
+      purchase_invoice_id:invoiceId,
+      model:model,
+      storage:storage,
+      imei1:imei,
+      quantity:1,
+      unit_price_aed:aed,
+      exchange_rate:rate,
+      unit_cost_pkr:t.unitCost,
+      allocated_cost:t.unitCost-(aed*rate)
+    }));
+
+    const items=await db.from("purchase_items")
+      .insert(itemRows).select("id,imei1");
+
+    if(items.error){
+      throw new Error("Invoice بن گیا، لیکن Purchase Items محفوظ نہیں ہوئے: "+items.error.message+
+      "۔ Invoice ID: "+invoiceId);
+    }
+
+    const deviceRows=items.data.map(item=>({
+      purchase_item_id:item.id,
+      shipment_id:shipmentId,
+      imei1:item.imei1,
+      model:model
+    }));
+
+    const dev=await db.from("devices").insert(deviceRows);
+    if(dev.error){
+      throw new Error("Invoice اور Items محفوظ ہوگئے، مگر Devices محفوظ نہیں ہوئے: "+
+      dev.error.message+"۔ Invoice ID: "+invoiceId);
+    }
+
+    msg.textContent="Purchase کامیابی سے محفوظ ہوگئی۔ Invoice ID: "+invoiceId;
+    $("invoiceNumber").value="";
+    $("model").value="";
+    $("storage").value="";
+    $("aedPrice").value="";
+    $("quantity").value=1;
+    $("customs").value=0;
+    $("otherCost").value=0;
+    $("notes").value="";
+    makeIMEIs();
+  }catch(e){
+    msg.textContent="مسئلہ: "+e.message;
+  }finally{
+    btn.disabled=false;
+    btn.textContent="Save Purchase";
+  }
+}
+
+$("quantity").addEventListener("input",makeIMEIs);
+["aedPrice","exchangeRate","customs","otherCost"].forEach(id=>{
+  $(id).addEventListener("input",totals);
+});
+$("saveBtn").addEventListener("click",savePurchase);
 $("purchaseDate").value=new Date().toISOString().slice(0,10);
-makeIMEIFields();
+makeIMEIs();
+loadLists();
 </script>
 </body>
 </html>
